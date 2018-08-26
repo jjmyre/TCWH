@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/wineries');
 });
+
+Route::get('/', function () {
+    return view('wineries');
+});
+
+
+
