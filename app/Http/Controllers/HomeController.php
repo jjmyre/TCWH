@@ -8,40 +8,50 @@ use App\Ava;
 use App\Time;
 use Session;
 
-class GuideController extends Controller
+class HomeController extends Controller
 {
-    public function default() {
-  
-        return view('guide.list')->with([
-            'wineries' => null,
-        ]);
-    }
+    function __invoke(){
+        
+        $count=0;
+        $citySelect = 'default';
+        $regionSelect = 'default';
+        $sortSelect= 'default';
+        $cityOptions =[];
+        $regionOptions= [];
+        $subRegionOptions =[];
 
-    public function list(Request $request) {
+        $wineries = Winery::all();
 
-        // Validate list/sort and get the values for list
-
-        $this->validate($request, [
-            'citySelect' => 'required',
-            'sortSelect' => 'required',
-        ]);
-
-        $citySelect = $request->input('citySelect');
-        $sortSelect = $request->input('sortSelect');
-
-
-        if($citySelect != 'all'){
-            $wineries = Winery::with('times')->where('city', '=',
-                $citySelect)->orderBy('name', 'asc')->get();  
-        }
-        else {
-            $wineries = Winery::with('times')->orderBy('name', 'asc')->get(); 
+        foreach($wineries as $winery){
+            $count++;
         }
 
-        return view('guide.list')->with([
+        $wineries->sortBy('region');
+
+        foreach($wineries->unique('region') as $winery) {
+            $regionOptions[] = $winery->region;
+        }
+
+        $wineries->sortBy('sub_region');
+
+        
+        foreach($wineries->unique('sub_region') as $winery) {
+            $subRegionOptions[] = $winery->city;
+        }
+
+        $wineries->sortBy('city');
+
+        foreach($wineries->unique('city') as $winery) {
+            $cityOptions[] = $winery->city;
+        }
+
+        return view('guide.default')->with([
             'citySelect' => $citySelect,
             'sortSelect' => $sortSelect,
-            'wineries' => $wineries,
+            'cityOptions' => $cityOptions,
+            'regionOptions' => $regionOptions,
+            'subRegionOptions' => $subRegionOptions,
+            'count' => $count,
         ]);
     }
 }

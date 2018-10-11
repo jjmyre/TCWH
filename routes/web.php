@@ -15,7 +15,7 @@ Route::get('/', function () {
     return redirect('/guide');
 });
 
-Route::get('/guide', 'GuideController@default');
+Route::get('/guide', 'HomeController');
 
 Route::get('/guide/list', 'GuideController@list');
 
