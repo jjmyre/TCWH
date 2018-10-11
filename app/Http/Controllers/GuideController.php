@@ -15,7 +15,9 @@ class GuideController extends Controller
         $wineries=Winery::all();
 
         $count=0;
-
+        $citySelect = '';
+        $regionSelect = '';
+        $sortSelect= '';
         $cityOptions =[];
         $regionOptions= [];
         $subRegionOptions =[];
@@ -47,6 +49,8 @@ class GuideController extends Controller
 
 
         return view('guide.default')->with([
+            'citySelect' => $citySelect,
+            'sortSelect' => $sortSelect,
             'cityOptions' => $cityOptions,
             'regionOptions' => $regionOptions,
             'subRegionOptions' => $subRegionOptions,
