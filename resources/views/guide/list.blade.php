@@ -13,16 +13,16 @@
         <div class="uk-width-1-2@s">
             <label class="uk-label" for="citySelect">Location</label>
             <select name="citySelect" id="citySelect" class="uk-select">
-                <option value='all' {{ $citySelect == "unwatched" ? 'SELECTED' : '' }}>All</option>
+                <option value='all' {{ $citySelect == $cityOption ? 'SELECTED' : '' }}>All</option>
                 @foreach($cityOptions as $cityOption)
-                    <option value='{{$cityOption}}' {{ $citySelect == "$cityOption" ? 'SELECTED' : '' }}>{{$cityOption}}</option>
+                    <option value='{{$cityOption}}' {{ $citySelect == $cityOption ? 'SELECTED' : '' }}>{{$cityOption}}</option>
                 @endforeach
             </select>
             {{--<label class="uk-label" for="regionSelect">Location</label>
             <select name="regionSelect" id="regionSelect" class="uk-select">
                 <option value='all'>All</option>
                 @foreach($regionOptions as $regionOption)
-                    <option value='{{$regionOption}}' {{ $regionSelect == "{{$regionOption}}" ? 'SELECTED' : '' }}>{{$regionOption}}</option>
+                    <option value='{{$regionOption}}' {{ $regionSelect == $regionOption ? 'SELECTED' : '' }}>{{$regionOption}}</option>
                 @endforeach
             </select>--}}
         </div>
