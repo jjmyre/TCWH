@@ -12,8 +12,6 @@ class GuideController extends Controller
 {
     public function default() {
         
-        $wineries=Winery::all();
-
         $count=0;
         $citySelect = '';
         $regionSelect = '';
