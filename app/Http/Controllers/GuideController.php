@@ -43,8 +43,6 @@ class GuideController extends Controller
             $cityOptions[] = $winery->city;
         }
 
-        $wineries = [];
-
 
         return view('guide.default')->with([
             'citySelect' => $citySelect,
@@ -52,7 +50,6 @@ class GuideController extends Controller
             'cityOptions' => $cityOptions,
             'regionOptions' => $regionOptions,
             'subRegionOptions' => $subRegionOptions,
-            'wineries' => $count,
         ]);
     }
 
