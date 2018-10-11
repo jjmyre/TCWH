@@ -13,12 +13,14 @@ class GuideController extends Controller
     public function default() {
         
         $count=0;
-        $citySelect = '';
-        $regionSelect = '';
-        $sortSelect= '';
+        $citySelect = 'default';
+        $regionSelect = 'default';
+        $sortSelect= 'default';
         $cityOptions =[];
         $regionOptions= [];
         $subRegionOptions =[];
+
+        $wineries = Winery::all();
 
         foreach($wineries as $winery){
             $count++;
