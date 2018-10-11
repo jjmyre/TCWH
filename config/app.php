@@ -150,6 +150,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Cornford\Googlmapper\MapperServiceProvider::class,
+        Spatie\Geocoder\GeocoderServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -190,10 +192,12 @@ return [
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
+        'Geocoder' => Spatie\Geocoder\Facades\Geocoder::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
+        'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
@@ -208,7 +212,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
     ],
 
 ];

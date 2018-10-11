@@ -1,0 +1,74 @@
+[
+    {
+    "name":"Ancient Lakes",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/ancient-lakes",
+    "css_class":"al"
+    },
+    {
+    "name":"Columbia Gorge",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/columbia-gorge",
+    "css_class":"cg"
+    },
+    {"name":"Columbia Valley",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/columbia-valley",
+    "css_class":"cv"
+    },
+    {"name":"Horse Heaven Hills",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/horse-heaven-hills",
+    "css_class":"hhh"
+    },
+    {"name":"Lake Chelan",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/lake-chelan",
+    "css_class":"lc"
+    },
+    {"name":"Lewis-Clark Valley",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine-101/regions/lewis_clark_valley",
+    "css_class":"lcv"
+    },
+    {"name":"Naches Heights",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/naches-heights",
+    "css_class":"nh"
+    },
+    {"name":"Puget Sound",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/puget-sound",
+    "css_class":"ps"
+    },
+    {"name":"Rattlesnake Hills",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/rattlesnake-hills",
+    "css_class":"rh"
+    },
+    {"name":"Red Mountain",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/red-mountain",
+    "css_class":"rm"
+    },
+    {"name":"Snipes Mountain",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/snipes-mountain",
+    "css_class":"sm"
+    },
+    {"name":"Wahluke Slope",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/wahluke-slope",
+    "css_class":"ws"
+    },
+    {"name":"Walla Walla Valley",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/walla-walla-valley",
+    "css_class":"wwv"
+    },
+    {"name":"Yakima Valley",
+    "description":"",
+    "info_url":"https://www.washingtonwine.org/wine/facts-and-stats/regions-and-avas/yakima-valley",
+    "css_class":"yv"
+    }
+]

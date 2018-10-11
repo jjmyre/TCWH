@@ -55,7 +55,7 @@ a:hover {
 /* line 133, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/base.scss */
 a,
 .uk-link {
-  color: #367c00;
+  color: #207e0c;
   text-decoration: none;
   cursor: pointer;
 }
@@ -63,7 +63,7 @@ a,
 /* line 141, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/base.scss */
 a:hover,
 .uk-link:hover {
-  color: #7100c9;
+  color: #a513c4;
   text-decoration: underline;
 }
 
@@ -260,7 +260,7 @@ h6, .uk-h6 {
   margin: 0 0 20px 0;
   font-family: "Stoke", serif;
   font-weight: normal;
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   text-transform: none;
 }
 
@@ -390,7 +390,7 @@ blockquote {
   font-size: 1.25rem;
   line-height: 1.5;
   font-style: italic;
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /* Add margin if adjacent element */
@@ -581,7 +581,7 @@ a.uk-link-heading:not(:hover),
 /* line 70, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/link.scss */
 a.uk-link-heading:hover,
 .uk-link-heading a:hover {
-  color: #46007C;
+  color: #6A0C7E;
   text-decoration: none;
 }
 
@@ -957,7 +957,7 @@ a.uk-link-reset:hover,
  */
 /* line 30, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/description-list.scss */
 .uk-description-list > dt {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   font-size: 0.875rem;
   font-weight: normal;
   text-transform: uppercase;
@@ -1740,7 +1740,7 @@ button.uk-icon:not(:disabled) {
   outline: none;
   background-color: #fff;
   color: #666;
-  border-color: #46007C;
+  border-color: #6A0C7E;
 }
 
 /* Disabled */
@@ -1965,7 +1965,7 @@ select.uk-form-width-xsmall {
 .uk-radio:focus,
 .uk-checkbox:focus {
   outline: none;
-  border-color: #46007C;
+  border-color: #6A0C7E;
 }
 
 /*
@@ -1975,7 +1975,7 @@ select.uk-form-width-xsmall {
 .uk-radio:checked,
 .uk-checkbox:checked,
 .uk-checkbox:indeterminate {
-  background-color: #46007C;
+  background-color: #6A0C7E;
   border-color: transparent;
 }
 
@@ -1984,7 +1984,7 @@ select.uk-form-width-xsmall {
 .uk-radio:checked:focus,
 .uk-checkbox:checked:focus,
 .uk-checkbox:indeterminate:focus {
-  background-color: #290049;
+  background-color: #43084f;
 }
 
 /*
@@ -2110,7 +2110,7 @@ select.uk-form-width-xsmall {
  ========================================================================== */
 /* line 596, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/form.scss */
 .uk-form-label {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   font-size: 0.875rem;
 }
 
@@ -2304,7 +2304,7 @@ select.uk-form-width-xsmall {
 /* line 165, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-default {
   background-color: transparent;
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   border: 1px solid #e5e5e5;
 }
 
@@ -2313,7 +2313,7 @@ select.uk-form-width-xsmall {
 .uk-button-default:hover,
 .uk-button-default:focus {
   background-color: transparent;
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   border-color: #b2b2b2;
 }
 
@@ -2322,7 +2322,7 @@ select.uk-form-width-xsmall {
 .uk-button-default:active,
 .uk-button-default.uk-active {
   background-color: transparent;
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   border-color: #999999;
 }
 
@@ -2331,7 +2331,7 @@ select.uk-form-width-xsmall {
  */
 /* line 191, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-primary {
-  background-color: #46007C;
+  background-color: #6A0C7E;
   color: #fff;
   border: 1px solid transparent;
 }
@@ -2340,7 +2340,7 @@ select.uk-form-width-xsmall {
 /* line 198, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-primary:hover,
 .uk-button-primary:focus {
-  background-color: #380063;
+  background-color: #560a67;
   color: #fff;
 }
 
@@ -2348,7 +2348,7 @@ select.uk-form-width-xsmall {
 /* line 206, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-primary:active,
 .uk-button-primary.uk-active {
-  background-color: #290049;
+  background-color: #43084f;
   color: #fff;
 }
 
@@ -2357,7 +2357,7 @@ select.uk-form-width-xsmall {
  */
 /* line 217, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-secondary {
-  background-color: #367c00;
+  background-color: #207e0c;
   color: #fff;
   border: 1px solid transparent;
 }
@@ -2366,7 +2366,7 @@ select.uk-form-width-xsmall {
 /* line 224, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-secondary:hover,
 .uk-button-secondary:focus {
-  background-color: #2b6300;
+  background-color: #1a670a;
   color: #fff;
 }
 
@@ -2374,7 +2374,7 @@ select.uk-form-width-xsmall {
 /* line 232, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-secondary:active,
 .uk-button-secondary.uk-active {
-  background-color: #204900;
+  background-color: #144f08;
   color: #fff;
 }
 
@@ -2448,7 +2448,7 @@ select.uk-form-width-xsmall {
   line-height: 1.5;
   background: none;
   /* 2 */
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   position: relative;
 }
 
@@ -2459,7 +2459,7 @@ select.uk-form-width-xsmall {
   bottom: 0;
   left: 0;
   right: 100%;
-  border-bottom: 1px solid rgba(70, 0, 124, 0.7);
+  border-bottom: 1px solid rgba(106, 12, 126, 0.7);
   transition: right 0.3s ease-out;
 }
 
@@ -2467,7 +2467,7 @@ select.uk-form-width-xsmall {
 /* line 318, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-text:hover,
 .uk-button-text:focus {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /* line 353, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/mixins-theme.scss */
@@ -2499,14 +2499,14 @@ select.uk-form-width-xsmall {
   line-height: 1.5;
   background: none;
   /* 2 */
-  color: #367c00;
+  color: #207e0c;
 }
 
 /* Hover + Focus */
 /* line 347, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/button.scss */
 .uk-button-link:hover,
 .uk-button-link:focus {
-  color: #7100c9;
+  color: #a513c4;
   text-decoration: underline;
 }
 
@@ -2685,7 +2685,7 @@ select.uk-form-width-xsmall {
  */
 /* line 178, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/section.scss */
 .uk-section-primary {
-  background: #46007C;
+  background: #6A0C7E;
 }
 
 /*
@@ -2693,7 +2693,7 @@ select.uk-form-width-xsmall {
  */
 /* line 191, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/section.scss */
 .uk-section-secondary {
-  background: #367c00;
+  background: #207e0c;
 }
 
 /* Overlap modifier
@@ -3339,7 +3339,7 @@ select.uk-form-width-xsmall {
  */
 /* line 191, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/tile.scss */
 .uk-tile-primary {
-  background: #46007C;
+  background: #6A0C7E;
 }
 
 /*
@@ -3347,7 +3347,7 @@ select.uk-form-width-xsmall {
  */
 /* line 204, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/tile.scss */
 .uk-tile-secondary {
-  background: #367c00;
+  background: #207e0c;
 }
 
 /* ========================================================================
@@ -3475,13 +3475,13 @@ select.uk-form-width-xsmall {
   background: #fff;
   color: #666;
   background: white;
-  border: 1px solid #46007C;
+  border: 1px solid #6A0C7E;
   border-radius: 5px;
 }
 
 /* line 235, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/card.scss */
 .uk-card-default .uk-card-title {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   color: white;
   padding: 0;
   text-align: center;
@@ -3495,10 +3495,10 @@ select.uk-form-width-xsmall {
 
 /* line 245, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/card.scss */
 .uk-card-default .uk-card-header {
-  background: rgba(54, 124, 0, 0.9);
+  background: rgba(32, 126, 12, 0.9);
   color: white;
   border-radius: 5px 5px 0 0;
-  border-bottom: 1px solid #46007C;
+  border-bottom: 1px solid #6A0C7E;
 }
 
 /* line 249, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/card.scss */
@@ -3511,7 +3511,7 @@ select.uk-form-width-xsmall {
  */
 /* line 257, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/card.scss */
 .uk-card-primary {
-  background: #46007C;
+  background: #6A0C7E;
   color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -3523,7 +3523,7 @@ select.uk-form-width-xsmall {
 
 /* line 268, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/card.scss */
 .uk-card-primary.uk-card-hover:hover {
-  background-color: #46007C;
+  background-color: #6A0C7E;
   box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16);
 }
 
@@ -3532,7 +3532,7 @@ select.uk-form-width-xsmall {
  */
 /* line 283, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/card.scss */
 .uk-card-secondary {
-  background: #367c00;
+  background: #207e0c;
   color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -3544,7 +3544,7 @@ select.uk-form-width-xsmall {
 
 /* line 294, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/card.scss */
 .uk-card-secondary.uk-card-hover:hover {
-  background-color: #367c00;
+  background-color: #207e0c;
   box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16);
 }
 
@@ -3773,7 +3773,7 @@ select.uk-form-width-xsmall {
 /* OnClick */
 /* line 43, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/totop.scss */
 .uk-totop:active {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /* ========================================================================
@@ -3785,7 +3785,7 @@ select.uk-form-width-xsmall {
 /* line 27, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/marker.scss */
 .uk-marker {
   padding: 5px;
-  background: #367c00;
+  background: #207e0c;
   color: #fff;
   border-radius: 500px;
 }
@@ -3861,8 +3861,8 @@ select.uk-form-width-xsmall {
  */
 /* line 98, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/alert.scss */
 .uk-alert-primary {
-  background: #c1a9d3;
-  color: #46007C;
+  background: #cfb0d5;
+  color: #6A0C7E;
 }
 
 /*
@@ -3933,7 +3933,7 @@ select.uk-form-width-xsmall {
   border-radius: 500px;
   vertical-align: middle;
   /* 1 */
-  background: #46007C;
+  background: #6A0C7E;
   color: #fff;
   font-size: 0.875rem;
   /* 2 */
@@ -3960,7 +3960,7 @@ select.uk-form-width-xsmall {
 .uk-label {
   display: inline-block;
   padding: 0 10px;
-  background: #46007C;
+  background: #6A0C7E;
   line-height: 1.5;
   font-size: 0.875rem;
   color: #fff;
@@ -4032,7 +4032,7 @@ select.uk-form-width-xsmall {
  */
 /* line 66, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/overlay.scss */
 .uk-overlay-primary {
-  background: rgba(54, 124, 0, 0.8);
+  background: rgba(32, 126, 12, 0.8);
 }
 
 /* ========================================================================
@@ -4603,7 +4603,7 @@ ul.uk-nav-sub {
 /* Active */
 /* line 196, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/nav.scss */
 .uk-nav-default > li.uk-active > a {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /*
@@ -4611,7 +4611,7 @@ ul.uk-nav-sub {
  */
 /* line 205, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/nav.scss */
 .uk-nav-default .uk-nav-header {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /*
@@ -4658,7 +4658,7 @@ ul.uk-nav-sub {
 /* Active */
 /* line 255, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/nav.scss */
 .uk-nav-primary > li.uk-active > a {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /*
@@ -4666,7 +4666,7 @@ ul.uk-nav-sub {
  */
 /* line 264, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/nav.scss */
 .uk-nav-primary .uk-nav-header {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /*
@@ -4722,14 +4722,14 @@ ul.uk-nav-sub {
   display: flex;
   /* 1 */
   position: relative;
-  padding: .75em 3em .75em 0;
+  padding: .75em 0;
 }
 
 /* Container
  ========================================================================== */
 /* line 101, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/navbar.scss */
 .uk-navbar-container:not(.uk-navbar-transparent) {
-  background: #46007C;
+  background: #6A0C7E;
 }
 
 /*
@@ -4880,7 +4880,6 @@ ul.uk-nav-sub {
 .uk-navbar-nav > li > a {
   color: white;
   padding: .75em 1em;
-  margin-right: .5em;
   font-family: "Stoke", serif;
 }
 
@@ -4894,25 +4893,25 @@ ul.uk-nav-sub {
 .uk-navbar-nav > li > a.uk-open {
   color: white;
   outline: none;
-  background: #2b6300;
-  border-radius: 15px;
-  text-shadow: 1px 1px 1px black;
+  text-decoration: overline;
+  text-decoration-color: #5EBD3E;
+  border-radius: 3px;
 }
 
 /* OnClick */
 /* line 257, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/navbar.scss */
 .uk-navbar-nav > li > a:active {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /* Active */
 /* line 263, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/navbar.scss */
 .uk-navbar-nav > li.uk-active > a {
   color: white;
-  background: #4caf00;
+  background: #2cad10;
   text-shadow: 1px 1px 1px black;
   border-radius: 15px;
-  border: 1px solid #367c00;
+  border: 1px solid #207e0c;
 }
 
 /* Item
@@ -4933,7 +4932,7 @@ ul.uk-nav-sub {
 .uk-navbar-toggle:hover,
 .uk-navbar-toggle:focus,
 .uk-navbar-toggle.uk-open {
-  color: #367c00;
+  color: #3CEE00;
   outline: none;
   text-decoration: none;
 }
@@ -4973,7 +4972,7 @@ ul.uk-nav-sub {
   width: 200px;
   /* 4 */
   padding: 25px;
-  background: rgba(70, 0, 124, 0.95);
+  background: rgba(106, 12, 126, 0.95);
   color: white;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
@@ -5094,7 +5093,7 @@ ul.uk-nav-sub {
 /* Active */
 /* line 432, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/navbar.scss */
 .uk-navbar-dropdown-nav > li.uk-active > a {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /*
@@ -5102,7 +5101,7 @@ ul.uk-nav-sub {
  */
 /* line 441, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/navbar.scss */
 .uk-navbar-dropdown-nav .uk-nav-header {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /*
@@ -5131,7 +5130,7 @@ ul.uk-nav-sub {
  ========================================================================== */
 /* line 468, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/navbar.scss */
 .uk-navbar-dropbar {
-  background: rgba(70, 0, 124, 0.95);
+  background: rgba(106, 12, 126, 0.95);
 }
 
 /*
@@ -5237,7 +5236,7 @@ ul.uk-nav-sub {
   /* 1 */
   display: block;
   /* 2 */
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   font-size: 0.875rem;
   text-transform: uppercase;
   transition: 0.1s ease-in-out;
@@ -5248,7 +5247,7 @@ ul.uk-nav-sub {
 /* line 101, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/subnav.scss */
 .uk-subnav > * > a:hover,
 .uk-subnav > * > a:focus {
-  color: #367c00;
+  color: #207e0c;
   text-decoration: none;
   outline: none;
 }
@@ -5256,7 +5255,7 @@ ul.uk-nav-sub {
 /* Active */
 /* line 110, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/subnav.scss */
 .uk-subnav > .uk-active > a {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /* Divider modifier
@@ -5290,7 +5289,7 @@ ul.uk-nav-sub {
 .uk-subnav-pill > * > :first-child {
   padding: 5px 10px;
   background: transparent;
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /* Hover + Focus */
@@ -5311,7 +5310,7 @@ ul.uk-nav-sub {
 /* Active */
 /* line 170, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/subnav.scss */
 .uk-subnav-pill > .uk-active > a {
-  background-color: #46007C;
+  background-color: #6A0C7E;
   color: #fff;
 }
 
@@ -5532,8 +5531,8 @@ ul.uk-nav-sub {
 /* Active */
 /* line 96, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/tab.scss */
 .uk-tab > .uk-active > a {
-  color: rgba(70, 0, 124, 0.7);
-  border-color: #46007C;
+  color: rgba(106, 12, 126, 0.7);
+  border-color: #6A0C7E;
 }
 
 /* Disabled */
@@ -5887,7 +5886,7 @@ ul.uk-nav-sub {
   display: block;
   font-size: 1.25rem;
   line-height: 1.4;
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
   overflow: hidden;
 }
 
@@ -6064,7 +6063,7 @@ ul.uk-nav-sub {
  */
 /* line 98, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/dropdown.scss */
 .uk-dropdown-nav .uk-nav-header {
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /*
@@ -6766,7 +6765,7 @@ ul.uk-nav-sub {
   box-sizing: border-box;
   width: 270px;
   padding: 20px 20px;
-  background: rgba(70, 0, 124, 0.95);
+  background: rgba(106, 12, 126, 0.95);
   /* 3 */
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -7184,7 +7183,7 @@ ul.uk-nav-sub {
  */
 /* line 145, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/notification.scss */
 .uk-notification-message-primary {
-  color: #46007C;
+  color: #6A0C7E;
 }
 
 /*
@@ -7361,18 +7360,18 @@ ul.uk-nav-sub {
  */
 /* line 78, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/progress.scss */
 .uk-progress::-webkit-progress-value {
-  background-color: #46007C;
+  background-color: #6A0C7E;
   transition: width 0.6s ease;
 }
 
 /* line 84, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/progress.scss */
 .uk-progress::-moz-progress-bar {
-  background-color: #46007C;
+  background-color: #6A0C7E;
 }
 
 /* line 89, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/progress.scss */
 .uk-progress::-ms-fill {
-  background-color: #46007C;
+  background-color: #6A0C7E;
   transition: width 0.6s ease;
   /* 1 */
   border: 0;
@@ -8634,7 +8633,7 @@ ul.uk-nav-sub {
 .uk-text-lead {
   font-size: 1.5rem;
   line-height: 1.5;
-  color: rgba(70, 0, 124, 0.7);
+  color: rgba(106, 12, 126, 0.7);
 }
 
 /* line 52, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/text.scss */
@@ -8702,7 +8701,7 @@ ul.uk-nav-sub {
 
 /* line 94, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/text.scss */
 .uk-text-primary {
-  color: #46007C !important;
+  color: #6A0C7E !important;
 }
 
 /* line 95, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/text.scss */
@@ -8736,13 +8735,13 @@ ul.uk-nav-sub {
   /* 2 */
   display: inline-block;
   /* 3 */
-  color: #46007C !important;
+  color: #6A0C7E !important;
 }
 
 @supports (-webkit-background-clip: text) {
   /* line 122, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/text.scss */
   .uk-text-background {
-    background-color: #46007C;
+    background-color: #6A0C7E;
   }
 }
 
@@ -9145,12 +9144,12 @@ iframe.uk-cover {
 
 /* line 28, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/background.scss */
 .uk-background-primary {
-  background-color: #46007C;
+  background-color: #6A0C7E;
 }
 
 /* line 29, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/scss/components/background.scss */
 .uk-background-secondary {
-  background-color: #367c00;
+  background-color: #207e0c;
 }
 
 /* Size
@@ -12324,20 +12323,19 @@ iframe.uk-cover {
   }
 }
 
-/* line 92, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 91, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 html {
-  background: url("../images/black-linen.png") repeat;
-  background-color: #8f68ad;
+  background: #8f68ad url("https://www.transparenttextures.com/patterns/grey-washed-wall.png");
 }
 
-/* line 96, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 94, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 body {
   margin: 0 auto;
-  min-width: 23em;
+  min-width: 30em;
   max-width: 80em;
 }
 
-/* line 101, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 99, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 header h1 {
   color: white;
   margin: 0 auto;
@@ -12347,79 +12345,56 @@ header h1 {
   line-height: 1em;
 }
 
-@media only screen and (min-width: 22.5em) {
-  /* line 110, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-  header {
-    background: url("../images/vineyard-small.jpg") no-repeat;
-    background-size: 56.25em 11.25em;
-    height: 6em;
-  }
-  /* line 115, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-  header h1 {
-    font-size: 1.5em;
-    padding: .75em 0 .75em 1em;
-    text-align: center;
-  }
-}
-
-@media only screen and (min-width: 960px) {
-  /* line 122, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-  header {
-    background: url("../images/vineyard-full.jpg") no-repeat;
-    background-size: 75em 18.75em;
-    height: 12em;
-  }
-  /* line 127, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-  header h1 {
-    font-size: 2.5em;
-    padding: 3em 0 .75em 1.75em;
-  }
-}
-
-/* line 132, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 108, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 ul.uk-navbar-dropdown-nav > li a {
   color: white;
   padding-left: .5em;
 }
 
-/* line 136, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 112, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 ul.uk-navbar-dropdown-nav > li a:hover {
-  background: #2b6300;
+  background: #1a670a;
   border-radius: 10px;
   text-shadow: 1px 1px 1px black;
   color: white;
 }
 
-/* line 142, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 118, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 ul.uk-navbar-dropdown-nav > li a:active {
-  background: #4caf00;
+  background: #2cad10;
   padding-left: .5em;
 }
 
-/* line 146, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 122, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 img {
   width: 100%;
 }
 
-/* line 149, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 125, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 footer {
   color: white;
   padding: 2em 0;
 }
 
-/* line 153, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 129, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 footer a:hover {
-  color: #367c00;
+  color: #207e0c;
 }
 
-/* line 156, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-.wrapper {
-  background: mintcream;
+/* line 133, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.uk-container {
   margin: 0 auto;
-  padding: 2em;
+  min-height: 50em;
+  padding: 0;
 }
 
-/* line 162, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 139, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.wrapper {
+  background: #e6e4d4 url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
+  padding: 0 3em 4em 3em;
+}
+
+/* line 145, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 [uk-icon] span,
 [uk-navbar-toggle-icon] span {
   position: absolute;
@@ -12432,6 +12407,39 @@ footer a:hover {
   -webkit-clip-path: inset(50%);
   clip-path: inset(50%);
   border: 0;
+}
+
+/* line 159, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.hide {
+  visibility: hidden;
+}
+
+/* line 163, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.show {
+  visibility: visible;
+}
+
+/* line 167, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.uk-logo {
+  width: 10em;
+  padding: 1em;
+}
+
+/* line 173, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.visuallyHidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* line 184, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.winery_logo {
+  width: 8em;
 }
 
 /*# sourceMappingURL=../../../../../../../../Applications/MAMP/htdocs/tcwh/public/css/styles.map */

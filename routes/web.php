@@ -15,7 +15,34 @@ Route::get('/', function () {
     return redirect('/guide');
 });
 
-Route::get('/guide', 'GuideController');
+Route::get('/guide', 'GuideController@default');
+
+Route::get('/guide/list', 'GuideController@list');
+
+Route::get('/winery/:id', 'GuideController@detail');
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/signup', function () {
+    return view('signup');
+});
+
+
+
+/*
+
+
+
+Route::post('/planner/add/:id', 'PlannerController@add');
+
+
+
+
+
+
+*/
 
 Route::get('/debug', function () {
 

@@ -13,24 +13,25 @@
         <div class="uk-width-1-2@s">
             <label class="uk-label" for="citySelect">Location</label>
             <select name="citySelect" id="citySelect" class="uk-select">
-                <option value='all' {{ $citySelect == "unwatched" ? 'SELECTED' : '' }}>All</option>
+                <option selected value='all'>All</option>
                 @foreach($cityOptions as $cityOption)
-                    <option value='{{$cityOption}}' {{ $citySelect == "$cityOption" ? 'SELECTED' : '' }}>{{$cityOption}}</option>
+                    <option value='{{$cityOption}}'>{{$cityOption}}</option>
                 @endforeach
             </select>
             {{--<label class="uk-label" for="regionSelect">Location</label>
             <select name="regionSelect" id="regionSelect" class="uk-select">
                 <option value='all'>All</option>
+                <option value='all'>All</option>
                 @foreach($regionOptions as $regionOption)
-                    <option value='{{$regionOption}}' {{ $regionSelect == "{{$regionOption}}" ? 'SELECTED' : '' }}>{{$regionOption}}</option>
+                    <option value='{{$regionOption}}'>{{$regionOption}}</option>
                 @endforeach
             </select>--}}
         </div>
         <div class="uk-width-1-2@s">
             <label class="uk-label" for="sortSelect">Sort By</label>
             <select name="sortSelect" id="sortSelect" class="uk-select">
-                <option value='a-z' {{ $sortSelect == "a-z" ? 'SELECTED' : '' }}>Alphabetical (A-Z)</option>
-                <option value='z-a' {{ $sortSelect == "z-a" ? 'SELECTED' : '' }}>Alphabetical (Z-A)</option>
+                <option value='a-z'>Alphabetical (A-Z)</option>
+                <option value='z-a'>Alphabetical (Z-A)</option>
             {{--<option>Most Favorited</option>
                 <option>Most Visited</option>
                 <option>Average Rating</option>--}}             
@@ -55,27 +56,26 @@
                     <label for="dining_option">Dining Only</label>
                 </fieldset>
             </div>
-            <button type="submit" class="uk-button uk-button-primary">Go</button>
+            <button type="submit" class="uk-button uk-button-primary">Search</button>
         </div>
     </form>
-    
     @if($wineries)
-    <div class="uk-child-width-1-2@m" uk-grid>
+        @if(is_numeric ($wineries))
+            <p>{{$wineries}}</p>
+        @else
         @foreach($wineries as $winery)
-            <div class="uk-card uk-card-small uk-padding-small uk-card-hover">
-                <div class="uk-card-header uk-padding-remove">
+            <div class="uk-card uk-card-small uk-border">
+                <div class="uk-card-header">
                     <a class="uk-link-heading" href="/winery/{{$winery->id}}">
-                        <div class="uk-grid-small uk-flex-center" uk-grid>
+                        <div class="uk-grid-small" uk-grid>
                             <div>   
                                 <img class="winery_logo" src="{{'/img/logos/'.$winery->logo_lg}}" alt="{{$winery->name}} Logo">
                             </div>
-                            <div class="uk-flex uk-flex-middle">    
+                            <div class="uk-width-expand uk-flex uk-flex-middle">    
                                 <div>
-                                    <h2 class="uk-card-title uk-margin-remove-bottom uk-padding-left">{{ $winery->name }}
-                                        <span class="uk-text-muted" uk-icon="icon: check"></span>
-                                    </h2>
+                                    <h2 class="uk-card-title uk-margin-remove-bottom uk-padding-left">{{ $winery->name }}</h2>
                                     @if( $winery->sub_name )
-                                        <p class="uk-text-meta uk-margin-remove">{{ $winery->sub_name }}</p>
+                                        <p class="uk-text-meta uk-margin-remove-top">{{ $winery->sub_name }}</p>
                                     @endif
                                     <form class="uk-form uk-display-inline" action="/favorite/add/" method="post">
                                     {{ csrf_field() }}
@@ -106,36 +106,32 @@
                         </div>
                     </a>
                 </div> 
-                <div class="uk-card-body uk-padding-remove-top">
-                    @php
-                        $directionLink = 'https://www.google.com/maps/dir//'.$winery->name.', '.$winery->street.', '.$winery->state.', '.$winery->zip;
-                    @endphp
-
-                    <address class="uk-grid-small uk-flex-center" uk-grid>
-                        <div class="uk-flex-middle">
-                            <a class="uk-link-heading" href="/winery/{{$winery->id}}">{{ $winery->street }}<br>
-                            {{ $winery->city }}, {{ $winery->state }}, {{ $winery->zip }}</a>
-                        </div>
-                        <div class="uk-flex-middle">
-                            @if( $winery->phone )
-                                <a class="uk-link uk-display-block" href="tel:+6494461709">
-                                    <span uk-icon="icon:receiver"></span>
-                                {{ $winery->phone }}</a>
-                            @endif
-                            @if($winery->web_url)
-                                <a class="uk-link uk-display-inline-block" href="{{ $winery->web_url }}" target="_blank">
-                                <span uk-icon="icon:link"></span>Visit Website</a>
-                            @endif
-                            <a class="uk-link uk-display-block" href="{!! str_replace(' ', '+', $directionLink) !!}" target="_blank">
-                                <span uk-icon="icon:location"></span>
-                                Directions</a>
-                        </div>
+                <div class="uk-card-body">
+                    <address>
+                        <p>{{ $winery->street }}<br>
+                        {{ $winery->city }}, {{ $winery->state }} {{ $winery->zip }}</p>
+                        @if( $winery->phone )
+                            <a class="uk-link uk-display-block" href="tel:+6494461709">
+                            <span uk-icon="icon:receiver"></span>
+                            {{ $winery->phone }}</a>
+                        @endif
+                        @if($winery->email)
+                            <a class="uk-link uk-display-block" href="mailto:{{$winery->email}}">
+                            <span uk-icon="icon:mail"></span>
+                            {{ $winery->email }}</a>
+                        @endif
+                        @if($winery->web_url)
+                            <a class="uk-link uk-display-inline-block" href="{{ $winery->web_url }}" target="_blank">
+                            <span uk-icon="icon:link"></span>Visit Website
+                            </a>
+                        @endif
                     </address>
+
                 </div>
-            </div>
-              
+                <hr class="uk-divider-icon">
         @endforeach
-    </div>
+        @endif
+
     @else
         <p>GREETINGS</p>
     @endif  
