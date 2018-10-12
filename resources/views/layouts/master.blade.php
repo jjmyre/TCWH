@@ -23,7 +23,7 @@
 <body>
     <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
         <nav class="uk-navbar-container uk-padding-remove uk-visible@l" uk-navbar>
-            <div class="uk-navbar-left">
+            <div class="uk-navbar-left uk-container">
                 <a class="uk-navbar-item uk-logo uk-padding-small uk-visible@l uk-margin-left" href="#">
                     <img id="logo" src="/img/logo_high.png" alt="Tri-Cities Wine Hub">
                 </a>
@@ -37,7 +37,7 @@
                 </ul>
             </div>
             @guest
-                <div class="uk-navbar-right">
+                <div class="uk-navbar-right uk-container">
                     <ul class="uk-navbar-nav">
                         <li><a class="uk-button uk-button-primary uk-margin-small-right" uk-toggle="target: #login-modal" href="">Login</a></li>
                         <li><a class="uk-button uk-button-primary uk-margin-small-right" href="{{ url('/signup') }}">Signup</a></li>
@@ -89,11 +89,6 @@
         @yield('content')
     </div>
     <footer class="uk-text-center">
-        <div uk-grid >
-            <a class="uk-width-1-3 uk-text-right" href="#" target="_blank" uk-icon="icon:facebook; ratio: 2;"><span>Facebook</span></a>
-            <a class="uk-width-1-3" href="#" target="_blank" uk-icon="icon:instagram; ratio: 2;"><span>Instagram</span></a>
-            <a class="uk-width-1-3 uk-text-left" href="#" target="_blank" uk-icon="icon:twitter; ratio: 2;"><span>Twitter</span></a>
-        </div>
         <p>&copy; 2018 Justin Myre. All Rights Reserved.</p>
     </footer>
         <!-- Login Form Modal -->
@@ -102,7 +97,7 @@
             <h2 class="uk-modal-title">User Login</h2>
             <form class="uk-form uk-form-stacked" action="/login" method="post" id="login-form">
                 <div class="uk-form-row"> 
-                    <label class="visuallyHidden" for="name">User Name</label>
+                    <label class="visuallyHidden" for="user">User Name</label>
                     <div class="uk-inline uk-width-1-1"> 
                         <span class="uk-form-icon" uk-icon="icon:user"></span>
                         <input class="uk-input" type="text" id="user" placeholder="User Name" required>
@@ -135,7 +130,9 @@
                     <li><a href="{{ url('/guide') }}">Winery Guide</a></li>
                     <li><a href="{{ url('/ava') }}">AVA Map</a></li>
                     <li><a href="{{ url('/region') }}">Regional Info</a></li>
-                    <hr>
+                </ul>
+                <hr>
+                <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
                     <li><a href="{{ url('/about') }}">About</a></li>
                     <li><a href="https://tcwinehub.tumblr.com/">Blog</a></li>
                     <li><a href="{{ url('/contact') }}">Contact Us</a></li>

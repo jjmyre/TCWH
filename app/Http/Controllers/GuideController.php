@@ -10,7 +10,8 @@ use Session;
 
 class GuideController extends Controller
 {
-    public function default() {
+
+     public function default(Request $request) {
         
         $count=0;
         $citySelect = 'default';
@@ -45,13 +46,15 @@ class GuideController extends Controller
             $cityOptions[] = $winery->city;
         }
 
-
-        return view('guide.default')->with([
+        return view('guide.list')->with([
             'citySelect' => $citySelect,
+            'regionSelect' => $regionSelect,
             'sortSelect' => $sortSelect,
             'cityOptions' => $cityOptions,
             'regionOptions' => $regionOptions,
             'subRegionOptions' => $subRegionOptions,
+            'wineries' => $wineries,
+            'count' => $count,
         ]);
     }
 

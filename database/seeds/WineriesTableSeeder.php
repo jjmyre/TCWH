@@ -37,8 +37,7 @@ class WineriesTableSeeder extends Seeder
 		        'size' => $winery->size,
 		        'dining' => $winery->dining,
 		        'note' => $winery->note,
-                'logo_lg' => $winery->logo_lg,
-                'logo_sm' => $winery->logo_sm,
+                'logo' => $winery->logo,
 	    	]);
    		}
     }

@@ -22,8 +22,7 @@
     "saturday":"10:00am - 5:00pm",  
     "sunday":"10:00am - 5:00pm",
     "note":"",
-    "logo_sm":"14hands_sm.png",
-    "logo_lg":"14hands_lg.png"
+    "logo":"14hands_logo.png"
     },
     {
     "name":"2dor Wines",
@@ -48,8 +47,7 @@
     "saturday":"11:00am – 9:00pm",
     "sunday":"10:00am – 7:00pm",
     "note":"",
-    "logo_sm":"2dor_sm.png",
-    "logo_lg":"2dor_lg.png"
+    "logo":"2dor_logo.png"
     },
     {
     "name":"Airfield Estates Winery",
@@ -74,8 +72,7 @@
     "saturday":"10:00am – 6:00pm",
     "sunday":"10:00am – 6:00pm",
     "note":"",
-    "logo_sm":"airfield_sm.png",
-    "logo_lg":"airfield_lg.png"
+    "logo":"airfield_logo.png"
     },
     {
     "name":"Alexandria Nicole Cellars",
@@ -100,8 +97,7 @@
     "saturday":"11:00am - 5:00pm",
     "sunday":"12:00pm - 5:00pm",
     "note":"",
-    "logo_sm":"alexandria_sm.png",
-    "logo_lg":"alexandria_lg.png"
+    "logo":"alexandria_logo.png"
     },
     {
     "name":"Alexandria Nicole Cellars",
@@ -126,8 +122,7 @@
     "saturday":"12:00pm - 5:00pm",
     "sunday":"12:00pm - 5:00pm",
     "note":"",
-    "logo_sm":"alexandria_sm.png",
-    "logo_lg":"alexandria_lg.png"
+    "logo":"alexandria_logo.png"
     },
     {
     "name":"Anelare Winery",
@@ -152,8 +147,7 @@
     "saturday":"11:00am - 5:00pm",
     "sunday":"11:00am - 5:00pm",
     "note":"",
-    "logo_sm":"anelare_sm.png",
-    "logo_lg":"anelare_lg.png"
+    "logo":"anelare_logo.png"
     },
     {
     "name":"Barnard Griffin Winery",
@@ -178,8 +172,7 @@
     "saturday":"10:00am - 5:00pm",
     "sunday":"10:00am - 5:00pm",
     "note":"",
-    "logo_sm":"barnard_sm.png",
-    "logo_lg":"barnard_lg.png"
+    "logo":"barnard_logo.png"
     },
     {
     "name": "Barrel Springs Winery",
@@ -204,8 +197,7 @@
     "saturday":"10:00am - 5:00pm",
     "sunday":"10:00am - 5:00pm",
     "note":"",
-    "logo_sm":"barrelsprings_sm.png",
-    "logo_lg":"barrelsprings_lg.png"
+    "logo":"barrelsprings_logo.png"
     },
     {
     "name": "Bartholomew Winery",
@@ -230,8 +222,7 @@
     "saturday":"12:00pm - 5:00pm",
     "sunday":"12:00pm - 5:00pm",
     "note":"",
-    "logo_sm":"bartholomew_sm.png",
-    "logo_lg":"bartholomew_lg.png"
+    "logo":"bartholomew_logo.png"
     },
     {
     "name": "Bill’s Wines",
@@ -256,8 +247,7 @@
     "saturday": "12:00pm - 8:00pm",  
     "sunday": "12:00am - 6:00pm",
 	"note":"Bill’s tasting room has a lounge atmosphere with patio seating. They not only offer wine tasting, but also serve microbrews, cheeses and cigars. Call for special events.",
-    "logo_sm":"bills_sm.png",
-    "logo_lg":"bills_lg.png"
+    "logo":"bills_logo.png"
     },
     {
     "name":"Bookwalter Winery",
@@ -282,7 +272,6 @@
     "saturday":"12:00pm - 7:00pm",  
     "sunday":"12:00am - 6:00pm",
     "note":"",
-    "logo_sm":"bookwalter_sm.png",
-    "logo_lg":"bookwalter_lg.png"
+    "logo":"bookwalter_logo.png"
     }
 ]

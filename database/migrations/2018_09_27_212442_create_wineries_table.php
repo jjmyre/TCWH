@@ -26,13 +26,11 @@ class CreateWineriesTable extends Migration
             $table->integer('zip');
             $table->string('phone');
             $table->string('email')->nullable();
-            $table->string('logo')->nullable();
             $table->string('web_url')->nullable();
             $table->string('size');
             $table->boolean('dining');
             $table->text('note')->nullable();
-            $table->string('logo_lg')->nullable();
-            $table->string('logo_sm')->nullable();
+            $table->string('logo')->nullable();
         });
     }
 
