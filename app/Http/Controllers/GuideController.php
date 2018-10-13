@@ -11,8 +11,10 @@ use Session;
 class GuideController extends Controller
 {
 
-     public function default(Request $request) {
+     public function default() {
         
+        $wineries = Winery::paginate(20);
+
         $count=0;
         $citySelect = 'default';
         $regionSelect = 'default';
@@ -21,28 +23,19 @@ class GuideController extends Controller
         $regionOptions= [];
         $subRegionOptions =[];
 
-        $wineries = Winery::all();
-
-        foreach($wineries as $winery){
+        foreach($wineries as $winery) {
             $count++;
         }
-
-        $wineries->sortBy('region');
-
-        foreach($wineries->unique('region') as $winery) {
+        
+        foreach($wineries->unique('region')->sortBy('region') as $winery) {
             $regionOptions[] = $winery->region;
         }
-
-        $wineries->sortBy('sub_region');
-
         
-        foreach($wineries->unique('sub_region') as $winery) {
+        foreach($wineries->unique('sub_region')->sortBy('sub_region') as $winery) {
             $subRegionOptions[] = $winery->city;
         }
 
-        $wineries->sortBy('city');
-
-        foreach($wineries->unique('city') as $winery) {
+        foreach($wineries->unique('city')->sortBy('city') as $winery) {
             $cityOptions[] = $winery->city;
         }
 
@@ -72,47 +65,50 @@ class GuideController extends Controller
         $sortSelect = $request->input('sortSelect');
 
         $wineries = Winery::all();
+        $count = 0;
 
+        // initialize location options
         $cityOptions =[];
         $regionOptions= [];
         $subRegionOptions =[];
 
-        $wineries->sortBy('region');
-
+        // create region options for location select
         foreach($wineries->unique('region') as $winery) {
             $regionOptions[] = $winery->region;
         }
 
-        $wineries->sortBy('sub_region');
-
-        
+        // create sub_region options for location select
         foreach($wineries->unique('sub_region') as $winery) {
-            $subRegionOptions[] = $winery->city;
+            $subRegionOptions[] = $winery->sub_region;
         }
 
         $wineries->sortBy('city');
-
-        foreach($wineries->unique('city') as $winery) {
+        // create city options for location select
+        foreach($wineries->unique('city')->sortBy('city') as $winery) {
             $cityOptions[] = $winery->city;
         }
 
         if($citySelect != 'all'){
             if($sortSelect == "a-z") {
                 $wineries = Winery::where('city', '=',
-                $citySelect)->orderBy('name', 'asc')->get();
+                $citySelect)->orderBy('name', 'asc')->paginate(8);
             }  
             elseif($sortSelect == "z-a"){
                 $wineries = Winery::where('city', '=',
-                $citySelect)->orderBy('name', 'desc')->get();
-            }
+                $citySelect)->orderBy('name', 'desc')->paginate(8);
+            } 
         }
         else {
             if($sortSelect == "a-z") {
-                $wineries = Winery::orderBy('name', 'asc')->paginate(5); 
+                $wineries = Winery::orderBy('name', 'asc')->paginate(8); 
             }  
             elseif($sortSelect == "z-a"){
-                $wineries = Winery::orderBy('name', 'desc')->paginate(5);
+                $wineries = Winery::orderBy('name', 'desc')->paginate(8);
             }
+        }
+
+        foreach($wineries as $winery){
+            $count++;
         }
 
         return view('guide.list')->with([
@@ -121,7 +117,25 @@ class GuideController extends Controller
             'cityOptions' => $cityOptions,
             'regionOptions' => $regionOptions,
             'subRegionOptions' => $subRegionOptions,
+            'count' => $count,
             'wineries' => $wineries,
+        ]);
+    }
+
+    public function detail($id) {
+        $winery = Winery::with('avas')->find($id);
+
+        $avas = [];
+
+        foreach($winery->avas as $ava){
+            $avas[] = $ava->name;
+        }
+
+        ksort($avas);
+
+        return view('guide.detail')->with([
+            'winery' => $winery,
+            'avas' => $avas,
         ]);
     }
 }

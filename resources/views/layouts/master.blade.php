@@ -24,14 +24,16 @@
     <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
         <nav class="uk-navbar-container uk-padding-remove uk-visible@l" uk-navbar>
             <div class="uk-navbar-left uk-container">
-                <a class="uk-navbar-item uk-logo uk-padding-small uk-visible@l uk-margin-left" href="#">
+                <a class="uk-navbar-item uk-logo uk-padding-small uk-visible@l" href="#">
                     <img id="logo" src="/img/logo_high.png" alt="Tri-Cities Wine Hub">
                 </a>
                 <ul class="uk-navbar-nav" uk-nav>
                     <li class="{{ request()->is('guide*') ? 'uk-active' : '' }}"><a href="{{ url('/guide') }}">Winery Guide</a></li>
                     <li class="{{ request()->is('ava*') ? 'uk-active' : '' }}"><a href="{{ url('/ava') }}">AVA Map</a></li>
-                    <li class="{{ request()->is('planner*') ? 'uk-active' : '' }}"><a href="{{ url('/planner') }}">Planner</a></li>
-                    <li class="{{ request()->is('about') ? 'uk-active' : '' }}"><a href="{{ url('/about') }}">About</a></li>
+                    @auth
+                        <li class="{{ request()->is('planner*') ? 'uk-active' : '' }}"><a href="{{ url('/planner') }}">Planner</a></li>
+                    @endauth
+                    {{--<li class="{{ request()->is('about') ? 'uk-active' : '' }}"><a href="{{ url('/about') }}">About</a></li>--}}
                     <li><a href="https://tcwinehub.tumblr.com/" target="_blank">Blog</a></li>
                     <li class="{{ request()->is('contact') ? 'uk-active' : '' }}"><a href="{{ url('/contact') }}">Contact</a></li>
                 </ul>
@@ -39,8 +41,8 @@
             @guest
                 <div class="uk-navbar-right uk-container">
                     <ul class="uk-navbar-nav">
-                        <li><a class="uk-button uk-button-primary uk-margin-small-right" uk-toggle="target: #login-modal" href="">Login</a></li>
-                        <li><a class="uk-button uk-button-primary uk-margin-small-right" href="{{ url('/signup') }}">Signup</a></li>
+                        <li><a class="uk-text-uppercase uk-nav-item uk-margin-small-right" uk-toggle="target: #login-modal" href="">Login</a></li>
+                        <li><a class="uk-text-uppercase  uk-nav-item uk-margin-small-right" href="{{ url('/signup') }}">Signup</a></li>
                     </ul>
                 </div>
             @endguest
@@ -68,7 +70,7 @@
                 <div class="uk-navbar-center-left">
                     <a class="uk-padding-large uk-navbar-toggle" uk-icon="icon: menu; ratio: 2" uk-toggle="target: #offcanvas-menu" href="#"><span>Menu</span></a>
                 </div>
-                <a class="uk-logo uk-navbar-item"><img class="uk-hidden@l" src="/img/logo_low.png" alt="Tri-Cities Wine Hub"></a>
+                <a class="uk-logo uk-navbar-item"><img class="uk-hidden@l" src="/img/logo_high.png" alt="Tri-Cities Wine Hub"></a>
                 <div class="uk-navbar-center-right">
                     <a class="uk-padding-large uk-navbar-toggle uk-hidden@l" uk-icon="icon: user; ratio: 2" uk-toggle="target: #offcanvas-user" href="#"><span>User</span></a>
                 </div>
@@ -77,9 +79,7 @@
     </div>
     <div class="uk-container wrapper">
         <header class="uk-padding-large"> 
-            <h1 class="uk-heading-line uk-text-center">
-                @yield('header')
-            </h1>
+            @yield('header')
         </header>
         @if(Session::get('message') != null)
             <div class='uk-alert uk-alert-warning'>
@@ -129,11 +129,13 @@
                 <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
                     <li><a href="{{ url('/guide') }}">Winery Guide</a></li>
                     <li><a href="{{ url('/ava') }}">AVA Map</a></li>
-                    <li><a href="{{ url('/region') }}">Regional Info</a></li>
+                    @auth
+                        <li><a href="{{ url('/planner') }}">Planner</a></li>
+                    @endauth
                 </ul>
                 <hr>
                 <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
-                    <li><a href="{{ url('/about') }}">About</a></li>
+                    {{--<li><a href="{{ url('/about') }}">About</a></li>--}}
                     <li><a href="https://tcwinehub.tumblr.com/">Blog</a></li>
                     <li><a href="{{ url('/contact') }}">Contact Us</a></li>
                 </ul>
@@ -149,7 +151,6 @@
                     @endguest
                     @auth
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                        <li><a href="{{ url('/planner') }}">Tasting Planner</a></li>
                         <li><a href="{{ url('/journal') }}">Wine Journal</a></li>
                         <li><a href="{{ url('/account') }}">Edit Info</a></li>
                         <li><a href="{{ url('/logout') }}">Logout</a></li>

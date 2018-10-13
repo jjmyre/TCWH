@@ -15,49 +15,54 @@ Route::get('/', function () {
     return redirect('/guide');
 });
 
+// Guide
+
 Route::get('/guide', 'GuideController@default');
 
 Route::get('/guide/list/', 'GuideController@list');
 
-Route::get('/winery/:id', 'GuideController@detail');
+Route::get('/guide/winery/{id}', 'GuideController@detail');
+Route::get('/guide/region/{id}', 'GuideController@detail');
+
+// Planner CRUD
+Route::post('/planner/add/:id', 'PlannerController@add');
+
+
+// Contact & Error Correction
 
 Route::get('/contact', function () {
     return view('contact');
 });
+Route::post('/contact', function () {
+    return view('contact');
+});
+
+
+// Login & Signup
 
 Route::get('/signup', function () {
     return view('signup');
 });
 
+Route::post('/signup', function () {
+    return view('signup');
+});
 
 
-/*
-
-
-
-Route::post('/planner/add/:id', 'PlannerController@add');
-
-
-
-
-
-
-*/
-
-Route::get('/debug', function () {
+/* Route::get('/debug', function () {
 
     $debug = [
         'Environment' => App::environment(),
         'Database defaultStringLength' => Illuminate\Database\Schema\Builder::$defaultStringLength,
     ];
 
-    /*
+    
     The following commented out line will print your MySQL credentials.
     Uncomment this line only if you're facing difficulties connecting to the
     database and you need to confirm your credentials. When you're done
     debugging, comment it back out so you don't accidentally leave it
     running on your production server, making your credentials public.
-    */
+    
     #$debug['MySQL connection config'] = config('database.connections.mysql');
 
     try {
@@ -70,6 +75,6 @@ Route::get('/debug', function () {
 
     dump($debug);
 });
-
+*/
 
 
