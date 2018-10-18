@@ -22,10 +22,18 @@ Route::get('/guide', 'GuideController@default');
 Route::get('/guide/list/', 'GuideController@list');
 
 Route::get('/guide/winery/{id}', 'GuideController@detail');
-Route::get('/guide/region/{id}', 'GuideController@detail');
+
+
+
+Route::get('/avamap', 'AvaMapController@list');
+
 
 // Planner CRUD
+
 Route::post('/planner/add/:id', 'PlannerController@add');
+
+
+
 
 
 // Contact & Error Correction
@@ -78,3 +86,7 @@ Route::post('/signup', function () {
 */
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

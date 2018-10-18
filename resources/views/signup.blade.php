@@ -5,7 +5,7 @@
 @endsection
 
 @section('header')
-    Create Account
+    <h1 class="uk-heading-primary uk-text-center">Create Account</h1>
 @endsection
 
 @section('content')

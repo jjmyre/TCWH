@@ -11,9 +11,9 @@ class Winery extends Model
     	return $this->belongsToMany('App\Ava')->withTimestamps();
     }	
 
-    public function times() {
+    public function time() {
     	# One-to-one relationship
-    	return $this->hasOne('App\Time')->withTimestamps();
+    	return $this->hasOne('App\Time');
     }
 
 }

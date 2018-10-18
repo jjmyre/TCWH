@@ -10,6 +10,7 @@
     <link href="{{ asset('css/styles.css') }}" type='text/css' rel='stylesheet' />
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Courgette|Source+Serif+Pro|Source+Sans+Pro" rel="stylesheet">
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -29,7 +30,7 @@
                 </a>
                 <ul class="uk-navbar-nav" uk-nav>
                     <li class="{{ request()->is('guide*') ? 'uk-active' : '' }}"><a href="{{ url('/guide') }}">Winery Guide</a></li>
-                    <li class="{{ request()->is('ava*') ? 'uk-active' : '' }}"><a href="{{ url('/ava') }}">AVA Map</a></li>
+                    <li class="{{ request()->is('avamap*') ? 'uk-active' : '' }}"><a href="{{ url('/avamap') }}">AVA Map</a></li>
                     @auth
                         <li class="{{ request()->is('planner*') ? 'uk-active' : '' }}"><a href="{{ url('/planner') }}">Planner</a></li>
                     @endauth
@@ -128,7 +129,7 @@
                 <button class="uk-offcanvas-close" type="button" uk-close></button>
                 <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
                     <li><a href="{{ url('/guide') }}">Winery Guide</a></li>
-                    <li><a href="{{ url('/ava') }}">AVA Map</a></li>
+                    <li><a href="{{ url('/avamap') }}">AVA Map</a></li>
                     @auth
                         <li><a href="{{ url('/planner') }}">Planner</a></li>
                     @endauth
@@ -147,12 +148,11 @@
                 <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
                     @guest
                         <li><a href="">Login</a></li>
-                        <li><a href="{{ url('/signup') }}">Signup</a></li>
+                        <li class="{{ request()->is('signup*') ? 'uk-active' : '' }}"><a href="{{ url('/signup') }}">Signup</a></li>
                     @endguest
                     @auth
-                        <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                        <li><a href="{{ url('/journal') }}">Wine Journal</a></li>
-                        <li><a href="{{ url('/account') }}">Edit Info</a></li>
+                        <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                        <li class="{{ request()->is('profile*') ? 'uk-active' : '' }}"><a href="{{ url('/account') }}">Edit Info</a></li>
                         <li><a href="{{ url('/logout') }}">Logout</a></li>
                     @endauth
                 </ul>

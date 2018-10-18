@@ -5,7 +5,7 @@
 @endsection
 
 @section('header')
-    Contact Us
+    <h1 class="uk-heading-primary uk-text-center">Contact Us</h1>
 @endsection
 
 @section('content')

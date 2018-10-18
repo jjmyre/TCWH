@@ -38,8 +38,7 @@ class CreateTimesTable extends Migration
     public function down()
     {
         Schema::table('times', function (Blueprint $table) {
-
-            $table->dropForeign('times_winery_id_foreign');
+            $table->dropForeign('time_winery_id_foreign');
         });
 
         Schema::dropIfExists('times');

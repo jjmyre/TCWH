@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class AvaMapController extends Controller
 {
-    function __invoke(){
-        return view('ava.list');
+    public function list() {
+    	return view('ava.list');
     }
+
 }
