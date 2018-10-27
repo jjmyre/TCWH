@@ -16,22 +16,33 @@ Route::get('/', function () {
 });
 
 // Guide
-
-Route::get('/guide', 'GuideController@default');
-
+Route::get('/guide', 'GuideController@index');
 Route::get('/guide/list/', 'GuideController@list');
-
-Route::get('/guide/winery/{id}', 'GuideController@detail');
-
+Route::get('/winery/{id}', 'GuideController@detail');
 
 
+// AVA Map
 Route::get('/avamap', 'AvaMapController@list');
 
+// Planner
+Route::get('/planner', 'PlannerController@index');
+Route::post('/planner/add/{id}', 'PlannerController@add');
+Route::post('/planner/move/{id}', 'PlannerController@move');
+Route::post('/planner/remove/{id}', 'PlannerController@remove');
+Route::post('/planner/clear', 'PlannerController@clear');
 
-// Planner CRUD
+// Favorites
+Route::post('/favorite/{id}', 'FavoriteController@favorite');
+Route::post('/unfavorite/{id}', 'FavoriteController@unfavorite');
 
-Route::post('/planner/add/:id', 'PlannerController@add');
+// Wishlists
+Route::post('/wishlist/{id}', 'WishlistController@wishlist');
+Route::post('/unwishlist/{id}', 'WishlistController@unwishlist');
 
+// Visited Wineries
+Route::post('/visited/{id}', 'VisitController@visited');
+Route::post('/unvisited/{id}', 'VisitController@unvisited');
+Route::post('/unvisited/all', 'VisitController@clear');
 
 
 
@@ -41,7 +52,7 @@ Route::post('/planner/add/:id', 'PlannerController@add');
 Route::get('/contact', function () {
     return view('contact');
 });
-Route::post('/contact', function () {
+Route::post('/correction/{id}', function () {
     return view('contact');
 });
 
@@ -89,4 +100,4 @@ Route::post('/signup', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

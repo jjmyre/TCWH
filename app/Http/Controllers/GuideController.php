@@ -11,7 +11,7 @@ use Session;
 class GuideController extends Controller
 {
 
-     public function default() {
+     public function index() {
         
         $wineries = Winery::all();
 

@@ -30,13 +30,13 @@
             <div class="uk-card-header uk-padding-remove">                      
                 <div class="uk-flex-center" uk-grid>
                     <div>
-                        <a class="uk-link-heading" title="Click for Detail View" href="/guide/winery/{{$winery->id}}">   
+                        <a class="uk-link-heading" title="Click for Detail View" href="/winery/{{$winery->id}}">   
                             <img class="winery_logo" src="{{'/img/logos/'.$winery->logo}}" alt="{{$winery->name}} Logo">
                         </a>
                     </div>
                     <div class="uk-flex uk-flex-middle">    
                         <div>
-                            <a class="uk-link-reset" title="Click for Detail View" href="/guide/winery/{{$winery->id}}">
+                            <a class="uk-link-reset" title="Click for Detail View" href="/winery/{{$winery->id}}">
                                 <h2 class="uk-card-title uk-display-inline uk-margin-remove-bottom uk-padding-left">{{ $winery->name }}
                                 </h2>
                                 <span class="uk-text-muted uk-float-right" uk-icon="icon: check"></span>

@@ -10,7 +10,7 @@
     <link href="{{ asset('css/styles.css') }}" type='text/css' rel='stylesheet' />
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Courgette|Source+Serif+Pro|Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Courgette|Nunito+Sans|Fahkwang" rel="stylesheet">
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -53,12 +53,15 @@
                         <li class="uk-parent"><a href="#" class="uk-margin-right" uk-icon="icon: user; ratio: 2"><span>User</span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li>USERNAME</li>
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Tasting Planner</a></li>
-                                    <li><a href="#">Wine Journal</a></li>
+                                    <li>Hello, {{'name'}}</li>
+                                    <li><a href="#">My Dashboard</a></li>
                                     <li><a href="#">Edit Info</a></li>
-                                    <li><a href="#">Logout</a></li>
+                                    <li>
+                                        <form method='POST' id='logout' action='/logout'>
+                                            {{ csrf_field() }}
+                                            <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -79,7 +82,7 @@
         </nav>
     </div>
     <div class="uk-container wrapper">
-        <header class="uk-padding-large"> 
+        <header class="uk-padding"> 
             @yield('header')
         </header>
         @if(Session::get('message') != null)
@@ -92,36 +95,6 @@
     <footer class="uk-text-center">
         <p>&copy; 2018 Justin Myre. All Rights Reserved.</p>
     </footer>
-        <!-- Login Form Modal -->
-    <div id="login-modal" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
-            <h2 class="uk-modal-title">User Login</h2>
-            <form class="uk-form uk-form-stacked" action="/login" method="post" id="login-form">
-                <div class="uk-form-row"> 
-                    <label class="visuallyHidden" for="user">User Name</label>
-                    <div class="uk-inline uk-width-1-1"> 
-                        <span class="uk-form-icon" uk-icon="icon:user"></span>
-                        <input class="uk-input" type="text" id="user" placeholder="User Name" required>
-                    </div>
-                </div>
-                <div class="uk-form-row uk-margin-top">        
-                    <label class="visuallyHidden" for="password">Password</label>
-                    <div class="uk-inline uk-width-1-1">    
-                        <span class="uk-form-icon" uk-icon="icon:lock"></span>
-                        <input class="uk-input" type="text" id="password" placeholder="Password" required>
-                    </div>
-                </div>
-                <div class="uk-margin-top">        
-                    <label class="uk-form-label" for="remember">Remember Me</label>   
-                    <input class="uk-checkbox uk-form-controls-text" type="checkbox" id="remember">
-                </div>
-                <p class="uk-text-right">
-                    <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                    <button class="uk-button uk-button-primary" type="submit">Login</button>
-                </p>
-            </form>
-        </div>
-    </div>
     <!-- Off-canvas navbar -->
     <div class="uk-offcanvas-content">
         <div id="offcanvas-menu" uk-offcanvas="overlay: true; mode: push">
@@ -147,16 +120,63 @@
                 <button class="uk-offcanvas-close" type="button" uk-close></button>
                 <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
                     @guest
-                        <li><a href="">Login</a></li>
+                        <li><a uk-toggle="target: #login-modal" href="">Login</a></li>
                         <li class="{{ request()->is('signup*') ? 'uk-active' : '' }}"><a href="{{ url('/signup') }}">Signup</a></li>
                     @endguest
                     @auth
-                        <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                        <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="{{ url('/dashboard') }}">My Dashboard</a></li>
                         <li class="{{ request()->is('profile*') ? 'uk-active' : '' }}"><a href="{{ url('/account') }}">Edit Info</a></li>
-                        <li><a href="{{ url('/logout') }}">Logout</a></li>
+                        <li>
+                            <form method='POST' id='logout' action='/logout'>
+                                {{ csrf_field() }}
+                                <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
+                            </form>
+                        </li>
                     @endauth
                 </ul>
             </div>
+        </div>
+    </div>
+    <!-- Login Form Modal -->
+    <div id="login-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">User Login</h2>
+            <form class="uk-form uk-form-stacked" action="{{ route('login') }}" method="post" id="login-form">
+
+                {{ csrf_field() }}
+
+                <div class="uk-form-row"> 
+                    <label class="visuallyHidden" for="user">User Name</label>
+                    <div class="uk-inline uk-width-1-1"> 
+                        <span class="uk-form-icon" uk-icon="icon:user"></span>
+                        <input class="uk-input" type="text" id="user" placeholder="User Name" required>
+                    </div>
+                </div>
+                <div class="uk-form-row uk-margin-top">        
+                    <label class="visuallyHidden" for="email">Email Or User Name</label>
+                    <div class="uk-inline uk-width-1-1">    
+                        <span class="uk-form-icon" uk-icon="icon:mail"></span>
+                        <input class="uk-input" type="email" name="email" value="{{ old('email') }}" id="email" placeholder="Email" required autofocus>
+                    </div>
+                </div>
+                <div class="uk-form-row uk-margin-top">        
+                    <label class="visuallyHidden" for="password">Password</label>
+                    <div class="uk-inline uk-width-1-1">    
+                        <span class="uk-form-icon" uk-icon="icon:lock"></span>
+                        <input class="uk-input" type="text" value="{{ old('password') }}" name="password" id="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <div class="uk-margin-top uk-inline">        
+                    <label class="uk-form-label" for="remember">Remember Me</label>   
+                    <input class="uk-checkbox uk-form-controls-text" name="remember" value="old('remember') ? 'checked' : '' }}" type="checkbox" >
+                </div>
+                <p class="uk-text-right">
+                    <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                    <button class="uk-button uk-button-primary" type="submit">Login</button>
+                </p>
+
+                <a class='uk-button uk-button-small' href='{{ route('password.request') }}'>Forgot Password?</a>
+            </form>
         </div>
     </div>
 </body>

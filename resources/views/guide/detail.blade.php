@@ -52,12 +52,12 @@
             <h4 class="uk-margin-remove uk-text-center">Contact Info</h2>
             <table class="uk-table uk-table-small uk-flex uk-flex-center">
                 <tbody>
-                        <tr class="uk-flex uk-flex-middle">
-                            <th>Address</th>
-                            <td>{{$winery->street}} <br> 
-                                {{$winery->city}}, {{$winery->state}} {{$winery->zip}}
-                            </td> 
-                        </tr>
+                    <tr class="uk-flex uk-flex-middle">
+                        <th>Address</th>
+                        <td>{{$winery->street}} <br> 
+                            {{$winery->city}}, {{$winery->state}} {{$winery->zip}}
+                        </td> 
+                    </tr>
                     @if(!empty($winery->phone))
                         <tr>
                             <th>Phone</th>

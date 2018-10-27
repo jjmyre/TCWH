@@ -25,51 +25,104 @@
     <div class="uk-child-width-1-2@l uk-padding-small uk-margin-remove" uk-grid>
 @endif
     @foreach($cityWineries as $winery)
-        <div class="uk-card uk-box-shadow-hover-medium {{$winery->id}}">
+        <div class="uk-card" id="div_{{$winery->id}}">
             <div class="uk-card-header uk-padding-remove">                      
                 <div class="uk-flex-center" uk-grid>
                     <div>
-                        <a class="uk-link-heading" title="Click for Detail View" href="/guide/winery/{{$winery->id}}">   
+                        <a class="uk-link-heading" title="Click for Detail View" href="/winery/{{$winery->id}}">   
                             <img class="winery_logo" src="{{'/img/logos/'.$winery->logo}}" alt="{{$winery->name}} Logo">
                         </a>
                     </div>
                     <div class="uk-flex uk-flex-middle">    
                         <div>
-                            <a class="uk-link-reset" title="Click for Detail View" href="/guide/winery/{{$winery->id}}">
+                            <a class="uk-link-reset" title="Click for Detail View" href="/winery/{{$winery->id}}">
                                 <h3 class="uk-card-title uk-display-inline uk-margin-remove-bottom uk-padding-left">{{ $winery->name }}
                                 </h3>
-                                <span class="uk-text-muted uk-float-right" uk-icon="icon: check"></span>
-                                @if( $winery->sub_name )
+
+                                @auth
+                                    @if($winery)
+                                        <span class="uk-text-muted uk-padding-small uk-float-right" title="You have visited this winery." uk-icon="icon: check"></span>
+                                    @endif
+                                @endauth
+
+                                @if($winery->sub_name)
                                     <p class="uk-text uk-margin-remove">{{ $winery->sub_name }}</p>
                                 @endif
                             </a>
                             <div class="uk-padding-top">
-                                <form class="uk-form uk-display-inline" action="/favorite/add/" method="post">
-                                {{ csrf_field() }}
-                                <input type="hidden" value="{{$winery->id}}">
-                                <button type="submit" class="uk-button uk-button-text" title="Favorite">
-                                    <span uk-icon="icon: heart"></span>
-                                    <span>7</span>
-                                </button>
-                                
-                                </form>
-                                <form class="uk-form uk-display-inline" action="/wishlist/add/" method="post">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" value="{{$winery->id}}">
-                                    <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Wishlist">
+                                @auth
+                                    @if($winery)
+                                        <form class="uk-form uk-display-inline" action="/favorite/{{$winery->id}}/" method="post">
+                                        {{ csrf_field() }}
+                                            <input type="hidden" value="{{$winery->id}}">
+                                            <button type="submit" class="uk-button uk-button-text" title="Favorite">
+                                                <span uk-icon="icon: heart; ratio:2"></span>
+                                                <span>7</span>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form class="uk-form uk-display-inline" action="/unfavorite/{{$winery->id}}/" method="post">
+                                        {{ csrf_field() }}
+                                            <input type="hidden" value="{{$winery->id}}">
+                                            <button type="submit" class="uk-button uk-button-text" title="Favorite">
+                                                <span uk-icon="icon: heart; ratio:2"></span>
+                                                <span>7</span>
+                                            </button>
+                                        </form>
+                                    @endif
+                                    @if($winery)
+                                        <form class="uk-form uk-display-inline" action="/wishlist/{{$winery->id}}/" method="post">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" value="{{$winery->id}}">
+                                            <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Wishlist">
+                                                <span uk-icon="icon: star; ratio:2"></span>
+                                                <span>60</span>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form class="uk-form uk-display-inline" action="/unwishlist/{{$winery->id}}/" method="post">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" value="{{$winery->id}}">
+                                            <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Wishlist">
+                                                <span uk-icon="icon: star; ratio:2"></span>
+                                                <span>60</span>
+                                            </button>
+                                        </form>
+                                    @endif
+                                    @if($winery)
+                                        <form class="uk-form uk-display-inline" action="/planner/add/{{$winery->id}}" method="post">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" value="{{$winery->id}}">
+                                            <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Planner">
+                                                <span uk-icon="icon: plus-circle; ratio:2"></span>        
+                                                <span>14</span>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form class="uk-form uk-display-inline" action="/planner/remove/{{$winery->id}}" method="post">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" value="{{$winery->id}}">
+                                            <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Planner">
+                                                <span uk-icon="icon: plus-circle; ratio:2"></span>        
+                                                <span>14</span>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                                @guest
+                                    <div class="uk-button" title="Favorite">
+                                        <span uk-icon="icon: heart"></span>
+                                        <span>7</span>
+                                    </div>   
+                                    <div class="uk-button" title="Wishlist">
                                         <span uk-icon="icon: star"></span>
                                         <span>60</span>
-                                    </button>
-                                    
-                                </form>
-                                <form class="uk-form uk-display-inline" action="/planner/add/" method="post">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" value="{{$winery->id}}">
-                                    <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Planner">
+                                    </div>
+                                    <div class="uk-button uk-padding-remove-left" title="Planner">
                                         <span uk-icon="icon: plus-circle"></span>        
                                         <span>14</span>
-                                    </button>
-                                </form>
+                                    </div>
+                                @endguest
                             </div> 
                         </div>
                     </div>
@@ -98,11 +151,90 @@
                         <a class="uk-link uk-display-block" href="{!! str_replace(' ', '+', $directionLink) !!}" target="_blank">
                             <span uk-icon="icon:location"></span>
                             Directions</a>
-                    </div>
+
+                        <a class="time-box uk-link uk-display-inline-block" uk-toggle="target: #times-modal">
+                            <span class="uk-margin-small-right" uk-icon="icon: clock"></span>
+                            
+                            @if($winery->time->monday = 'closed')
+                                <span class="closed">M
+                            @elseif($winery->time->monday == 'appt')
+                                <span class="appt">M
+                            @else
+                                <span class="open">M
+                            @endif
+                            </span>
+                            @if($winery->time->tuesday = 'closed')
+                                <span class="closed">Tu 
+                            @elseif($winery->time->tuesday = 'appt')
+                                <span class="appt">Tu
+                            @else
+                                <span class="open">Tu
+                            @endif
+                            </span>                           
+                            @if($winery->time->wednesday === 'closed')
+                                <span class="closed">W 
+                            @elseif($winery->time->wednesday === 'appt')
+                                <span class="appt">W
+                            @else
+                                <span class="open">W
+                            @endif
+                            </span>
+                            @if($winery->time->thursday === 'closed')
+                                <span class="closed">Th 
+                            @elseif($winery->time->thursday === 'appt')
+                                <span class="appt">Th
+                            @else
+                                <span class="open">Th
+                            @endif
+                            </span>
+                            @if($winery->time->friday === 'closed')
+                                <span class="closed">F 
+                            @elseif($winery->time->friday === 'appt')
+                                <span class="appt">F
+                            @else
+                                <span class="open">F
+                            @endif
+                            </span>
+                            @if($winery->time->saturday === 'closed')
+                                <span class="closed">Sa 
+                            @elseif($winery->time->saturday === 'appt')
+                                <span class="appt">Sa
+                            @else
+                                <span class="open">Sa
+                            @endif
+                            </span>
+                            @if($winery->time->sunday === 'closed')
+                                <span class="closed">Su 
+                            @elseif($winery->time->sunday === 'appt')
+                                <span class="appt">Su
+                            @else
+                                <span class="open">Su
+                            @endif
+                            </span>                                       
+                        </a>
                 </address>
+                {{-- Times Modal --}} 
+                <div id="times-modal" uk-modal>
+                    <div class="uk-modal-dialog uk-modal-body">
+                        <h2 class="uk-modal-title uk-heading-line">Business Hours</h2>
+                        <h3>{{$winery->name}}</h3>
+                        <p>Monday: {{$winery->time->monday}}</p>
+                        <p>Tuesday {{$winery->time->tuesday}}</p>
+                        <p>Wednesday: {{$winery->time->wednesday}}</p>
+                        <p>Thursday: {{$winery->time->thursday}}</p>
+                        <p>Friday: {{$winery->time->friday}}</p>
+                        <p>Saturday: {{$winery->time->saturday}}</p>
+                        <p>Sunday: {{$winery->time->sunday}}</p>
+                        <button class="uk-button uk-button-default uk-modal-close" type="button"><span uk-icon="close"></span></button>
+                    </div>
+                </div>
             </div>
         </div>
     @endforeach
 </div>
+
+
+
+
 
 
