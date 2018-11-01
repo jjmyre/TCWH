@@ -9,13 +9,13 @@
 @endsection
 
 @section('content')
-    <form class="uk-form uk-form-stacked uk-padding-large" action="{{ route('register') }}" method="POST" id="signup-form" uk-grid>
+    <form class="uk-form uk-form-stacked uk-padding-large" action="/signup" method="POST" id="signup-form" uk-grid>
         {{ csrf_field() }}
         <div class="uk-width-1-1">
-            <label class="uk-form-label" for="name">User Name</label>
+            <label class="uk-form-label" for="username">User Name</label>
             <div class="uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon:user"></span>
-                <input class="uk-input" id="name" name="name" placeholder="User Name" value="{{ old('name') }}" type="text"  required autofocus>                
+                <input class="uk-input" id="username" name="username" placeholder="User Name" value="{{ old('username') }}" type="text"  required autofocus>                
             </div>
         </div>
         <div class="uk-width-1-1 uk-margin-top">
@@ -29,14 +29,14 @@
             <label class="uk-form-label" for="password">Password</label>
             <div class="uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon:lock"></span>
-                <input class="uk-input" id="password" name="password" placeholder="Password" type="text" required>
+                <input class="uk-input" id="password" name="password" placeholder="Password" type="password" required>
             </div>
         </div>
         <div class="uk-width-1-1 uk-margin-top">     
             <label class="uk-form-label" for="password_confirm">Confirm Password</label>
             <div class="uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon:lock"></span>
-                <input class="uk-input" id="password-confirm" name="password_confirm" placeholder="Password" type="text" required>
+                <input class="uk-input" id="password-confirm" name="password_confirmation" placeholder="Confirm Password" type="password" required>
             </div>
         </div>
         <div class="uk-width-1-1 uk-margin-top">

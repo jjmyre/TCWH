@@ -43,13 +43,13 @@
                 <div class="uk-navbar-right uk-container">
                     <ul class="uk-navbar-nav">
                         <li><a class="uk-text-uppercase uk-nav-item uk-margin-small-right" uk-toggle="target: #login-modal" href="">Login</a></li>
-                        <li><a class="uk-text-uppercase  uk-nav-item uk-margin-small-right" href="{{ url('/signup') }}">Signup</a></li>
+                        <li class="{{ request()->is('signup') ? 'uk-active' : '' }}"><a class="uk-text-uppercase uk-nav-item uk-margin-small-right" href="{{ url('/signup') }}">Signup</a></li>
                     </ul>
                 </div>
             @endguest
             @auth
-                <div class="uk-navbar-right uk-visible@l">
-                    <ul class="uk-navbar-nav uk-visible@l uk-navbar-right">
+                <div class="uk-navbar-right uk-container">
+                    <ul class="uk-navbar-nav">
                         <li class="uk-parent"><a href="#" class="uk-margin-right" uk-icon="icon: user; ratio: 2"><span>User</span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
@@ -121,7 +121,7 @@
                 <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
                     @guest
                         <li><a uk-toggle="target: #login-modal" href="">Login</a></li>
-                        <li class="{{ request()->is('signup*') ? 'uk-active' : '' }}"><a href="{{ url('/signup') }}">Signup</a></li>
+                        <li class="{{ request()->is('signup*') ? 'uk-active' : '' }}"><a href="/signup">Signup</a></li>
                     @endguest
                     @auth
                         <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="{{ url('/dashboard') }}">My Dashboard</a></li>
@@ -141,22 +141,15 @@
     <div id="login-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <h2 class="uk-modal-title">User Login</h2>
-            <form class="uk-form uk-form-stacked" action="{{ route('login') }}" method="post" id="login-form">
+            <form class="uk-form uk-form-stacked" action="{{ route('login') }}" method="POST" id="login-form">
 
                 {{ csrf_field() }}
 
-                <div class="uk-form-row"> 
-                    <label class="visuallyHidden" for="user">User Name</label>
-                    <div class="uk-inline uk-width-1-1"> 
-                        <span class="uk-form-icon" uk-icon="icon:user"></span>
-                        <input class="uk-input" type="text" id="user" placeholder="User Name" required>
-                    </div>
-                </div>
                 <div class="uk-form-row uk-margin-top">        
-                    <label class="visuallyHidden" for="email">Email Or User Name</label>
+                    <label class="visuallyHidden" for="login">Username or Password</label>
                     <div class="uk-inline uk-width-1-1">    
-                        <span class="uk-form-icon" uk-icon="icon:mail"></span>
-                        <input class="uk-input" type="email" name="email" value="{{ old('email') }}" id="email" placeholder="Email" required autofocus>
+                        <span class="uk-form-icon" uk-icon="icon:user"></span>
+                        <input class="uk-input" type="text" name="email" value="{{ old('username') ?: old('email') }}" id="login" placeholder="Username or Password" required autofocus>
                     </div>
                 </div>
                 <div class="uk-form-row uk-margin-top">        
@@ -167,7 +160,7 @@
                     </div>
                 </div>
                 <div class="uk-margin-top uk-inline">        
-                    <label class="uk-form-label" for="remember">Remember Me</label>   
+                    <label class="uk-form-label" for="remember">Remember Me</label>
                     <input class="uk-checkbox uk-form-controls-text" name="remember" value="old('remember') ? 'checked' : '' }}" type="checkbox" >
                 </div>
                 <p class="uk-text-right">

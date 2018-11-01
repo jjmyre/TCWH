@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Winery;
 use App\Ava;
 use App\Time;
+use App\User;
 use Session;
 
 class GuideController extends Controller
@@ -25,7 +26,9 @@ class GuideController extends Controller
         $cityOrRegion = 'city';
         $listOrMap = 'list';
         $cityWineries = '';
-        $regionWineries = '';
+        $regionWineries = ''; 
+
+        $user = User::findOrFail($id)->all();
 
         foreach($wineries as $winery) {
             $totalCount++;
@@ -55,6 +58,7 @@ class GuideController extends Controller
             'cityOrRegion' => $cityOrRegion,
             'cityWineries' => $cityWineries,
             'regionWineries' => $regionWineries,
+            'user' => $user,
         ]);
     }
 
@@ -190,7 +194,7 @@ class GuideController extends Controller
         return view('guide.detail')->with([
             'winery' => $winery,
             'avas' => $avas,
-            'time' => $time
+            'time' => $time,
         ]);
     }
 }

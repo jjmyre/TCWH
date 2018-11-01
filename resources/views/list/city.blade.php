@@ -233,7 +233,7 @@
     @endforeach
 </div>
 
-
+{{ $cityWineries->appends(request()->except('page'))->links() }}
 
 
 

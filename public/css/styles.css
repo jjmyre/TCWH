@@ -4895,7 +4895,6 @@ ul.uk-nav-sub {
   outline: none;
   text-decoration: overline;
   text-decoration-color: #5EBD3E;
-  border-radius: 3px;
 }
 
 /* OnClick */
@@ -4911,8 +4910,6 @@ ul.uk-nav-sub {
   background: #26950e;
   text-shadow: 1px 1px 1px black;
   text-decoration: none;
-  border-radius: 15px;
-  border: 1px solid #207e0c;
 }
 
 /* Item
@@ -12324,17 +12321,17 @@ iframe.uk-cover {
   }
 }
 
-/* line 89, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 86, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 html {
   background: #e6e4d4 url("../img/backgrounds/washed.png") repeat;
 }
 
-/* line 92, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 89, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 body {
   margin: 0 auto;
 }
 
-/* line 95, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 92, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 header h1 {
   color: white;
   margin: 0 auto;
@@ -12345,13 +12342,13 @@ header h1 {
   line-height: 1em;
 }
 
-/* line 105, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 102, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 ul.uk-navbar-dropdown-nav > li a {
   color: white;
   padding-left: .5em;
 }
 
-/* line 109, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 106, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 ul.uk-navbar-dropdown-nav > li a:hover {
   background: #1a670a;
   border-radius: 10px;
@@ -12359,34 +12356,34 @@ ul.uk-navbar-dropdown-nav > li a:hover {
   color: white;
 }
 
-/* line 115, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 112, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 ul.uk-navbar-dropdown-nav > li a:active {
   background: #2cad10;
   padding-left: .5em;
 }
 
-/* line 119, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 116, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 img {
   width: 100%;
 }
 
-/* line 122, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 119, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 footer {
   color: #6A0C7E;
   padding: 2em 0;
 }
 
-/* line 126, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 123, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 footer a:hover {
   color: #207e0c;
 }
 
-/* line 130, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 127, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .uk-container {
   margin: 0 auto;
 }
 
-/* line 134, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 131, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .wrapper {
   background: #e6e4d4 url("../img/backgrounds/fabric.png") repeat;
   margin: 0 auto;
@@ -12396,23 +12393,23 @@ footer a:hover {
   border-top: 0px;
 }
 
-/* line 143, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 140, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .hide {
   visibility: hidden;
 }
 
-/* line 147, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 144, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .show {
   visibility: visible;
 }
 
-/* line 151, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 148, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .uk-logo {
   width: 10em;
   padding: 1em;
 }
 
-/* line 157, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 154, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .visuallyHidden,
 [uk-icon] span,
 [uk-navbar-toggle-icon] span {
@@ -12427,41 +12424,41 @@ footer a:hover {
   width: 1px;
 }
 
-/* line 171, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 168, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .winery_logo {
   width: 8em;
 }
 
-/* line 174, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 171, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .winery_logo_lg {
   width: 16em;
 }
 
-/* line 179, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 176, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .open {
   color: green;
   font-weight: bold;
 }
 
-/* line 184, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 181, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .closed {
   color: red;
   font-weight: bold;
 }
 
-/* line 189, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 186, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .appt {
   color: orange;
   font-weight: bold;
 }
 
-/* line 194, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 191, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .time-box {
   box-sizing: border-box;
   padding: 1px;
 }
 
-/* line 199, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 196, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .time-box:hover {
   text-decoration: none;
   box-sizing: border-box;
