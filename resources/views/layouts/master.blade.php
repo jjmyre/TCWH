@@ -53,12 +53,12 @@
                         <li class="uk-parent"><a href="#" class="uk-margin-right" uk-icon="icon: user; ratio: 2"><span>User</span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li>Hello, {{'name'}}</li>
-                                    <li><a href="#">My Dashboard</a></li>
-                                    <li><a href="#">Edit Info</a></li>
+                                    <li><strong>{{$user->username}}</strong></li>
+                                    <li><a href="/dashboard/{{$user->id}}">My Dashboard</a></li>
+                                    <li><a href="/editinfo/{{$user->id}}">Edit Info</a></li>
                                     <li>
                                         <form method='POST' id='logout' action='/logout'>
-                                            {{ csrf_field() }}
+                                            @csrf
                                             <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
                                         </form>
                                     </li>
@@ -85,12 +85,14 @@
         <header class="uk-padding"> 
             @yield('header')
         </header>
-        @if(Session::get('message') != null)
-            <div class='uk-alert uk-alert-warning'>
-                {{ Session::get('message') }}
+       
+        @yield('content')
+         @if(Session::get('message') != null)
+            <div class="uk-alert-success uk-margin-remove-bottom" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <strong>{{ Session::get('message') }}</strong>
             </div>
         @endif
-        @yield('content')
     </div>
     <footer class="uk-text-center">
         <p>&copy; 2018 Justin Myre. All Rights Reserved.</p>
@@ -128,7 +130,7 @@
                         <li class="{{ request()->is('profile*') ? 'uk-active' : '' }}"><a href="{{ url('/account') }}">Edit Info</a></li>
                         <li>
                             <form method='POST' id='logout' action='/logout'>
-                                {{ csrf_field() }}
+                                @csrf
                                 <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
                             </form>
                         </li>
@@ -138,37 +140,53 @@
         </div>
     </div>
     <!-- Login Form Modal -->
-    <div id="login-modal" uk-modal>
+    @if ($errors->has('username') || $errors->has('email') || $errors->has('password')) 
+        <div id="login-modal" class="uk-open" uk-modal style="display: block">
+    @else
+        <div id="login-modal" uk-modal>
+    @endif 
         <div class="uk-modal-dialog uk-modal-body">
             <h2 class="uk-modal-title">User Login</h2>
             <form class="uk-form uk-form-stacked" action="{{ route('login') }}" method="POST" id="login-form">
 
-                {{ csrf_field() }}
+                @csrf
 
-                <div class="uk-form-row uk-margin-top">        
-                    <label class="visuallyHidden" for="login">Username or Password</label>
+                <div class="uk-form-row uk-margin-top">
+                    @if ($errors->has('username') || $errors->has('email'))               
+                        <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                            <a class="uk-alert-close" uk-close></a>
+                            <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+                        </div>
+                    @endif 
+                    <label class="visuallyHidden" for="login">Username or Email</label>
                     <div class="uk-inline uk-width-1-1">    
                         <span class="uk-form-icon" uk-icon="icon:user"></span>
-                        <input class="uk-input" type="text" name="email" value="{{ old('username') ?: old('email') }}" id="login" placeholder="Username or Password" required autofocus>
+                        <input class="uk-input" type="text" name="login" value="{{ old('username') ?: old('email_login') }}" id="login" placeholder="Username or Email" autofocus>
                     </div>
                 </div>
-                <div class="uk-form-row uk-margin-top">        
+                <div class="uk-form-row uk-margin-top">
+                    @if ($errors->get('password'))              
+                        <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                            <a class="uk-alert-close" uk-close></a>
+                            <strong>{{ $errors->first('password') }}</strong>    
+                        </div>
+                    @endif    
                     <label class="visuallyHidden" for="password">Password</label>
                     <div class="uk-inline uk-width-1-1">    
                         <span class="uk-form-icon" uk-icon="icon:lock"></span>
-                        <input class="uk-input" type="text" value="{{ old('password') }}" name="password" id="password" placeholder="Password" required>
+                        <input class="uk-input" type="password" value="{{ old('password') }}" name="password" id="password" placeholder="Password" >
                     </div>
                 </div>
-                <div class="uk-margin-top uk-inline">        
-                    <label class="uk-form-label" for="remember">Remember Me</label>
-                    <input class="uk-checkbox uk-form-controls-text" name="remember" value="old('remember') ? 'checked' : '' }}" type="checkbox" >
+                <div class="uk-margin-top">        
+                    <input class="uk-checkbox" name="remember" value="old('remember') ? 'checked' : '' }}" type="checkbox" >
+                    <label for="remember">Remember Me </label>
                 </div>
                 <p class="uk-text-right">
                     <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                    <button class="uk-button uk-button-primary" type="submit">Login</button>
+                    <button class="uk-button uk-button-primary" type="submit">Log Me In</button>
                 </p>
 
-                <a class='uk-button uk-button-small' href='{{ route('password.request') }}'>Forgot Password?</a>
+                <a class='uk-button uk-button-small' href="/password/reset">Forgot Password?</a>
             </form>
         </div>
     </div>

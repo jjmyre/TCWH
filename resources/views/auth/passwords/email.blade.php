@@ -1,47 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.master')
+
+@section('title')
+    Password Reset
+@endsection
+
+@section('header')
+    <h1 class="uk-heading-primary uk-text-center">Password Reset</h1>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}" aria-label="{{ __('Reset Password') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="uk-card">
+        <div class="uk-card-body uk-padding">
+            @if (session('status'))
+                <div class="uk-alert-success uk-margin-remove-bottom" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <strong>{{ session('status') }}</strong>
                 </div>
-            </div>
+            @endif
+            <form class="uk-form uk-form-stacked" action="{{ route('password.email') }}" method="POST" uk-grid>
+                @csrf
+                <div class="uk-width-1-1">
+                    @if ($errors->has('email'))               
+                        <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                            <a class="uk-alert-close" uk-close></a>
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </div>
+                    @endif 
+                    <label for="email" class="visuallyHidden">E-Mail Address</label>
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon:mail"></span>
+                        <input id="email_reset" type="email" class="uk-input" name="email" value="{{ old('email') }}" required autofocus placeholder="Your Email Address">                
+                    </div>
+                </div>
+                <div class="uk-width-1-1 uk-margin-top-large uk-text-right">
+                    <button type="submit" class="uk-button uk-button-primary">Email Reset Link</button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
-@endsection
+@endsection   

@@ -9,35 +9,68 @@
 @endsection
 
 @section('content')
-    <form class="uk-form uk-form-horizontal uk-padding-large" action="/contact" method="post" id="contact_form" uk-grid>
-        <fieldset class="uk-fieldset uk-width-1-2">
-            <div class="uk-inline">
-                <label class="uk-form-label" for="name">Name*</label>
-                <input class="uk-input" type="text" id="name" required aria-required="true">
+<div class="uk-card">
+    <div class="uk-card-body uk-padding">
+        <form class="uk-form uk-form-stacked" action="/contact" method="POST" id="contact_form" uk-grid>
+            @csrf
+            <div class="uk-width-1-1">
+                @if ($errors->has('name'))               
+                    <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </div>
+                @endif
+                @auth
+                    <label class="uk-form-label" for="name">Username</label>
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon:user"></span>
+                        <input class="uk-input" id="name" name="name" placeholder="User Name" value="{{ old('name') != null ? old('name') : $user->username}}" type="text"  required>                
+                    </div>
+                @endauth
+                @guest 
+                    <label class="uk-form-label" for="name">Name</label>
+                    <div class="uk-width-1-1">
+                        <input class="uk-input" id="name" name="name" placeholder="Name" value="{{ old('name') }}" type="text" required autofocus>                
+                    </div>
+                @endguest
             </div>
-            <div class="uk-inline">     
-                <label class="uk-form-label" for="email">Email*</label>
-                <input class="uk-input" type="email" id="email" placeholder="Email" required aria-required="true">
+            <div class="uk-width-1-1 uk-margin-top">
+                @if ($errors->has('email'))               
+                    <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </div>
+                @endif 
+                <label class="uk-form-label" for="email">Email</label>
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon" uk-icon="icon:mail"></span>
+                    @auth
+                        <input class="uk-input" id="email" name="email" placeholder="Email Address" type="email" value="{{ old('email') != null ? old('email') : $user->email }}"  required>
+                    @endauth
+                    @guest
+                        <input class="uk-input" id="email" name="email" placeholder="Email Address" type="email" value="{{ old('email') }}"  required>
+                    @endguest
+                </div>
             </div>
-        </fieldset>
-        <fieldset class="uk-fieldset uk-width-1-1">
-            <div class="uk-inline">
-                <label class="uk-form-label" for="survey">Subject of Message</label>
-                <select class="uk-select" aria-required="false" id="survey">
-                    <option>Error Correction</option>
-                    <option>Winery Suggestion</option>
-                    <option>Photography Submission</option>
+            <div class="uk-width-1-1 uk-margin-top">
+                <label class="uk-form-label" for="subject">Subject of Message</label>
+                <select class="uk-select" name="subject" id="subject" required>
+                    <option value='' {{ old('subject') == '' ? 'SELECTED' : '' }} disabled>Subject of Message</option>
+                    <option value="mistake" {{ old('subject') == 'mistake' ? 'SELECTED' : '' }}>Error Correction</option>
+                    <option value="suggestion" {{ old('subject') == 'suggestion' ? 'SELECTED' : '' }}>Winery Suggestion</option>
+                    <option value="photo" {{ old('subject') == 'photo' ? 'SELECTED' : '' }}>Photography Submission</option>
+                    <option value="other" {{ old('subject') == 'other' ? 'SELECTED' : '' }}>Other</option>
                 </select>
             </div>
-        </fieldset>
-        <fieldset class="uk-fieldset uk-width-1-1">
-            <div class="uk-form-row">
+            <div class="uk-width-1-1 uk-margin-top">
                 <label class="uk-form-label" for="message">Message*</label>
-                <textarea class="uk-textarea uk-width-1-1 uk-form-large" id="message" required aria-required="true"></textarea>
+                <textarea class="uk-textarea uk-width-1-1 uk-form-large" id="message" value="{{ old('message') }}" required></textarea>
             </div>
-        </fieldset>
+            <div class="uk-width-1-1 uk-margin-top-large uk-text-right">
+                <button type="submit" class="uk-button uk-button-primary">Send Message</button> 
+            </div>
+        </form>
+    </div>
+</div>
 
-
-        <button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-medium-top">Send</button> 
-    </form>
 @endsection

@@ -19,8 +19,8 @@
             </div>
         </div>
         <div class="uk-width-1-1 uk-text-center uk-padding-remove uk-grid uk-child-width-1-1 uk-display-inline" uk-grid>
-            <form class="uk-form uk-display-inline" action="/favorite/add/" method="post">
-            {{ csrf_field() }}
+            <form class="uk-form uk-display-inline" action="/favorite/" method="post">
+                @csrf
                 <input type="hidden" value="{{$winery->id}}">
                 <button type="submit" class="uk-button uk-button-default uk-button-small" title="Favorite">
                     <span uk-icon="icon: heart"></span>
@@ -28,7 +28,7 @@
                 </button>
             </form>
             <form class="uk-form uk-form uk-display-inline" action="/wishlist/add/" method="post">
-                {{ csrf_field() }}
+                @csrf
                 <input type="hidden" value="{{$winery->id}}">
                 <button type="submit" class="uk-button uk-button-default uk-button-small" title="Wishlist">
                     <span uk-icon="icon: star;"></span>
@@ -37,7 +37,7 @@
                 
             </form>
             <form class="uk-form uk-form uk-display-inline" action="/planner/add/" method="post">
-                {{ csrf_field() }}
+                @csrf
                 <input type="hidden" value="{{$winery->id}}">
                 <button type="submit" class="uk-button uk-button-default uk-button-small" title="Planner">
                     <span uk-icon="icon: plus-circle"></span>
@@ -61,19 +61,19 @@
                     @if(!empty($winery->phone))
                         <tr>
                             <th>Phone</th>
-                            <td>{{$winery->phone}}</td> 
+                            <td><a href="tel:{{$winery->phone}}">{{$winery->phone}}</a></td> 
                         </tr>
                     @endif
                     @if(!empty($winery->email))
                         <tr>
                             <th>Email</th>
-                            <td>{{$winery->email}}</td> 
+                            <td><a href="mailto:{{$winery->email}}">{{$winery->email}}</td> 
                         </tr>
                     @endif
                     @if(!empty($winery->web_url))
                         <tr>
                             <th>Website</th>
-                            <td><a class="uk-link" href="tel:{{$winery->web}}">{{$winery->web_url}}</a></td> 
+                            <td><a class="uk-link" href="{{$winery->web_url}}" target="_blank">{{$winery->web_url}}</a></td> 
                         </tr>
                     @endif
                 </tbody>

@@ -17,39 +17,56 @@ Route::get('/', function () {
 
 // Guide
 Route::get('/guide', 'GuideController@index');
-Route::get('/guide/list/', 'GuideController@list');
-Route::get('/winery/{id}', 'GuideController@detail');
+Route::get('/guide/list', 'GuideController@list');
+
+// Winery Detail Page
+Route::get('winery/{id}', 'GuideController@detail');
 
 // AVA Map
-Route::get('/avamap', 'AvaMapController@list');
+Route::get('/avamap', 'AvaMapController@index');
+Route::get('/avamap/{id}', 'AvaMapController@list');
 
-//Authentication-Protected Routes
+// About Page
+Route::get('/about', function () {
+	return view('about');
+});
+
+// Disclaimers Page
+Route::get('/disclaimers', function () {
+	return view('disclaimers');
+});
+
+// Authentication-Protected Routes
 Route::group(['middleware' => 'auth'], function () {
 	// Planner
 	Route::get('/planner', 'PlannerController@index');
-	Route::post('/planner/add/{id}', 'PlannerController@add');
-	Route::post('/planner/move/{id}', 'PlannerController@move');
-	Route::post('/planner/remove/{id}', 'PlannerController@remove');
-	Route::post('/planner/clear', 'PlannerController@clear');
+	Route::post('/planner/add', 'PlannerController@add');
+	Route::post('/planner/move', 'PlannerController@move');
+	Route::delete('/planner/remove/{id}', 'PlannerController@remove');
+	Route::delete('/planner/clear', 'PlannerController@clear');
+
+	// User Edit Info & Dashboard
+	Route::get('/dashboard/{id}', 'UserController@dashboard');
+	Route::get('/editinfo/{id}', 'UserController@edit');
 
 	// Favorites
-	Route::post('/favorite/{id}', 'FavoriteController@favorite');
-	Route::post('/unfavorite/{id}', 'FavoriteController@unfavorite');
+	Route::post('/favorite', 'FavoriteController@favorite');
+	Route::delete('/unfavorite/{id}', 'FavoriteController@unfavorite');
 
 	// Wishlists
-	Route::post('/wishlist/{id}', 'WishlistController@wishlist');
-	Route::post('/unwishlist/{id}', 'WishlistController@unwishlist');
+	Route::post('/wishlist', 'WishlistController@wishlist');
+	Route::delete('/unwishlist/{id}', 'WishlistController@unwishlist');
 
 	// Visited Wineries
-	Route::post('/visited/{id}', 'VisitController@visited');
-	Route::post('/unvisited/{id}', 'VisitController@unvisited');
-	Route::post('/unvisited/clear', 'VisitController@clear');
+	Route::post('/visited', 'VisitController@visited');
+	Route::delete('/unvisited/{id}', 'VisitController@unvisited');
+	Route::delete('/unvisited/clear', 'VisitController@clear');
 });
 
 // Contact Routes
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/contact', 'ContactController@showForm');
+Route::post('/contact', 'ContactController@submitForm');
+
 Route::post('/correction/{id}', function () {
     return view('contact');
 });
@@ -61,10 +78,10 @@ Route::post('/correction/{id}', function () {
 Route::get('/signup', function () {
     return view('signup');
 });
-Route::post('/signup', 'Auth\RegisterController@register');
+Route::post('/signup', 'Auth\RegisterController@register')->name('register');
 
 // Login Routes
-Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Password Reset Routes
@@ -111,3 +128,4 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
+*/

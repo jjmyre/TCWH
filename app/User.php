@@ -26,4 +26,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    #Define relationship of favorites, wishlists and visits
+    public function favorites() {   
+        return $this->belongsToMany('App\Winery', 'favorites')->withTimestamps();
+    }
+
+    public function wishlists() {   
+        return $this->belongsToMany('App\Winery', 'wishlists')->withTimestamps();
+    }
+
+    public function visits() {   
+        return $this->belongsToMany('App\Winery', 'visits')->withTimestamps();
+    }
+
 }

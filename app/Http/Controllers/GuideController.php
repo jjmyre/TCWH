@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Winery;
+use App\Favorite;
+use App\Wishlist;
+use App\Visit;
+use App\Plan;
 use App\Ava;
 use App\Time;
 use App\User;
@@ -12,11 +17,18 @@ use Session;
 class GuideController extends Controller
 {
 
-     public function index() {
+    public function index() {
         
         $wineries = Winery::all();
+        $user = Auth::user();
+        $favorites = $user->favorites()->get();
+        $wishlists = $user->wishlists()->get();
+        $visits = $user->visits()->get();
+        $members = User::all();
+        //$memberFavorite = $members->favorites();
+        //$memberWishlist = $members->wishlists();
 
-        $totalCount=0;
+        $wineryCount=0;
         $citySelect = 'default';
         $regionSelect = 'default';
         $sortSelect= '';
@@ -25,13 +37,9 @@ class GuideController extends Controller
         $subRegionOptions =[];
         $cityOrRegion = 'city';
         $listOrMap = 'list';
-        $cityWineries = '';
-        $regionWineries = ''; 
-
-        $user = User::findOrFail($id)->all();
 
         foreach($wineries as $winery) {
-            $totalCount++;
+            $wineryCount++;
         }
         
         foreach($wineries->unique('region')->sortBy('region') as $winery) {
@@ -46,19 +54,20 @@ class GuideController extends Controller
             $cityOptions[] = $winery->city;
         }
 
-        return view('guide.list')->with([
+        return view('guide.index')->with([
             'citySelect' => $citySelect,
             'regionSelect' => $regionSelect,
             'sortSelect' => $sortSelect,
             'cityOptions' => $cityOptions,
             'regionOptions' => $regionOptions,
             'subRegionOptions' => $subRegionOptions,
-            'wineries' => $wineries,
-            'totalCount' => $totalCount,
+            'wineryCount' => $wineryCount,
             'cityOrRegion' => $cityOrRegion,
-            'cityWineries' => $cityWineries,
-            'regionWineries' => $regionWineries,
+            'wineries' => $wineries,
             'user' => $user,
+            'favorites' => $favorites,
+            'wishlists' => $wishlists,
+            'visits' => $visits,
         ]);
     }
 
@@ -79,13 +88,15 @@ class GuideController extends Controller
         $cityOrRegion = $request->input('cityOrRegion');
 
         $wineries = Winery::all();
-        $cityCount = 0;
-        $regionCount = 0;
-        $totalCount = 0;
+        $wineryCount = 0;
 
-        foreach($wineries as $winery){
-            $totalCount++;
-        }
+        $user = Auth::user();
+        $favorites = $user->favorites()->get();
+        $wishlists = $user->wishlists()->get();
+        $visits = $user->visits()->get();
+        $members = User::all();
+        //$memberFavorite = $members->favorites();
+        //$memberWishlist = $members->wishlists();
 
         // initialize location options
         $cityOptions =[];
@@ -107,56 +118,47 @@ class GuideController extends Controller
             $cityOptions[] = $winery->city;
         }
 
-        if(!empty($citySelect)){
-            if($citySelect != 'all' && $citySelect != 'default'){
+        if($citySelect != '' && $regionSelect == 'default'){
+            if($citySelect != 'all'){
                 if($sortSelect == "a-z") {
-                    $cityWineries = Winery::where('city', $citySelect)->orderBy('name','asc')->paginate(8);
+                    $wineries = Winery::where('city', $citySelect)->orderBy('name','asc')->paginate(10);
                 }
                 elseif($sortSelect == "z-a"){
-                    $cityWineries = Winery::where('city', $citySelect)->orderBy('name','desc')->paginate(8);
+                    $wineries = Winery::where('city', $citySelect)->orderBy('name','desc')->paginate(10);
                 }
-                $cityCount = $cityWineries->total();    
+                $wineryCount = $wineries->total();    
             }
             elseif($citySelect == 'all') {
                 if($sortSelect == "a-z") {
-                    $cityWineries = Winery::orderBy('name','desc')->paginate(8);
+                    $wineries = Winery::orderBy('name','asc')->paginate(10);
                 }
                 elseif($sortSelect == "z-a"){
-                    $cityWineries = Winery::orderBy('name','desc')->paginate(8);
+                    $wineries = Winery::orderBy('name','desc')->paginate(10);
                 }
-                $cityCount = $cityWineries->total();   
-            }
-            else{
-                $cityWineries = [];
-                $cityCount = '';
-            }       
+                $wineryCount = $wineries->total();   
+            }  
         }
 
-        if(!empty($regionSelect)){
-            if($regionSelect != 'all' && $regionSelect != 'default'){
+        if($regionSelect != '' && $citySelect == 'default'){
+            if($regionSelect != 'all'){
                 if($sortSelect == "a-z") {
-                    $regionWineries = Winery::where('region', $regionSelect)->orderBy('name','asc')->paginate(8);
+                    $wineries = Winery::where('region', $regionSelect)->orderBy('name','asc')->paginate(10);
                 }
                 elseif($sortSelect == "z-a"){
-                    $regionWineries = Winery::where('region', $regionSelect)->orderBy('name', 'desc')->paginate(8);
+                    $wineries = Winery::where('region', $regionSelect)->orderBy('name', 'desc')->paginate(10);
                 }
-                $regionCount = $regionWineries->total();
+                $wineryCount = $wineries->total();
                   
             }
             elseif($regionSelect == 'all') {
                 if($sortSelect == "a-z") {
-                    $regionWineries = Winery::orderBy('name','asc')->paginate(8);
+                    $wineries = Winery::orderBy('name','asc')->paginate(10);
                 }
                 elseif($sortSelect == "z-a"){
-                    $regionWineries = Winery::orderBy('name', 'desc')->paginate(8);
+                    $regionWineries = Winery::orderBy('name', 'desc')->paginate(10);
                 }
-                $regionCount = $regionWineries->total();    
-            }
-            else{
-                $regionWineries = [];
-                $regionCount = '';
-            }
-           
+                $wineryCount = $wineries->total();    
+            } 
         }
 
         return view('guide.list')->with([
@@ -168,16 +170,19 @@ class GuideController extends Controller
             'regionOptions' => $regionOptions,
             'subRegionOptions' => $subRegionOptions,
             'cityOrRegion' => $cityOrRegion,
-            'cityCount' => $cityCount,
-            'regionCount' => $regionCount,
-            'totalCount' => $totalCount,
-            'cityWineries' => $cityWineries,
-            'regionWineries' => $regionWineries,
+            'wineryCount' => $wineryCount,
+            'wineries' => $wineries,
+            'user' => $user,
+            'favorites' => $favorites,
+            'wishlists' => $wishlists,
+            'visits' => $visits,
         ]);
     }
 
     public function detail($id) {
         $winery = Winery::with('avas')->find($id);
+        $user = Auth::user();
+        $members = User::all();
 
         $avas = [];
 
@@ -195,6 +200,8 @@ class GuideController extends Controller
             'winery' => $winery,
             'avas' => $avas,
             'time' => $time,
+            'user' => $user,
+            'members' => $members
         ]);
     }
 }

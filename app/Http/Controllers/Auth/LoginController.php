@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Session;
 
 class LoginController extends Controller
 {
@@ -57,5 +59,21 @@ class LoginController extends Controller
     public function username()
     {
         return $this->username;
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        if($this->username == 'username'){
+            $this->validate($request, [
+                $this->username() => 'required|exists:users,username', 
+                'password' => 'required|min:7',
+            ]);
+        }
+        else{
+            $this->validate($request, [
+                $this->username() => 'required|exists:users,email', 
+                'password' => 'required|min:7',
+            ]);
+        }
     }
 }

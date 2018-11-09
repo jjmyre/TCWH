@@ -16,4 +16,9 @@ class Winery extends Model
     	return $this->hasOne('App\Time');
     }
 
+     public function users() {
+    	# One-to-one relationship
+    	return $this->hasMany('App\User'); 
+    }
+
 }

@@ -12464,4 +12464,14 @@ footer a:hover {
   box-sizing: border-box;
 }
 
+/* line 201, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.favorited .wishlisted .planned {
+  color: red;
+}
+
+/* line 207, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.not_favorited .not_wishlisted .not_planned {
+  color: blue;
+}
+
 /*# sourceMappingURL=../../../../../../../../Applications/MAMP/htdocs/tcwh/public/css/styles.map */

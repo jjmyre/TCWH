@@ -38,7 +38,6 @@
                             <a class="uk-link-reset" title="Click for Detail View" href="/winery/{{$winery->id}}">
                                 <h3 class="uk-card-title uk-display-inline uk-margin-remove-bottom uk-padding-left">{{ $winery->name }}
                                 </h3>
-
                                 @auth
                                     @if($winery)
                                         <span class="uk-text-muted uk-padding-small uk-float-right" title="You have visited this winery." uk-icon="icon: check"></span>
@@ -52,18 +51,18 @@
                             <div class="uk-padding-top">
                                 @auth
                                     @if($winery)
-                                        <form class="uk-form uk-display-inline" action="/favorite/{{$winery->id}}/" method="post">
-                                        {{ csrf_field() }}
-                                            <input type="hidden" value="{{$winery->id}}">
+                                        <form class="uk-form uk-display-inline" action="/favorite" method="post">
+                                            @csrf
+                                            <input type="hidden" name="winery-id" value="{{$winery->id}}">
                                             <button type="submit" class="uk-button uk-button-text" title="Favorite">
                                                 <span uk-icon="icon: heart; ratio:2"></span>
                                                 <span>7</span>
                                             </button>
                                         </form>
                                     @else
-                                        <form class="uk-form uk-display-inline" action="/unfavorite/{{$winery->id}}/" method="post">
-                                        {{ csrf_field() }}
-                                            <input type="hidden" value="{{$winery->id}}">
+                                        <form class="uk-form uk-display-inline" action="/unfavorite/{{$winery->id}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="delete" />
                                             <button type="submit" class="uk-button uk-button-text" title="Favorite">
                                                 <span uk-icon="icon: heart; ratio:2"></span>
                                                 <span>7</span>
@@ -71,18 +70,18 @@
                                         </form>
                                     @endif
                                     @if($winery)
-                                        <form class="uk-form uk-display-inline" action="/wishlist/{{$winery->id}}/" method="post">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" value="{{$winery->id}}">
+                                        <form class="uk-form uk-display-inline" action="/wishlist" method="post">
+                                            @csrf
+                                            <input type="hidden" name="winery-id" value="{{$winery->id}}">
                                             <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Wishlist">
                                                 <span uk-icon="icon: star; ratio:2"></span>
                                                 <span>60</span>
                                             </button>
                                         </form>
                                     @else
-                                        <form class="uk-form uk-display-inline" action="/unwishlist/{{$winery->id}}/" method="post">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" value="{{$winery->id}}">
+                                        <form class="uk-form uk-display-inline" action="/unwishlist/{{$winery->id}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="delete" />
                                             <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Wishlist">
                                                 <span uk-icon="icon: star; ratio:2"></span>
                                                 <span>60</span>
@@ -90,9 +89,9 @@
                                         </form>
                                     @endif
                                     @if($winery)
-                                        <form class="uk-form uk-display-inline" action="/planner/add/{{$winery->id}}" method="post">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" value="{{$winery->id}}">
+                                        <form class="uk-form uk-display-inline" action="/planner/add" method="post">
+                                            @csrf
+                                            <input type="hidden" name="winery-id" value="{{$winery->id}}">
                                             <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Planner">
                                                 <span uk-icon="icon: plus-circle; ratio:2"></span>        
                                                 <span>14</span>
@@ -100,8 +99,8 @@
                                         </form>
                                     @else
                                         <form class="uk-form uk-display-inline" action="/planner/remove/{{$winery->id}}" method="post">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" value="{{$winery->id}}">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="delete" />
                                             <button type="submit" class="uk-button uk-button-text uk-margin-left" title="Planner">
                                                 <span uk-icon="icon: plus-circle; ratio:2"></span>        
                                                 <span>14</span>

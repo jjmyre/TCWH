@@ -26,7 +26,7 @@
     <div class="uk-child-width-1-2@l uk-padding-small uk-margin-remove" uk-grid>
 @endif    
     @foreach($regionWineries as $winery)
-        <div class="uk-card uk-box-shadow-hover-medium">
+        <div class="uk-card">
             <div class="uk-card-header uk-padding-remove">                      
                 <div class="uk-flex-center" uk-grid>
                     <div>
