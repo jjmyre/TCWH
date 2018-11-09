@@ -21,9 +21,9 @@ class GuideController extends Controller
         
         $wineries = Winery::all();
         $user = Auth::user();
-        $favorites = $user->favorites()->get();
-        $wishlists = $user->wishlists()->get();
-        $visits = $user->visits()->get();
+        $favorites = Auth::user()->favorites()->get();
+        $wishlists = Auth::user()->wishlists()->get();
+        $visits = Auth::user()->visits()->get();
         $members = User::all();
         //$memberFavorite = $members->favorites();
         //$memberWishlist = $members->wishlists();
@@ -91,9 +91,9 @@ class GuideController extends Controller
         $wineryCount = 0;
 
         $user = Auth::user();
-        $favorites = $user->favorites()->get();
-        $wishlists = $user->wishlists()->get();
-        $visits = $user->visits()->get();
+        $favorites = Auth::user()->favorites()->get();
+        $wishlists = Auth::user()->wishlists()->get();
+        $visits = Auth::user()->visits()->get();
         $members = User::all();
         //$memberFavorite = $members->favorites();
         //$memberWishlist = $members->wishlists();
