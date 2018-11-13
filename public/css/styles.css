@@ -12453,25 +12453,58 @@ footer a:hover {
 }
 
 /* line 191, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-.time-box {
-  box-sizing: border-box;
-  padding: 1px;
-}
-
-/* line 196, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-.time-box:hover {
-  text-decoration: none;
-  box-sizing: border-box;
-}
-
-/* line 201, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .favorited .wishlisted .planned {
+  color: red;
+  fill: blue;
+}
+
+/* line 198, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.favorited svg {
   color: red;
 }
 
-/* line 207, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-.not_favorited .not_wishlisted .not_planned {
-  color: blue;
+/* line 202, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.wishlisted svg {
+  color: yellow;
+}
+
+/* line 206, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.planned svg {
+  color: green;
+}
+
+/* line 210, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.visited svg {
+  color: green;
+}
+
+/* line 214, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.not_favorited svg,
+button.not_wishlisted svg,
+button.not_planned svg {
+  color: gray;
+}
+
+/* line 220, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.not_favorited svg:hover {
+  color: red;
+}
+
+/* line 223, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.not_wishlisted svg:hover {
+  color: yellow;
+}
+
+/* line 227, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.not_planned svg:hover {
+  color: green;
+}
+
+/* line 234, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+button.favorited svg :hover,
+button.wishlisted svg :hover,
+button.planned svg :hover {
+  color: gray;
 }
 
 /*# sourceMappingURL=../../../../../../../../Applications/MAMP/htdocs/tcwh/public/css/styles.map */

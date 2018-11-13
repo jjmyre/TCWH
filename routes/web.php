@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/planner', 'PlannerController@index');
 	Route::post('/planner/add', 'PlannerController@add');
 	Route::post('/planner/move', 'PlannerController@move');
-	Route::delete('/planner/remove/{id}', 'PlannerController@remove');
+	Route::delete('/planner/remove/{winery_id}', 'PlannerController@remove');
 	Route::delete('/planner/clear', 'PlannerController@clear');
 
 	// User Edit Info & Dashboard
@@ -51,15 +51,15 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// Favorites
 	Route::post('/favorite', 'FavoriteController@favorite');
-	Route::delete('/unfavorite/{id}', 'FavoriteController@unfavorite');
+	Route::delete('/unfavorite/{winery_id}', 'FavoriteController@unfavorite');
 
 	// Wishlists
 	Route::post('/wishlist', 'WishlistController@wishlist');
-	Route::delete('/unwishlist/{id}', 'WishlistController@unwishlist');
+	Route::delete('/unwishlist/{winery_id}', 'WishlistController@unwishlist');
 
 	// Visited Wineries
 	Route::post('/visited', 'VisitController@visited');
-	Route::delete('/unvisited/{id}', 'VisitController@unvisited');
+	Route::delete('/unvisited/{winery_id}', 'VisitController@unvisited');
 	Route::delete('/unvisited/clear', 'VisitController@clear');
 });
 

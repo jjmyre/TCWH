@@ -85,14 +85,13 @@
         <header class="uk-padding"> 
             @yield('header')
         </header>
-       
-        @yield('content')
-         @if(Session::get('message') != null)
-            <div class="uk-alert-success uk-margin-remove-bottom" uk-alert>
+        @if(Session::has('status'))
+            <div class="uk-alert-primary uk-margin-remove-bottom" uk-alert>
                 <a class="uk-alert-close" uk-close></a>
-                <strong>{{ Session::get('message') }}</strong>
+                <strong>{{ Session::get('status') }}</strong>
             </div>
         @endif
+        @yield('content')
     </div>
     <footer class="uk-text-center">
         <p>&copy; 2018 Justin Myre. All Rights Reserved.</p>

@@ -2,16 +2,20 @@
 
 @section('list')
 
-@if($citySelect == 'all')
-    <h2 class="uk-heading-line uk-text-center">All Cities</h2>
-@elseif($citySelect != 'default' && $citySelect != 'all')
-    <h2 class="uk-heading-line uk-text-center">{{$citySelect}}</h2>
+@if(!empty($citySelect))
+    @if($citySelect == 'all')
+        <h2 class="uk-heading-line uk-text-center">All Cities</h2>
+    @elseif($citySelect != 'default' && $citySelect != 'all')
+        <h2 class="uk-heading-line uk-text-center">{{$citySelect}}</h2>
+    @endif
 @endif
 
-@if($regionSelect == 'all')
-    <h2 class="uk-heading-line uk-text-center">All Regions</h2>
-@elseif($regionSelect != 'default' && $regionSelect != 'all')
-    <h2 class="uk-heading-line uk-text-center">{{$regionSelect}}</h2>
+@if(!empty($regionSelect)) 
+    @if($regionSelect == 'all')
+        <h2 class="uk-heading-line uk-text-center">All Regions</h2>
+    @elseif($regionSelect != 'default' && $regionSelect != 'all')
+        <h2 class="uk-heading-line uk-text-center">{{$regionSelect}}</h2>
+    @endif
 @endif
 
 <p class="uk-text-center uk-text-muted">
@@ -24,7 +28,7 @@
     @endif
 
 {{ $wineries->appends(request()->except('page'))->links() }}
-    
+  
 @if($wineryCount <= 1)
     <div class="uk-child-width uk-margin-remove" uk-grid>
 @else
@@ -32,7 +36,7 @@
 @endif
     @foreach($wineries as $winery)
         <div class="uk-card" id="div_{{$winery->id}}">
-            <div class="uk-card-header uk-padding-remove">                      
+            <div class="uk-card-header uk-padding-remove">                     
                 <div class="uk-flex-center" uk-grid>
                     <div>
                         <a class="uk-link-heading" title="Click for Detail View" href="/winery/{{$winery->id}}">   
@@ -45,8 +49,8 @@
                                 <h3 class="uk-card-title uk-display-inline uk-margin-remove-bottom uk-padding-left">{{ $winery->name }}
                                 </h3>
                                 @auth
-                                    @if($visits->contains($winery->winery_id))
-                                        <span class="uk-text-muted uk-padding-small" title="You have visited this winery." uk-icon="icon: check"></span>
+                                    @if($visits->contains('id', $winery->id))
+                                        <span class="uk-text-muted uk-padding-small uk-float-right" title="You have visited this winery." uk-icon="icon: check"></span>
                                     @endif
                                 @endauth
 
@@ -56,51 +60,46 @@
                             </a>
                             <div class="uk-padding-top">
                                 @auth
-                                    @if($user->favorites->contains('winery_id', $winery->winery_id))
+                                    @if($favorites->contains('id', $winery->id))
                                         <form class="uk-form uk-display-inline" action="/unfavorite/{{$winery->id}}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
-                                            <button type="submit" class="uk-button uk-button-text favorited" title="Favorite">
+                                            <button type="submit" class="favorited uk-button uk-button-text" title="Favorite">
                                                 <span uk-icon="icon: heart; ratio:2"></span>
-                                                <span>7</span>
-                                            </button>
-                                        </form>
+                                              
                                     @else
                                          <form class="uk-form uk-display-inline" action="/favorite" method="post">
                                             @csrf
-                                            <input type="hidden" name="winery-id" value="{{$winery->id}}">
-                                            <button type="submit" class="uk-button uk-button-text not_favorited" title="Favorite">
+                                            <input type="hidden" name="winery_id" value="{{$winery->id}}">
+                                            <button type="submit" class="not_favorited uk-button uk-button-text" title="Favorite">
                                                 <span uk-icon="icon: heart; ratio:2"></span>
-                                                <span>7</span>
-                                            </button>
-                                        </form>
                                     @endif
-                                    @if($user->wishlists->contains('winery_id', $winery->winery_id))
+                                            <span>({{ $allFavorites->where('winery_id', '==', $winery->id)->count() }})</span>
+                                        </button>
+                                    </form>
+
+                                    @if($wishlists->contains('id', $winery->id))
                                         <form class="uk-form uk-display-inline" action="/unwishlist/{{$winery->id}}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
                                             <button type="submit" class="uk-button uk-button-text uk-margin-left wishlisted" title="Wishlist">
-                                                <span uk-icon="icon: star; ratio:2"></span>
-                                                <span>60</span>
-                                            </button>
-                                        </form>
+                                                <span class="wishlisted" uk-icon="icon: star; ratio:2"></span>
                                     @else    
                                         <form class="uk-form uk-display-inline" action="/wishlist" method="post">
                                             @csrf
-                                            <input type="hidden" name="winery-id" value="{{$winery->id}}">
+                                            <input type="hidden" name="winery_id" value="{{$winery->id}}">
                                             <button type="submit" class="uk-button uk-button-text uk-margin-left not_wishlisted" title="Wishlist">
-                                                <span uk-icon="icon: star; ratio:2"></span>
-                                                <span>60</span>
-                                            </button>
-                                        </form>
+                                                <span class="not_wishlisted" uk-icon="icon: star; ratio:2"></span>
                                     @endif
+                                            <span>({{ $allWishlists->where('winery_id', '==', $winery->id)->count() }})</span>
+                                        </button>
+                                    </form>
                                     @if($winery)
                                         <form class="uk-form uk-display-inline" action="/planner/add" method="post">
                                             @csrf
-                                            <input type="hidden" name="winery-id" value="{{$winery->id}}">
+                                            <input type="hidden" name="winery_id" value="{{$winery->id}}">
                                             <button type="submit" class="uk-button uk-button-text uk-margin-left planned" title="Planner">
-                                                <span uk-icon="icon: plus-circle; ratio:2"></span>        
-                                                <span>14</span>
+                                                <span uk-icon="icon: plus-circle; ratio:2"></span>
                                             </button>
                                         </form>
                                     @else
@@ -108,24 +107,19 @@
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
                                             <button type="submit" class="uk-button uk-button-text uk-margin-left not_planned" title="Planner">
-                                                <span uk-icon="icon: plus-circle; ratio:2"></span>        
-                                                <span>14</span>
+                                                <span uk-icon="icon: plus-circle; ratio:2"></span>
                                             </button>
                                         </form>
                                     @endif
                                 @endauth
                                 @guest
-                                    <div class="uk-button" title="Favorite">
-                                        <span uk-icon="icon: heart"></span>
-                                        <span>7</span>
+                                    <div class="uk-button uk-button-small uk-margin-left not_favorited" title="Favorite">
+                                        <span uk-icon="icon: heart; ratio: 2"></span>
+                                        <span>({{ $allFavorites->where('winery_id', '==', $winery->id)->count() }})</span>
                                     </div>   
-                                    <div class="uk-button" title="Wishlist">
-                                        <span uk-icon="icon: star"></span>
-                                        <span>60</span>
-                                    </div>
-                                    <div class="uk-button uk-padding-remove-left" title="Planner">
-                                        <span uk-icon="icon: plus-circle"></span>        
-                                        <span>14</span>
+                                    <div class="uk-button uk-button-small uk-margin-left not_wishlisted" title="Wishlist">
+                                        <span uk-icon="icon: star; ratio: 2"></span>
+                                        <span>({{ $allWishlists->where('winery_id', '==', $winery->id)->count() }})</span>
                                     </div>
                                 @endguest
                             </div> 
@@ -157,15 +151,15 @@
                             <span uk-icon="icon:location"></span>
                             Directions</a>
 
-                        <a class="time-box uk-link uk-display-inline-block" uk-toggle="target: #times-modal">
-                            <span class="uk-margin-small-right" uk-icon="icon: clock"></span>
-                            
+                        <a class="time-box uk-link uk-display-inline-block" uk-toggle="target: #times-modal-{{$winery->id}}">
+                            <span uk-icon="icon: clock"></span>
+                    
                             @if($winery->time->monday = 'closed')
-                                <span class="closed">M
+                                <span class="closed"> M
                             @elseif($winery->time->monday == 'appt')
-                                <span class="appt">M
+                                <span class="appt"> M
                             @else
-                                <span class="open">M
+                                <span class="open"> M
                             @endif
                             </span>
                             @if($winery->time->tuesday = 'closed')
@@ -219,18 +213,22 @@
                         </a>
                 </address>
                 {{-- Times Modal --}} 
-                <div id="times-modal" uk-modal>
+                <div id="times-modal-{{$winery->id}}" uk-modal>
                     <div class="uk-modal-dialog uk-modal-body">
-                        <h2 class="uk-modal-title uk-heading-line">Business Hours</h2>
-                        <h3>{{$winery->name}}</h3>
-                        <p>Monday: {{$winery->time->monday}}</p>
-                        <p>Tuesday {{$winery->time->tuesday}}</p>
-                        <p>Wednesday: {{$winery->time->wednesday}}</p>
-                        <p>Thursday: {{$winery->time->thursday}}</p>
-                        <p>Friday: {{$winery->time->friday}}</p>
-                        <p>Saturday: {{$winery->time->saturday}}</p>
-                        <p>Sunday: {{$winery->time->sunday}}</p>
-                        <button class="uk-button uk-button-default uk-modal-close" type="button"><span uk-icon="close"></span></button>
+                        <div class="uk-text-right">
+                            <button class="uk-text-right uk-modal-close uk-margin-remove-bottom" type="button" uk-close></button>
+                        </div>
+                        <h2 class="uk-modal-title uk-text-center uk-heading-line">Business Hours</h2>
+                        <div class="uk-margin-left">
+                            <h3 class="uk-text-center">{{$winery->name}}</h3>
+                            <p>Monday: {{$winery->time->monday}}</p>
+                            <p>Tuesday {{$winery->time->tuesday}}</p>
+                            <p>Wednesday: {{$winery->time->wednesday}}</p>
+                            <p>Thursday: {{$winery->time->thursday}}</p>
+                            <p>Friday: {{$winery->time->friday}}</p>
+                            <p>Saturday: {{$winery->time->saturday}}</p>
+                            <p>Sunday: {{$winery->time->sunday}}</p>
+                        </div>
                     </div>
                 </div>
             </div>

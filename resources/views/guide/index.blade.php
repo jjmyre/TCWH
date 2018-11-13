@@ -23,9 +23,6 @@
             <li class="uk-padding-remove"><a href="#">List</a></li>
             <li class="uk-padding-remove"><a href="#">Map</a></li>
         </ul>
-    </div>
-    
-    <div>
         <ul class="uk-subnav uk-subnav-pill uk-padding-small" uk-switcher="connect: .cityOrRegion">
             @if($cityOrRegion == 'city')
                 <li class="uk-padding-remove uk-active"><a href="#">City</a></li>
@@ -43,7 +40,7 @@
         <form method='get' action='/guide/list/' name="guideCityForm" id="guideCityForm" class="uk-form uk-padding-large uk-flex uk-grid-match uk-child-width-1-3@s" uk-grid>
 
             <div>
-                <label class="uk-form-label" for="citySelect">City</label>                   
+                <label class="uk-form-label" for="citySelect">Location</label>                   
                 <select name="citySelect" id="citySelect" class="uk-select" required>
                     <option value='' {{ $citySelect == 'default' ? 'SELECTED' : '' }} disabled>Select City</option>
                     <option value='all' {{ $citySelect == 'all' ? 'SELECTED' : '' }}>All Cities</option>
@@ -68,7 +65,7 @@
         </form>
         <form method='get' action='/guide/list/' name="guideRegionForm" id="guideRegionForm" class="uk-form uk-padding-large uk-margin-remove-top uk-flex uk-grid-match uk-child-width-1-3@s" uk-grid>
             <div>
-                <label class="uk-form-label" for="regionSelect">Wine Region</label>
+                <label class="uk-form-label" for="regionSelect">Location</label>
                 <select name="regionSelect" id="regionSelect" class="uk-select" required>
                     <option value='' {{ $regionSelect == 'default' ? 'SELECTED' : '' }} disabled>Select Region</option>
                     <option value='all' {{ $regionSelect == 'all' ? 'SELECTED' : '' }}>All Regions</option>
@@ -95,16 +92,12 @@
         <div>
             @if(!empty($wineries))
                 @yield('list')
-            @else
-                <p class="uk-text-center uk-margin-top uk-text-muted">There are {{ $wineryCount }} wineries waiting to be discovered.</p>
             @endif
         </div>
 
         <div>
             @if(!empty($wineries))
                 @yield('map')
-            @else
-                <p class="uk-text-center uk-margin-top uk-text-muted">There are {{ $wineryCount }} wineries waiting to be discovered.</p>
             @endif
         </div>
     </div>

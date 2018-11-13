@@ -25,13 +25,17 @@ class GuideController extends Controller
             $favorites = Auth::user()->favorites()->get();
             $wishlists = Auth::user()->wishlists()->get();
             $visits = Auth::user()->visits()->get(); 
+        } 
+        else {
+            $favorites = [];
+            $wishlists = [];
+            $visits = [];
         }
-      
         $members = User::all();
-        //$memberFavorite = $members->favorites();
-        //$memberWishlist = $members->wishlists();
+        $allFavorites = Favorite::all();
+        $allWishlists = Wishlist::all(); 
 
-        $wineryCount=0;
+        $wineryCount=$wineries->count();
         $citySelect = 'default';
         $regionSelect = 'default';
         $sortSelect= '';
@@ -41,9 +45,7 @@ class GuideController extends Controller
         $cityOrRegion = 'city';
         $listOrMap = 'list';
 
-        foreach($wineries as $winery) {
-            $wineryCount++;
-        }
+        
         
         foreach($wineries->unique('region')->sortBy('region') as $winery) {
             $regionOptions[] = $winery->region;
@@ -68,6 +70,9 @@ class GuideController extends Controller
             'cityOrRegion' => $cityOrRegion,
             'wineries' => $wineries,
             'user' => $user,
+            'allFavorites' => $allFavorites,
+            'allWishlists' => $allWishlists,
+            'visits' => $visits,
         ]);
     }
 
@@ -91,14 +96,20 @@ class GuideController extends Controller
         $wineryCount = 0;
 
         $user = Auth::user();
+
         if($user) {
             $favorites = Auth::user()->favorites()->get();
             $wishlists = Auth::user()->wishlists()->get();
             $visits = Auth::user()->visits()->get(); 
-        }
+        } 
+        else {
+            $favorites = [];
+            $wishlists = [];
+            $visits = [];
+        } 
         $members = User::all();
-        //$memberFavorite = $members->favorites();
-        //$memberWishlist = $members->wishlists();
+        $allFavorites = Favorite::all();
+        $allWishlists = Wishlist::all();
 
         // initialize location options
         $cityOptions =[];
@@ -175,9 +186,11 @@ class GuideController extends Controller
             'wineryCount' => $wineryCount,
             'wineries' => $wineries,
             'user' => $user,
-       //     'favorites' => $favorites,
-        //  'wishlists' => $wishlists,
-         //   'visits' => $visits,
+            'favorites' => $favorites,
+            'wishlists' => $wishlists,
+            'allFavorites' => $allFavorites,
+            'allWishlists' => $allWishlists,
+            'visits' => $visits,
         ]);
     }
 
