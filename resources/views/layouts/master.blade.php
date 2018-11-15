@@ -57,9 +57,9 @@
                                     <li><a href="/dashboard/{{$user->id}}">My Dashboard</a></li>
                                     <li><a href="/editinfo/{{$user->id}}">Edit Info</a></li>
                                     <li>
-                                        <form method='POST' id='logout' action='/logout'>
+                                        <form method='POST' id='logout' class="uk-width-1-1" action='/logout'>
                                             @csrf
-                                            <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
+                                            <a href='#' class="uk-margin-top" onClick='document.getElementById("logout").submit();'>Logout</a>
                                         </form>
                                     </li>
                                 </ul>
@@ -81,16 +81,19 @@
             </div>
         </nav>
     </div>
+    <div>
+        @if(Session::has('status'))
+            <div class="uk-alert-primary uk-width-1-1 uk-margin-remove-bottom" uk-alert>
+                
+                <p class="uk-text-center uk-margin-remove-bottom">{{ Session::get('status') }}</p>
+                <a class="uk-alert-close" uk-close></a>
+            </div>
+        @endif
+    </div>
     <div class="uk-container wrapper">
         <header class="uk-padding"> 
             @yield('header')
         </header>
-        @if(Session::has('status'))
-            <div class="uk-alert-primary uk-margin-remove-bottom" uk-alert>
-                <a class="uk-alert-close" uk-close></a>
-                <strong>{{ Session::get('status') }}</strong>
-            </div>
-        @endif
         @yield('content')
     </div>
     <footer class="uk-text-center">
@@ -128,9 +131,9 @@
                         <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="{{ url('/dashboard') }}">My Dashboard</a></li>
                         <li class="{{ request()->is('profile*') ? 'uk-active' : '' }}"><a href="{{ url('/account') }}">Edit Info</a></li>
                         <li>
-                            <form method='POST' id='logout' action='/logout'>
+                            <form method='POST' id='logout_mobile' action='/logout'>
                                 @csrf
-                                <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
+                                <a href='#' onClick='document.getElementById("logout_mobile").submit();'>Logout</a>
                             </form>
                         </li>
                     @endauth

@@ -21,14 +21,14 @@
                     </div>
                 @endif
                 @auth
-                    <label class="uk-form-label" for="name">Username</label>
+                    <label class="visuallyHidden" for="name">Username</label>
                     <div class="uk-inline uk-width-1-1">
                         <span class="uk-form-icon" uk-icon="icon:user"></span>
-                        <input class="uk-input" id="name" name="name" placeholder="User Name" value="{{ old('name') != null ? old('name') : $user->username}}" type="text"  required>                
+                        <input class="uk-input" id="name" name="name" value="{{$user->username}}" type="text" disabled required>                
                     </div>
                 @endauth
                 @guest 
-                    <label class="uk-form-label" for="name">Name</label>
+                    <label class="visuallyHidden" for="name">Name</label>
                     <div class="uk-width-1-1">
                         <input class="uk-input" id="name" name="name" placeholder="Name" value="{{ old('name') }}" type="text" required autofocus>                
                     </div>
@@ -41,19 +41,22 @@
                         <strong>{{ $errors->first('email') }}</strong>
                     </div>
                 @endif 
-                <label class="uk-form-label" for="email">Email</label>
+                <label class="visuallyHidden" for="email">Email</label>
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon:mail"></span>
                     @auth
-                        <input class="uk-input" id="email" name="email" placeholder="Email Address" type="email" value="{{ old('email') != null ? old('email') : $user->email }}"  required>
+                        <input class="uk-input" id="email" name="email" placeholder="Email Address" type="email" value="{{ $user->email }}" disabled required>
                     @endauth
                     @guest
                         <input class="uk-input" id="email" name="email" placeholder="Email Address" type="email" value="{{ old('email') }}"  required>
                     @endguest
                 </div>
             </div>
-            <div class="uk-width-1-1 uk-margin-top">
-                <label class="uk-form-label" for="subject">Subject of Message</label>
+            <div class="uk-width-1-1 uk-margin-top uk-margin-remove-bottom">
+                <p class="uk-form-label">Message*</p>
+            </div>
+            <div class="uk-width-1-1 uk-margin-remove-top">
+                <label class="visuallyHidden" for="subject">Subject of Message</label>
                 <select class="uk-select" name="subject" id="subject" required>
                     <option value='' {{ old('subject') == '' ? 'SELECTED' : '' }} disabled>Subject of Message</option>
                     <option value="mistake" {{ old('subject') == 'mistake' ? 'SELECTED' : '' }}>Error Correction</option>
@@ -63,8 +66,8 @@
                 </select>
             </div>
             <div class="uk-width-1-1 uk-margin-top">
-                <label class="uk-form-label" for="message">Message*</label>
-                <textarea class="uk-textarea uk-width-1-1 uk-form-large" id="message" value="{{ old('message') }}" required></textarea>
+                <label class="visuallyHidden" for="message">Message</label>
+                <textarea class="uk-textarea uk-width-1-1 uk-form-large" id="message" value="{{ old('message') }}" placeholder="500 character limit" required></textarea>
             </div>
             <div class="uk-width-1-1 uk-margin-top-large uk-text-right">
                 <button type="submit" class="uk-button uk-button-primary">Send Message</button> 

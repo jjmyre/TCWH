@@ -240,6 +240,11 @@
 
 {{ $wineries->appends(request()->except('page'))->links() }}
 
-
 @endsection
 
+@section('map')
+<div>
+
+<p> No map yet. </p>
+</div>
+@endsection

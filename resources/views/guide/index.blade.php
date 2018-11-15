@@ -60,7 +60,7 @@
             <div class="uk-flex-middle uk-flex">
                 <input type="hidden" name="cityOrRegion" value="city">
                 <input type="hidden" name="regionSelect" value="default">
-                <button type="submit" class="uk-button uk-button-secondary">Go</button>
+                <button type="submit" class="uk-button uk-button-secondary">Find Wineries</button>
             </div>
         </form>
         <form method='get' action='/guide/list/' name="guideRegionForm" id="guideRegionForm" class="uk-form uk-padding-large uk-margin-remove-top uk-flex uk-grid-match uk-child-width-1-3@s" uk-grid>
@@ -90,15 +90,11 @@
     </div>
     <div class="uk-switcher uk-container listOrMap uk-padding-large uk-padding-remove-top">
         <div>
-            @if(!empty($wineries))
-                @yield('list')
-            @endif
+            @yield('list')
         </div>
 
         <div>
-            @if(!empty($wineries))
-                @yield('map')      
-            @endif
+            @yield('map')      
         </div>
     </div>
 @endsection

@@ -12349,9 +12349,9 @@ ul.uk-navbar-dropdown-nav > li a {
 }
 
 /* line 106, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
-ul.uk-navbar-dropdown-nav > li a:hover {
+ul.uk-navbar-dropdown-nav > li a:hover,
+ul.uk-navbar-dropdown-nav > li form:hover {
   background: #1a670a;
-  border-radius: 10px;
   text-shadow: 1px 1px 1px black;
   color: white;
 }
@@ -12394,22 +12394,27 @@ footer a:hover {
 }
 
 /* line 140, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+.session-box {
+  background: #e6e4d4 url("../img/backgrounds/fabric.png") repeat;
+}
+
+/* line 144, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .hide {
   visibility: hidden;
 }
 
-/* line 144, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 148, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .show {
   visibility: visible;
 }
 
-/* line 148, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 152, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .uk-logo {
   width: 10em;
   padding: 1em;
 }
 
-/* line 154, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 158, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .visuallyHidden,
 [uk-icon] span,
 [uk-navbar-toggle-icon] span {
@@ -12424,83 +12429,83 @@ footer a:hover {
   width: 1px;
 }
 
-/* line 168, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 172, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .winery_logo {
   width: 8em;
 }
 
-/* line 171, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 175, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .winery_logo_lg {
   width: 16em;
 }
 
-/* line 176, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 180, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .open {
   color: green;
   font-weight: bold;
 }
 
-/* line 181, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 185, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .closed {
   color: red;
   font-weight: bold;
 }
 
-/* line 186, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 190, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .appt {
   color: orange;
   font-weight: bold;
 }
 
-/* line 191, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 195, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 .favorited .wishlisted .planned {
   color: red;
   fill: blue;
 }
 
-/* line 198, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 202, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.favorited svg {
   color: red;
 }
 
-/* line 202, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 206, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.wishlisted svg {
   color: yellow;
 }
 
-/* line 206, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 210, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.planned svg {
   color: green;
 }
 
-/* line 210, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 214, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.visited svg {
   color: green;
 }
 
-/* line 214, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 218, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.not_favorited svg,
 button.not_wishlisted svg,
 button.not_planned svg {
   color: gray;
 }
 
-/* line 220, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 224, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.not_favorited svg:hover {
   color: red;
 }
 
-/* line 223, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 227, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.not_wishlisted svg:hover {
   color: yellow;
 }
 
-/* line 227, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 231, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.not_planned svg:hover {
   color: green;
 }
 
-/* line 234, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
+/* line 238, /Users/jjm/Library/Mobile Documents/com~apple~CloudDocs/TC Wine Hub/src/tcwh-scss/styles.scss */
 button.favorited svg :hover,
 button.wishlisted svg :hover,
 button.planned svg :hover {

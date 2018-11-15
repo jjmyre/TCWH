@@ -11,12 +11,6 @@
 @section('content')
     <div class="uk-card">
         <div class="uk-card-body uk-padding">
-            @if (session('status'))
-                <div class="uk-alert-success uk-margin-remove-bottom" uk-alert>
-                    <a class="uk-alert-close" uk-close></a>
-                    <strong>{{ session('status') }}</strong>
-                </div>
-            @endif
             <form class="uk-form uk-form-stacked" action="{{ route('password.email') }}" method="POST" uk-grid>
                 @csrf
                 <div class="uk-width-1-1">
@@ -33,7 +27,7 @@
                     </div>
                 </div>
                 <div class="uk-width-1-1 uk-margin-top-large uk-text-right">
-                    <button type="submit" class="uk-button uk-button-primary">Email Reset Link</button>
+                    <button type="submit" class="uk-button uk-button-primary">Send Reset Link</button>
                 </div>
             </form>
         </div>

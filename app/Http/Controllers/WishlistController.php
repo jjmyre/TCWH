@@ -39,5 +39,9 @@ class WishlistController extends Controller
 
     public function clear() {
 
+    	Auth::user()->wishlists()->detach();
+    	
+    	return back()->with('status', 'Your wishlist was cleared!');
+
     }
 }

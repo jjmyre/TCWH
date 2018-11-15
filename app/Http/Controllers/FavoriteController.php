@@ -41,7 +41,7 @@ class FavoriteController extends Controller
 
     	Auth::user()->favorites()->detach();
     	
-    	return back()->with('status', All of your favorites were cleared!');
+    	return back()->with('status', 'All of your favorites were cleared!');
 
     }
 

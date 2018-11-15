@@ -197,7 +197,19 @@ class GuideController extends Controller
     public function detail($id) {
         $winery = Winery::with('avas')->find($id);
         $user = Auth::user();
+        if($user) {
+            $favorites = Auth::user()->favorites()->get();
+            $wishlists = Auth::user()->wishlists()->get();
+            $visits = Auth::user()->visits()->get(); 
+        } 
+        else {
+            $favorites = [];
+            $wishlists = [];
+            $visits = [];
+        }
         $members = User::all();
+        $allFavorites = Favorite::all();
+        $allWishlists = Wishlist::all(); 
 
         $avas = [];
 
@@ -216,7 +228,12 @@ class GuideController extends Controller
             'avas' => $avas,
             'time' => $time,
             'user' => $user,
-            'members' => $members
+            'favorites' => $favorites,
+            'wishlists' => $wishlists,
+            'allFavorites' => $allFavorites,
+            'allWishlists' => $allWishlists,
+            'visits' => $visits,
+            'members' => $members,
         ]);
     }
 }

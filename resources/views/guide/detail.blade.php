@@ -63,7 +63,7 @@
             </form>--}}
         </div>
     </div>                     
-    <div class="uk-grid uk-margin-large uk-child-width-1-3@m" uk-grid>
+    <div class="uk-grid uk-container uk-child-width-1-3@m" uk-grid>
         <div>
             <h4 class="uk-margin-remove uk-text-center">Contact Info</h2>
             <table class="uk-table uk-table-small uk-flex uk-flex-center">
@@ -95,8 +95,8 @@
                 </tbody>
             </table>
         </div>
-        <div>
-            <h4 class="uk-text-center uk-margin-remove">Tasting Room Hours</h4>
+        <div class="uk-text-center">
+            <h4 class="uk-margin-remove">Tasting Room Hours</h4>
             <table class="uk-table uk-table-small uk-flex uk-flex-center uk-table-justify">
                 <tbody>
                     <tr>
@@ -130,8 +130,8 @@
                 </tbody>
             </table>
         </div>
-        <div>
-            <h4 class="uk-text-left uk-margin-remove"> AVA Regions </h4>
+        <div class="uk-text-center">
+            <h4 class="uk-margin-remove"> AVA Regions </h4>
             <ul class="uk-list uk-margin-remove">
                 @foreach($avas as $ava)
                     <li class="uk-margin-remove"><a class="uk-link-reset" href="#">{{$ava}}</a></li>
@@ -147,7 +147,7 @@
             </p>
         </div>
     </div>
-    <div class="uk-flex uk-flex-center uk-margin-top-large">
+    <div class="uk-flex uk-flex-center uk-margin-top">
         @php
             $address_url = $winery->name.', '.$winery->street.', '.$winery->city.','.$winery->state.','.$winery->zip;
             str_replace(' ', '+', $address_url);
