@@ -36,14 +36,14 @@
                     @endif 
                     <label for="password" class="visuallyHidden">Password</label>
                     <div class="uk-inline uk-width-1-1">
-                        <span class="uk-form-icon" uk-icon="icon:mail"></span>
+                        <span class="uk-form-icon" uk-icon="icon:lock"></span>
                         <input id="password" type="password" class="uk-input" name="password" placeholder="Your New Password">                
                     </div>
                 </div>
                 <div class="uk-width-1-1">
                     <label for="email" class="visuallyHidden">Password</label>
                     <div class="uk-inline uk-width-1-1">
-                        <span class="uk-form-icon" uk-icon="icon:mail"></span>
+                        <span class="uk-form-icon" uk-icon="icon:lock"></span>
                         <input id="password-confirm" type="password" class="uk-input" name="password_confirmation" placeholder="Confirm Password" required>                
                     </div>
                 </div>
