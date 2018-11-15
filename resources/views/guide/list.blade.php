@@ -211,6 +211,7 @@
                             @endif
                             </span>                                       
                         </a>
+                    </div>
                 </address>
                 {{-- Times Modal --}} 
                 <div id="times-modal-{{$winery->id}}" uk-modal>
@@ -236,7 +237,9 @@
     @endforeach
 </div>
 
+
 {{ $wineries->appends(request()->except('page'))->links() }}
+
 
 @endsection
 

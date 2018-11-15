@@ -19,32 +19,48 @@
             </div>
         </div>
         <div class="uk-width-1-1 uk-text-center uk-padding-remove uk-grid uk-child-width-1-1 uk-display-inline" uk-grid>
-            <form class="uk-form uk-display-inline" action="/favorite/" method="post">
-                @csrf
-                <input type="hidden" value="{{$winery->id}}">
-                <button type="submit" class="uk-button uk-button-default uk-button-small" title="Favorite">
-                    <span uk-icon="icon: heart"></span>
-                    FAVORITE
-                </button>
-            </form>
-            <form class="uk-form uk-form uk-display-inline" action="/wishlist/add/" method="post">
-                @csrf
-                <input type="hidden" value="{{$winery->id}}">
-                <button type="submit" class="uk-button uk-button-default uk-button-small" title="Wishlist">
-                    <span uk-icon="icon: star;"></span>
-                    WISHLIST
-                </button>
-                
-            </form>
-            <form class="uk-form uk-form uk-display-inline" action="/planner/add/" method="post">
+            @auth
+                @if($favorites->contains('id', $winery->id))
+                    <form class="uk-form uk-display-inline" action="/unfavorite/{{$winery->id}}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="favorited uk-button uk-button-text" title="Favorite">
+                            <span uk-icon="icon: heart; ratio:2"></span>Remove from Favorites
+                @else
+                     <form class="uk-form uk-display-inline" action="/favorite" method="post">
+                        @csrf
+                        <input type="hidden" name="winery_id" value="{{$winery->id}}">
+                        <button type="submit" class="not_favorited uk-button uk-button-text" title="Favorite">
+                            <span uk-icon="icon: heart; ratio:2"></span>Add to Favorites
+                @endif
+                    </button>
+                </form>
+                @if($wishlists->contains('id', $winery->id))
+                    <form class="uk-form uk-display-inline" action="/unwishlist/{{$winery->id}}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="wishlisted uk-button uk-button-text" title="Wishlist">
+                            <span uk-icon="icon: star; ratio:2"></span>Remove from Wishlist
+                          
+                @else
+                     <form class="uk-form uk-display-inline" action="/wishlist" method="post">
+                        @csrf
+                        <input type="hidden" name="winery_id" value="{{$winery->id}}">
+                        <button type="submit" class="not_wishlisted uk-button uk-button-text" title="Wishlist">
+                            <span uk-icon="icon: star; ratio:2"></span>Add to Wishlist
+                @endif
+                    </button>
+                </form>
+            @endauth
+
+           {{-- <form class="uk-form uk-form uk-display-inline" action="/planner/add/" method="post">
                 @csrf
                 <input type="hidden" value="{{$winery->id}}">
                 <button type="submit" class="uk-button uk-button-default uk-button-small" title="Planner">
                     <span uk-icon="icon: plus-circle"></span>
                     PLANNER        
-                </button>
-
-            </form>
+                </button>. 
+            </form>--}}
         </div>
     </div>                     
     <div class="uk-grid uk-margin-large uk-child-width-1-3@m" uk-grid>

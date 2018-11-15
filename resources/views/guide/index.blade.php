@@ -97,7 +97,7 @@
 
         <div>
             @if(!empty($wineries))
-                @yield('map')
+                @yield('map')      
             @endif
         </div>
     </div>
