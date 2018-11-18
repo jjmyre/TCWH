@@ -63,6 +63,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('/unvisited/clear', 'VisitController@clear');
 });
 
+Route::get('send_test_email', function(){
+	Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
+	{
+		$message->to('laruetill@gmail.com');
+	});
+});
+
 // Contact Routes
 Route::get('/contact', 'ContactController@show');
 Route::post('/contact', 'ContactController@send');

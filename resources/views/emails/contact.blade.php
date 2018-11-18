@@ -1,9 +1,9 @@
-@if (isset($data))
+
 <div>
-		<p> $data->name</p>
-		<p>$data->body</p>
+	HELLO
+		<p>{{$name}}</p>
+		<p>{{$body}}</p>
 
 
 
 </div>
-@endif

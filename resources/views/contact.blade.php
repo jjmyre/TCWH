@@ -63,10 +63,9 @@
                 @endif 
                 <select class="uk-select" name="subject" id="subject" required>
                     <option value='' {{ old('subject') == '' ? 'SELECTED' : '' }} disabled>Choose Message Subject</option>
-                    <option value="mistake" {{ old('subject') == 'mistake' ? 'SELECTED' : '' }}>Error Correction</option>
-                    <option value="suggestion" {{ old('subject') == 'suggestion' ? 'SELECTED' : '' }}>Winery Suggestion</option>
-                    <option value="photo" {{ old('subject') == 'photo' ? 'SELECTED' : '' }}>Photography Submission</option>
-                    <option value="other" {{ old('subject') == 'other' ? 'SELECTED' : '' }}>Question or Comment</option>
+                    <option value="Error Correction" {{ old('subject') == 'Error Correction' ? 'SELECTED' : '' }}>Error Correction</option>
+                    <option value="Suggestion" {{ old('subject') == 'Suggestion' ? 'SELECTED' : '' }}>Winery Suggestion</option>
+                    <option value="Question or Comment" {{ old('subject') == 'Question or Comment' ? 'SELECTED' : '' }}>Question or Comment</option>
                 </select>
                 <div class="uk-width-1-1 uk-margin-top">
                     <label class="visuallyHidden" for="body">Message</label>

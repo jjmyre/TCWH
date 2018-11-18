@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 use App\User;
+use Mail;
 
 class ContactController extends Controller
 {
@@ -23,26 +25,29 @@ class ContactController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'subject' => 'required',
-            'message' => 'required',
+            'body' => 'required',
         ]);
 
         $name = $request->input('name');
-        $userEmail = $request->input('email');
+        $email = $request->input('email');
         $subject = $request->input('subject');
         $body = $request->input('body');
 
         $data = array(
             'name' => $name,
-            'body' => $body
+            'body' => $body,
+            'subject' => $subject,
+            'email' => $email
         );
 
-        Mail::send('contact', $data, function($message){
-            $message->subject($subject);
-            $message->from($userEmail, $name);
-            $message->to('admin@tcwinehub.com');
+
+        Mail::send('emails.contact', $data, function($message) use ($email, $name, $subject){
+            $message->from($email, $name);
+            $message->to('admin@tcwinehub.com', 'admin');
+            $message->subject('Contact Form: '.$subject);
         });
 
-        return Redirect::route('/')->with('status', 'Your message was successfully sent!');
+        return back()->with('status', 'Your message was successfully sent!');
 
     }   
 
