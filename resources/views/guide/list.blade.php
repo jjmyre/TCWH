@@ -64,14 +64,14 @@
                                         <form class="uk-form uk-display-inline" action="/unfavorite/{{$winery->id}}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
-                                            <button type="submit" class="favorited uk-button uk-button-text" title="Favorite">
+                                            <button type="submit" class="favorited uk-button uk-button-default" title="Favorite">
                                                 <span uk-icon="icon: heart; ratio:2"></span>
                                               
                                     @else
                                          <form class="uk-form uk-display-inline" action="/favorite" method="post">
                                             @csrf
                                             <input type="hidden" name="winery_id" value="{{$winery->id}}">
-                                            <button type="submit" class="not_favorited uk-button uk-button-text" title="Favorite">
+                                            <button type="submit" class="not_favorited uk-button uk-button-default" title="Favorite">
                                                 <span uk-icon="icon: heart; ratio:2"></span>
                                     @endif
                                             <span>({{ $allFavorites->where('winery_id', '==', $winery->id)->count() }})</span>
@@ -114,11 +114,11 @@
                                 @endauth
                                 @guest
                                     <div class="uk-button uk-button-small uk-margin-left not_favorited" title="Favorite">
-                                        <span uk-icon="icon: heart; ratio: 2"></span>
+                                        <span uk-icon="icon: heart"></span>
                                         <span>({{ $allFavorites->where('winery_id', '==', $winery->id)->count() }})</span>
                                     </div>   
                                     <div class="uk-button uk-button-small uk-margin-left not_wishlisted" title="Wishlist">
-                                        <span uk-icon="icon: star; ratio: 2"></span>
+                                        <span uk-icon="icon: star"></span>
                                         <span>({{ $allWishlists->where('winery_id', '==', $winery->id)->count() }})</span>
                                     </div>
                                 @endguest

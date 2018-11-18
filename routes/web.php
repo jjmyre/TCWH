@@ -64,8 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Contact Routes
-Route::get('/contact', 'ContactController@showForm');
-Route::post('/contact', 'ContactController@submitForm');
+Route::get('/contact', 'ContactController@show');
+Route::post('/contact', 'ContactController@send');
 
 Route::post('/correction/{id}', function () {
     return view('contact');
