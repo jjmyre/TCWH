@@ -15,7 +15,6 @@ class CreateAvaWineryTable extends Migration
     {
         Schema::create('ava_winery', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->integer('winery_id')->unsigned();
             $table->integer('ava_id')->unsigned();
 

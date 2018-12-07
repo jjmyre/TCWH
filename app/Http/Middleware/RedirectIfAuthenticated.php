@@ -18,7 +18,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            // redirect to last page or, if that fails, go to the home page
+            return redirect()->intended('/');
         }
 
         return $next($request);

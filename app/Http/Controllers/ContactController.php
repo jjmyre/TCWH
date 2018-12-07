@@ -25,7 +25,7 @@ class ContactController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'subject' => 'required',
-            'body' => 'required',
+            'message' => 'required|string|min:10|max:500',
         ]);
 
         $name = $request->input('name');
@@ -40,7 +40,6 @@ class ContactController extends Controller
             'email' => $email
         );
 
-
         Mail::send('emails.contact', $data, function($message) use ($email, $name, $subject){
             $message->from($email, $name);
             $message->to('admin@tcwinehub.com', 'admin');
@@ -50,11 +49,5 @@ class ContactController extends Controller
         return back()->with('status', 'Your message was successfully sent!');
 
     }   
-
-
-
-    public function clear() {
-
-    }
 
 }

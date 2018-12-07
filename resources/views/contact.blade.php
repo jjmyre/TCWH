@@ -24,7 +24,7 @@
                     <label class="visuallyHidden" for="name">Username</label>
                     <div class="uk-inline uk-width-1-1">
                         <span class="uk-form-icon" uk-icon="icon:user"></span>
-                        <input class="uk-input" id="name" name="name" value="{{$user->username}}" type="text" required>                
+                        <input class="uk-input" id="name" name="name" value="{{$user->username}}" type="text" required readonly>                
                     </div>
                 @endauth
                 @guest 
@@ -45,7 +45,7 @@
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon:mail"></span>
                     @auth
-                        <input class="uk-input" id="email" name="email" placeholder="Email Address" type="email" value="{{ $user->email }}" required>
+                        <input class="uk-input" id="email" name="email" placeholder="Email Address" type="email" value="{{ $user->email }}" required readonly>
                     @endauth
                     @guest
                         <input class="uk-input" id="email" name="email" placeholder="Email Address" type="email" value="{{ old('email') }}"  required>
@@ -69,13 +69,13 @@
                 </select>
                 <div class="uk-width-1-1 uk-margin-top">
                     <label class="visuallyHidden" for="body">Message</label>
-                     @if ($errors->has('body'))               
+                     @if ($errors->has('message'))               
                         <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
                             <a class="uk-alert-close" uk-close></a>
-                            <strong>{{ $errors->first('body') }}</strong>
+                            <strong>{{ $errors->first('message') }}</strong>
                         </div>
                     @endif 
-                    <textarea class="uk-textarea uk-width-1-1 uk-form-large" id="body" value="{{ old('body') }}" placeholder="Type your message (Limited to 500 characters)" name="body" required></textarea>
+                    <textarea class="uk-textarea uk-width-1-1 uk-form-large" id="body" value="{{ old('message') }}" placeholder="Type your message (Limited to 500 characters)" name="message" required></textarea>
                 </div>
             </fieldset>
             <div class="uk-width-1-1 uk-margin-top-large uk-text-right">

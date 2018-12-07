@@ -8,6 +8,6 @@ class Time extends Model
 {
 	# Defines a one-to-one relationship
 	public function winery() {
-    	return $this->belongsTo('App\Winery', 'foreign_key');
+    	return $this->belongsTo('App\Winery');
 	}
 }

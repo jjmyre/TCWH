@@ -18,8 +18,6 @@ Route::get('/', function () {
 // Guide
 Route::get('/guide', 'GuideController@index');
 Route::get('/guide/list', 'GuideController@list');
-
-// Winery Detail Page
 Route::get('winery/{id}', 'GuideController@detail');
 
 // AVA Map
@@ -52,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// Favorites
 	Route::post('/favorite', 'FavoriteController@favorite');
 	Route::delete('/unfavorite/{winery_id}', 'FavoriteController@unfavorite');
+	Route::delete('/favorite/clear', 'FavoriteController@clear');
 
 	// Wishlists
 	Route::post('/wishlist', 'WishlistController@wishlist');
@@ -61,13 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/visited', 'VisitController@visited');
 	Route::delete('/unvisited/{winery_id}', 'VisitController@unvisited');
 	Route::delete('/unvisited/clear', 'VisitController@clear');
-});
 
-Route::get('send_test_email', function(){
-	Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
-	{
-		$message->to('laruetill@gmail.com');
-	});
+	// User Logout
+	Route::post('/logout', 'UserController@logout');
+
 });
 
 // Contact Routes
@@ -77,9 +73,6 @@ Route::post('/contact', 'ContactController@send');
 Route::post('/correction/{id}', function () {
     return view('contact');
 });
-
-
-
 
 // Signup Routes
 Route::get('/signup', function () {

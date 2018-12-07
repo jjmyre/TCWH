@@ -18,83 +18,186 @@
 @endsection
 
 @section('content')
-    <div class="uk-flex uk-flex-center uk-grid uk-container" uk-grid>
-        <ul class="uk-subnav uk-subnav-pill uk-padding-small" uk-switcher="connect: .listOrMap">
-            <li class="uk-padding-remove"><a href="#">List</a></li>
-            <li class="uk-padding-remove"><a href="#">Map</a></li>
+    <div class="uk-flex uk-flex-center uk-grid uk-margin-remove uk-padding-remove">
+        <ul class="uk-subnav uk-subnav-pill uk-margin-right uk-margin-remove-left uk-padding-remove" uk-switcher="connect: .cityOrRegion">
+            <li class="uk-padding-remove {{ $cityOrRegion == 'city' ? 'uk-active' : '' }}"><a href="#">City</a></li>
+            <li class="uk-padding-remove {{ $cityOrRegion == 'region' ? 'uk-active' : '' }}"><a href="#">Region</a></li>
         </ul>
-        <ul class="uk-subnav uk-subnav-pill uk-padding-small" uk-switcher="connect: .cityOrRegion">
-            @if($cityOrRegion == 'city')
-                <li class="uk-padding-remove uk-active"><a href="#">City</a></li>
-            @else
-                <li class="uk-padding-remove"><a href="#">City</a></li>
-            @endif
-            @if($cityOrRegion == 'region')
-                <li class="uk-padding-remove uk-active"><a href="#">Region</a></li>
-            @else
-                <li class="uk-padding-remove"><a href="#">Region</a></li>
-            @endif
+        <ul class="uk-subnav uk-subnav-pill uk-margin-left uk-margin-remove-right uk-padding-remove" uk-switcher="connect: .listOrMap">
+            <li class="uk-padding-remove {{ $listOrMap == 'list' ? 'uk-active' : '' }}"><a href="#">List</a></li>
+            <li class="uk-padding-remove {{ $listOrMap == 'map' ? 'uk-active' : '' }}"><a href="#">Map</a></li>
         </ul>
-    </div>
-    <div class="uk-switcher cityOrRegion uk-container uk-margin-remove uk-padding-small">
-        <form method='get' action='/guide/list/' name="guideCityForm" id="guideCityForm" class="uk-form uk-padding-large uk-flex uk-grid-match uk-child-width-1-3@s" uk-grid>
-
-            <div>
-                <label class="uk-form-label" for="citySelect">Location</label>                   
-                <select name="citySelect" id="citySelect" class="uk-select" required>
-                    <option value='' {{ $citySelect == 'default' ? 'SELECTED' : '' }} disabled>Select City</option>
-                    <option value='all' {{ $citySelect == 'all' ? 'SELECTED' : '' }}>All Cities</option>
-                    @foreach($cityOptions as $cityOption)
-                        <option value='{{$cityOption}}' {{ $citySelect == $cityOption ? 'SELECTED' : '' }}>{{$cityOption}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div>
-                <label class="uk-form-label" for="sortSelect">Sorted By</label>
-                <select name="sortSelect" id="sortSelect" class="uk-select">
-                    <option value='a-z' {{ $sortSelect == "a-z" ? 'SELECTED' : '' }}>Alphabetical (A-Z)</option>
-                    <option value='z-a' {{ $sortSelect == "z-a" ? 'SELECTED' : '' }}>Alphabetical (Z-A)</option>           
-                </select>
-            </div>
-
-            <div class="uk-flex-middle uk-flex">
-                <input type="hidden" name="cityOrRegion" value="city">
-                <input type="hidden" name="regionSelect" value="default">
-                <button type="submit" class="uk-button uk-button-secondary">Find Wineries</button>
-            </div>
-        </form>
-        <form method='get' action='/guide/list/' name="guideRegionForm" id="guideRegionForm" class="uk-form uk-padding-large uk-margin-remove-top uk-flex uk-grid-match uk-child-width-1-3@s" uk-grid>
-            <div>
-                <label class="uk-form-label" for="regionSelect">Location</label>
-                <select name="regionSelect" id="regionSelect" class="uk-select" required>
-                    <option value='' {{ $regionSelect == 'default' ? 'SELECTED' : '' }} disabled>Select Region</option>
-                    <option value='all' {{ $regionSelect == 'all' ? 'SELECTED' : '' }}>All Regions</option>
-                    @foreach($regionOptions as $regionOption)
-                        <option value='{{$regionOption}}' {{ $regionSelect == $regionOption ? 'SELECTED' : '' }}>{{$regionOption}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div>
-                <label class="uk-form-label" for="sortSelect">Sorted By</label>
-                <select name="sortSelect" class="uk-select">
-                    <option value='a-z' {{ $sortSelect == "a-z" ? 'SELECTED' : '' }}>Alphabetical (A-Z)</option>
-                    <option value='z-a' {{ $sortSelect == "z-a" ? 'SELECTED' : '' }}>Alphabetical (Z-A)</option>         
-                </select>
-            </div>
-            <div class="uk-flex uk-flex-middle">
-                <input type="hidden" name="cityOrRegion" value="region">
-                <input type="hidden" name="citySelect" value="default">
-                <button type="submit" class="uk-border-rounded uk-button uk-button-secondary">Find Wineries</button>
-            </div>
-        </form>
     </div>
     <div class="uk-switcher uk-container listOrMap uk-padding-large uk-padding-remove-top">
-        <div>
-            @yield('list')
-        </div>
+        <div class="listSection">
+            <div class="uk-switcher cityOrRegion">
+                <form method='get' action='/guide/list/' name="listCityForm" id="listCityForm" class="uk-form uk-padding uk-margin-remove">
+                    <div class="uk-child-width-1-2@s" uk-grid>
+                        <div>
+                            <label class="visuallyHidden" for="citySelect">City</label>                   
+                            <select name="citySelect" id="citySelect" class="uk-select" required>
+                                <option value='' {{ $citySelect == 'default' ? 'SELECTED' : '' }} disabled>SELECT CITY</option>
+                                <option value='all' {{ $citySelect == 'all' ? 'SELECTED' : '' }}>All Cities</option>
+                                @foreach($cityOptions as $cityOption)
+                                    <option value='{{$cityOption}}' {{ $citySelect == $cityOption ? 'SELECTED' : '' }}>{{$cityOption}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label class="visuallyHidden" for="sortSelect">Sort</label>
+                            <select name="sortSelect" id="sortSelect" class="uk-select" required>
+                                <option value='a-z' {{ $sortSelect == "a-z" ? 'SELECTED' : '' }}>A&#8594;Z</option>
+                                <option value='z-a' {{ $sortSelect == "z-a" ? 'SELECTED' : '' }}>Z&#8594;A</option>           
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" name="cityOrRegion" value="city">
+                    <input type="hidden" name="listOrMap" value="list">
+                    <input type="hidden" name="regionSelect" value="default">
+                    <div class="uk-text-right uk-margin-top">
+                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">GO</button>
+                    </div>
+                </form>
+                <form method='get' action='/guide/list/' name="listRegionForm" id="listRegionForm" class="uk-form uk-padding uk-margin-remove">
+                    <div class="uk-child-width-1-2@s" uk-grid>
+                        <div>
+                            <label class="visuallyHidden" for="regionSelect">Location</label>
+                            <select name="regionSelect" id="regionSelect" class="uk-select" required>
+                                <option value='' {{ $regionSelect == 'default' ? 'SELECTED' : '' }} disabled>SELECT REGION</option>
+                                <option value='all' {{ $regionSelect == 'all' ? 'SELECTED' : '' }}>All Regions</option>
+                                @foreach($regionOptions as $regionOption)
+                                    <option value='{{$regionOption}}' {{ $regionSelect == $regionOption ? 'SELECTED' : '' }}>{{$regionOption}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label class="visuallyHidden" for="sortSelect">Sorted By</label>
+                            <select name="sortSelect" class="uk-select" required>
+                                <option value='a-z' {{ $sortSelect == "a-z" ? 'SELECTED' : '' }}>A&#8594;Z</option>
+                                <option value='z-a' {{ $sortSelect == "z-a" ? 'SELECTED' : '' }}>Z&#8594;A</option>         
+                            </select>
+                            <div class="uk-text-right uk-margin-top">
+                                <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">Go</button>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="cityOrRegion" value="region">
+                    <input type="hidden" name="listOrMap" value="list">
+                    <input type="hidden" name="citySelect" value="default">
+                </form>
+            </div>
+            <div class="uk-text-center">
+                @if($citySelect != 'default')
+                    <h2 class="uk-text uk-margin-remove-bottom">
+                    @if($citySelect == 'all')
+                        All Cities</h2>
+                    @else
+                        {{$citySelect}}</h2>
+                    @endif
+                @endif
 
-        <div>
-            @yield('map')      
+                @if($regionSelect != 'default')
+                    <h2 class="uk-text uk-margin-remove-bottom">
+                    @if($regionSelect == 'all')
+                       All Regions</h2>
+                    @else
+                        {{$regionSelect}}</h2>
+                    @endif
+                @endif
+            </div>
+
+            <p class="uk-text-muted uk-margin-remove-top uk-text-center">
+                @if($wineries->total() == 1)
+                    1 Winery
+                @elseif($wineries->total() > 1) 
+                    {{$wineries->total()}} Wineries
+                @elseif($wineries->total() < 1) 
+                    No wineries were found
+                @endif
+            </p>
+
+            @include('guide.list')
+
+        </div>
+        <div class="mapSection">
+            <div class="uk-switcher cityOrRegion">
+                <form method='get' action='/guide/list/' name="mapCityForm" id="mapCityForm" class="uk-form uk-padding uk-margin-remove">
+                    <div class="uk-child-width-1-1@s" uk-grid>
+                        <div>
+                            <label class="visuallyHidden" for="mapCitySelect">City</label>                   
+                            <select name="citySelect" id="mapCitySelect" class="uk-select" required>
+                                <option value='' {{ $citySelect == 'default' ? 'SELECTED' : '' }} disabled>SELECT CITY</option>
+                                <option value='all' {{ $citySelect == 'all' ? 'SELECTED' : '' }}>All Cities</option>
+                                @foreach($cityOptions as $cityOption)
+                                    <option value='{{$cityOption}}' {{ $citySelect == $cityOption ? 'SELECTED' : '' }}>{{$cityOption}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" name="cityOrRegion" value="city">
+                    <input type="hidden" name="listOrMap" value="map">
+                    <input name="sortSelect" type="hidden" value="a-z">
+                    <input type="hidden" name="regionSelect" value="default">
+                    <div class="uk-text-right uk-margin-top">
+                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">Go</button>
+                    </div>
+                </form>
+                <form method='get' action='/guide/list/' name="mapRegionForm" id="mapRegionForm" class="uk-form uk-padding uk-margin-remove">
+                    <div class="uk-child-width-1-1@s" uk-grid>
+                        <div>
+                            <label class="visuallyHidden" for="mapRegionSelect">Location</label>
+                            <select name="regionSelect" id="mapRegionSelect" class="uk-select" required>
+                                <option value='' {{ $regionSelect == 'default' ? 'SELECTED' : '' }} disabled>SELECT REGION</option>
+                                <option value='all' {{ $regionSelect == 'all' ? 'SELECTED' : '' }}>All Regions</option>
+                                @foreach($regionOptions as $regionOption)
+                                    <option value='{{$regionOption}}' {{ $regionSelect == $regionOption ? 'SELECTED' : '' }}>{{$regionOption}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" name="cityOrRegion" value="region">
+                    <input type="hidden" name="listOrMap" value="map">
+                    <input name="sortSelect" type="hidden" value="a-z">
+                    <input type="hidden" name="citySelect" value="default">
+                    <div class="uk-text-right uk-margin-top">
+                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">Go</button>
+                    </div>
+                </form>
+            </div>
+            <div class="uk-text-center">
+                @if($citySelect != 'default')
+                    <h2 class="uk-text uk-margin-remove-bottom">
+                    @if($citySelect == 'all')
+                        All Cities</h2>
+                    @else
+                        {{$citySelect}}</h2>
+                    @endif
+                @endif
+
+                @if($regionSelect != 'default')
+                    <h2 class="uk-text uk-margin-remove-bottom">
+                    @if($regionSelect == 'all')
+                       All Regions</h2>
+                    @else
+                        {{$regionSelect}}</h2>
+                    @endif
+                @endif
+            </div>
+
+            <p class="uk-text-muted uk-margin-remove-top uk-text-center">
+                @if($wineries->total() == 1)
+                    1 Winery
+                @elseif($wineries->total() > 1) 
+                    {{$wineries->total()}} Wineries
+                @elseif($wineries->total() < 1) 
+                    No wineries were found
+                @endif
+            </p>
+
+            @include('guide.map')
+            
         </div>
     </div>
 @endsection
+
+

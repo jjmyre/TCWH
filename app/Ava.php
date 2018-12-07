@@ -9,6 +9,6 @@ class Ava extends Model
     public function wineries()
 	{
 		# Many-to-many relationship
-	    return $this->belongsToMany('\App\Winery')->withTimestamps();
+	    return $this->belongsToMany('App\Winery');
 	}
 }

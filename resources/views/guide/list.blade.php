@@ -1,39 +1,6 @@
-@extends('guide.index')
-
-@section('list')
-
-@if(!empty($citySelect))
-    @if($citySelect == 'all')
-        <h2 class="uk-heading-line uk-text-center">All Cities</h2>
-    @elseif($citySelect != 'default' && $citySelect != 'all')
-        <h2 class="uk-heading-line uk-text-center">{{$citySelect}}</h2>
-    @endif
-@endif
-
-@if(!empty($regionSelect)) 
-    @if($regionSelect == 'all')
-        <h2 class="uk-heading-line uk-text-center">All Regions</h2>
-    @elseif($regionSelect != 'default' && $regionSelect != 'all')
-        <h2 class="uk-heading-line uk-text-center">{{$regionSelect}}</h2>
-    @endif
-@endif
-
-<p class="uk-text-center uk-text-muted">
-    @if($wineryCount == 1)
-        1 winery was found.</p>
-    @elseif($wineryCount > 1) 
-        {{$wineryCount}} wineries were found.</p>
-    @elseif($wineryCount < 1) 
-        No wineries were found.</p>
-    @endif
-
 {{ $wineries->appends(request()->except('page'))->links() }}
-  
-@if($wineryCount <= 1)
-    <div class="uk-child-width uk-margin-remove" uk-grid>
-@else
-    <div class="uk-child-width-1-2@l uk-padding-small uk-margin-remove" uk-grid>
-@endif
+
+<div class="uk-child-width-1-2@l uk-padding-small uk-margin-remove" uk-grid>
     @foreach($wineries as $winery)
         <div class="uk-card" id="div_{{$winery->id}}">
             <div class="uk-card-header uk-padding-remove">                     
@@ -65,14 +32,13 @@
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
                                             <button type="submit" class="favorited uk-button uk-button-default" title="Favorite">
-                                                <span uk-icon="icon: heart; ratio:2"></span>
-                                              
+                                                <span uk-icon="icon: heart"></span>
                                     @else
                                          <form class="uk-form uk-display-inline" action="/favorite" method="post">
                                             @csrf
                                             <input type="hidden" name="winery_id" value="{{$winery->id}}">
                                             <button type="submit" class="not_favorited uk-button uk-button-default" title="Favorite">
-                                                <span uk-icon="icon: heart; ratio:2"></span>
+                                                <span uk-icon="icon: heart"></span>
                                     @endif
                                             <span>({{ $allFavorites->where('winery_id', '==', $winery->id)->count() }})</span>
                                         </button>
@@ -82,35 +48,18 @@
                                         <form class="uk-form uk-display-inline" action="/unwishlist/{{$winery->id}}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
-                                            <button type="submit" class="uk-button uk-button-text uk-margin-left wishlisted" title="Wishlist">
-                                                <span class="wishlisted" uk-icon="icon: star; ratio:2"></span>
+                                            <button type="submit" class="wishlisted uk-button uk-button-default" title="Wishlist">
+                                                <span class="wishlisted" uk-icon="icon: star"></span>
                                     @else    
                                         <form class="uk-form uk-display-inline" action="/wishlist" method="post">
                                             @csrf
                                             <input type="hidden" name="winery_id" value="{{$winery->id}}">
-                                            <button type="submit" class="uk-button uk-button-text uk-margin-left not_wishlisted" title="Wishlist">
-                                                <span class="not_wishlisted" uk-icon="icon: star; ratio:2"></span>
+                                            <button type="submit" class="not_wishlisted uk-button uk-button-default" title="Wishlist">
+                                                <span class="not_wishlisted" uk-icon="icon: star"></span>
                                     @endif
                                             <span>({{ $allWishlists->where('winery_id', '==', $winery->id)->count() }})</span>
                                         </button>
                                     </form>
-                                    @if($winery)
-                                        <form class="uk-form uk-display-inline" action="/planner/add" method="post">
-                                            @csrf
-                                            <input type="hidden" name="winery_id" value="{{$winery->id}}">
-                                            <button type="submit" class="uk-button uk-button-text uk-margin-left planned" title="Planner">
-                                                <span uk-icon="icon: plus-circle; ratio:2"></span>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form class="uk-form uk-display-inline" action="/planner/remove/{{$winery->id}}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="delete" />
-                                            <button type="submit" class="uk-button uk-button-text uk-margin-left not_planned" title="Planner">
-                                                <span uk-icon="icon: plus-circle; ratio:2"></span>
-                                            </button>
-                                        </form>
-                                    @endif
                                 @endauth
                                 @guest
                                     <div class="uk-button uk-button-small uk-margin-left not_favorited" title="Favorite">
@@ -133,84 +82,88 @@
                 @endphp
 
                 <address class="uk-flex-center" uk-grid>
-                    <div class="uk-text-center">
+                    <div class="uk-text-left">
                         <a class="uk-link-reset" href="/winery/{{$winery->id}}">{{ $winery->street }}<br>
                         {{ $winery->city }}, {{ $winery->state }}, {{ $winery->zip }}</a>
                     </div>
                     <div class="uk-flex-middle">
                         @if( $winery->phone )
-                            <a class="uk-link uk-display-block" href="tel:{{$winery->phone}}">
+                            <div class="uk-display-block uk-margin-small-bottom">
                                 <span uk-icon="icon:receiver"></span>
-                            {{ $winery->phone }}</a>
+                                <a class="uk-link" href="tel:{{$winery->phone}}">{{ $winery->phone }}</a>
+                            </div>
                         @endif
                         @if($winery->web_url)
-                            <a class="uk-link uk-display-inline-block" href="{{ $winery->web_url }}" target="_blank">
-                            <span uk-icon="icon:link"></span>Visit Website</a>
+                            <div class="uk-display-block uk-margin-small-bottom">
+                                <span uk-icon="icon:link"></span>
+                                <a class="uk-link" href="{{ $winery->web_url }}" target="_blank"> Visit Website</a>
+                            </div>
                         @endif
-                        <a class="uk-link uk-display-block" href="{!! str_replace(' ', '+', $directionLink) !!}" target="_blank">
+                        <div class="uk-display-block uk-margin-small-bottom">
                             <span uk-icon="icon:location"></span>
-                            Directions</a>
-
-                        <a class="time-box uk-link uk-display-inline-block" uk-toggle="target: #times-modal-{{$winery->id}}">
+                            <a class="uk-link" href="{!! str_replace(' ', '+', $directionLink) !!}" target="_blank">Directions</a>
+                        </div>
+                        <div class="uk-display-block uk-margin-small-bottom">
                             <span uk-icon="icon: clock"></span>
-                    
-                            @if($winery->time->monday = 'closed')
-                                <span class="closed"> M
-                            @elseif($winery->time->monday == 'appt')
-                                <span class="appt"> M
-                            @else
-                                <span class="open"> M
-                            @endif
-                            </span>
-                            @if($winery->time->tuesday = 'closed')
-                                <span class="closed">Tu 
-                            @elseif($winery->time->tuesday = 'appt')
-                                <span class="appt">Tu
-                            @else
-                                <span class="open">Tu
-                            @endif
-                            </span>                           
-                            @if($winery->time->wednesday === 'closed')
-                                <span class="closed">W 
-                            @elseif($winery->time->wednesday === 'appt')
-                                <span class="appt">W
-                            @else
-                                <span class="open">W
-                            @endif
-                            </span>
-                            @if($winery->time->thursday === 'closed')
-                                <span class="closed">Th 
-                            @elseif($winery->time->thursday === 'appt')
-                                <span class="appt">Th
-                            @else
-                                <span class="open">Th
-                            @endif
-                            </span>
-                            @if($winery->time->friday === 'closed')
-                                <span class="closed">F 
-                            @elseif($winery->time->friday === 'appt')
-                                <span class="appt">F
-                            @else
-                                <span class="open">F
-                            @endif
-                            </span>
-                            @if($winery->time->saturday === 'closed')
-                                <span class="closed">Sa 
-                            @elseif($winery->time->saturday === 'appt')
-                                <span class="appt">Sa
-                            @else
-                                <span class="open">Sa
-                            @endif
-                            </span>
-                            @if($winery->time->sunday === 'closed')
-                                <span class="closed">Su 
-                            @elseif($winery->time->sunday === 'appt')
-                                <span class="appt">Su
-                            @else
-                                <span class="open">Su
-                            @endif
-                            </span>                                       
-                        </a>
+                            <a class="time-box uk-link uk-display-inline-block" uk-toggle="target: #times-modal-{{$winery->id}}">                 
+                                @if($winery->time->monday = 'Closed')
+                                    <span class="closed"> M
+                                @elseif($winery->time->monday == 'Appointment Only')
+                                    <span class="appt"> M
+                                @else
+                                    <span class="open"> M
+                                @endif
+                                </span>
+                                @if($winery->time->tuesday = 'Closed')
+                                    <span class="closed">Tu 
+                                @elseif($winery->time->tuesday = 'Appointment Only')
+                                    <span class="appt">Tu
+                                @else
+                                    <span class="open">Tu
+                                @endif
+                                </span>                           
+                                @if($winery->time->wednesday === 'Closed')
+                                    <span class="closed">W 
+                                @elseif($winery->time->wednesday === 'Appointment Only')
+                                    <span class="appt">W
+                                @else
+                                    <span class="open">W
+                                @endif
+                                </span>
+                                @if($winery->time->thursday === 'Closed')
+                                    <span class="Closed">Th 
+                                @elseif($winery->time->thursday === 'Appointment Only')
+                                    <span class="appt">Th
+                                @else
+                                    <span class="open">Th
+                                @endif
+                                </span>
+                                @if($winery->time->friday === 'Closed')
+                                    <span class="Closed">F 
+                                @elseif($winery->time->friday === 'Appointment Only')
+                                    <span class="appt">F
+                                @else
+                                    <span class="open">F
+                                @endif
+                                </span>
+                                @if($winery->time->saturday === 'Closed')
+                                    <span class="closed">Sa 
+                                @elseif($winery->time->saturday === 'Appointment Only')
+                                    <span class="appt">Sa
+                                @else
+                                    <span class="open">Sa
+                                @endif
+                                </span>
+                                @if($winery->time->sunday === 'Closed')
+                                    <span class="closed">Su 
+                                @elseif($winery->time->sunday === 'Appointment Only')
+                                    <span class="appt">Su
+                                @else
+                                    <span class="open">Su
+                                @endif
+                                </span>                                       
+                            </a>
+                        </div>
                     </div>
                 </address>
                 {{-- Times Modal --}} 
@@ -223,7 +176,7 @@
                         <div class="uk-margin-left">
                             <h3 class="uk-text-center">{{$winery->name}}</h3>
                             <p>Monday: {{$winery->time->monday}}</p>
-                            <p>Tuesday {{$winery->time->tuesday}}</p>
+                            <p>Tuesday: {{$winery->time->tuesday}}</p>
                             <p>Wednesday: {{$winery->time->wednesday}}</p>
                             <p>Thursday: {{$winery->time->thursday}}</p>
                             <p>Friday: {{$winery->time->friday}}</p>
@@ -237,14 +190,4 @@
     @endforeach
 </div>
 
-
 {{ $wineries->appends(request()->except('page'))->links() }}
-
-@endsection
-
-@section('map')
-<div>
-
-<p> No map yet. </p>
-</div>
-@endsection

@@ -20,7 +20,7 @@ return [
     | A Google API key to link Googlmapper to Google's API.
     |
     */
-    'key' => env('GOOGLE_API_KEY', 'AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw'),
+    'key' => env('GOOGLE_API_KEY'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,7 +30,7 @@ return [
     | The region Google API should use required in ISO 3166-1 code format.
     |
     */
-    'region' => 'GB',
+    'region' => 'US',
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     | Set if scroll wheel zoom should be used by Googlmapper.
     |
     */
-    'scrollWheelZoom' => true,
+    'scrollWheelZoom' => false,
 
     /*
     |--------------------------------------------------------------------------

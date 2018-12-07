@@ -97,35 +97,35 @@
         </div>
         <div class="uk-text-center">
             <h4 class="uk-margin-remove">Tasting Room Hours</h4>
-            <table class="uk-table uk-table-small uk-flex uk-flex-center uk-table-justify">
+            <table class="uk-table uk-table-small uk-flex uk-flex-center">
                 <tbody>
                     <tr>
                         <th>Monday</a></th>
-                        <td>{{$time->monday}}</td> 
+                        <td class="uk-text-left">{{$time->monday}}</td> 
                     </tr>
                     <tr>
                         <th>Tuesday</th>
-                        <td>{{$time->tuesday}}</td> 
+                        <td class="uk-text-left">{{$time->tuesday}}</td> 
                     </tr>
                     <tr>
                         <th>Wednesday</th>
-                        <td>{{$time->wednesday}}</td> 
+                        <td class="uk-text-left">{{$time->wednesday}}</td> 
                     </tr>
                     <tr>
                         <th>Thursday</th>
-                        <td>{{$time->thursday}}</td> 
+                        <td class="uk-text-left">{{$time->thursday}}</td> 
                     </tr>
                     <tr>
                         <th>Friday</th>
-                        <td>{{$time->friday}}</td> 
+                        <td class="uk-text-left">{{$time->friday}}</td> 
                     </tr>
                     <tr>
                         <th>Saturday</th>
-                        <td>{{$time->saturday}}</td> 
+                        <td class="uk-text-left">{{$time->saturday}}</td> 
                     </tr>
                     <tr>
                         <th>Sunday</th>
-                        <td>{{$time->sunday}}</td> 
+                        <td class="uk-text-left">{{$time->sunday}}</td> 
                     </tr>
                 </tbody>
             </table>
@@ -147,13 +147,7 @@
             </p>
         </div>
     </div>
-    <div class="uk-flex uk-flex-center uk-margin-top">
-        @php
-            $address_url = $winery->name.', '.$winery->street.', '.$winery->city.','.$winery->state.','.$winery->zip;
-            str_replace(' ', '+', $address_url);
-        @endphp
     
-        <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=address:{{$address_url}}&key=AIzaSyAfEbBPDyRHHQhMvLOaS6iTXTbqPyf3Kl0" allowfullscreen></iframe>
-    </div>
-    </div>
+    @include('guide.map')
+    
 @endsection

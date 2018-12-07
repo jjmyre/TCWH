@@ -8,7 +8,7 @@ class Winery extends Model
 {
     public function avas() {
     	# Many-to-many relationship
-    	return $this->belongsToMany('App\Ava')->withTimestamps();
+    	return $this->belongsToMany('App\Ava');
     }	
 
     public function time() {
@@ -16,9 +16,8 @@ class Winery extends Model
     	return $this->hasOne('App\Time');
     }
 
-     public function users() {
-    	# One-to-one relationship
-    	return $this->hasMany('App\User'); 
+    public function plans() {   
+        return $this->belongsToMany('App\User', 'plans')->withTimestamps()->withPivot('id', 'order');
     }
 
 }

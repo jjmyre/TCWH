@@ -30,7 +30,7 @@
                 </a>
                 <ul class="uk-navbar-nav" uk-nav>
                     <li class="{{ request()->is('guide*') ? 'uk-active' : '' }}"><a href="{{ url('/guide') }}">Winery Guide</a></li>
-                    <li class="{{ request()->is('avamap*') ? 'uk-active' : '' }}"><a href="{{ url('/avamap') }}">AVA Map</a></li>
+                    {{--<li class="{{ request()->is('avamap*') ? 'uk-active' : '' }}"><a href="{{ url('/avamap') }}">AVA Map</a></li>--}}
                     @auth
                         <li class="{{ request()->is('planner*') ? 'uk-active' : '' }}"><a href="{{ url('/planner') }}">Planner</a></li>
                     @endauth
@@ -57,9 +57,9 @@
                                     <li><a href="/dashboard/{{$user->id}}">My Dashboard</a></li>
                                     <li><a href="/editinfo/{{$user->id}}">Edit Info</a></li>
                                     <li>
-                                        <form method='POST' id='logout' class="uk-width-1-1" action='/logout'>
+                                        <form method='POST' action='/logout' id='logout' class="uk-width-1-1" action='/logout'>
                                             @csrf
-                                            <a href='#' class="uk-margin-top" onClick='document.getElementById("logout").submit();'>Logout</a>
+                                            <button type='submit' class='uk-button uk-button-primary' class="uk-margin-top">Logout</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -106,7 +106,7 @@
                 <button class="uk-offcanvas-close" type="button" uk-close></button>
                 <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
                     <li><a href="{{ url('/guide') }}">Winery Guide</a></li>
-                    <li><a href="{{ url('/avamap') }}">AVA Map</a></li>
+                    {{--<li><a href="{{ url('/avamap') }}">AVA Map</a></li>--}}
                     @auth
                         <li><a href="{{ url('/planner') }}">Planner</a></li>
                     @endauth
@@ -131,9 +131,9 @@
                         <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="{{ url('/dashboard') }}">My Dashboard</a></li>
                         <li class="{{ request()->is('profile*') ? 'uk-active' : '' }}"><a href="{{ url('/account') }}">Edit Info</a></li>
                         <li>
-                            <form method='POST' id='logout_mobile' action='/logout'>
+                            <form method='POST' action='/logout' id='logout_mobile' class="uk-width-1-1" action='/logout'>
                                 @csrf
-                                <a href='#' onClick='document.getElementById("logout_mobile").submit();'>Logout</a>
+                                <button type='submit' class='uk-button uk-button-primary' class="uk-margin-top">Logout</button>
                             </form>
                         </li>
                     @endauth
@@ -142,7 +142,7 @@
         </div>
     </div>
     <!-- Login Form Modal -->
-    @if ($errors->has('username') || $errors->has('email') || $errors->has('password')) 
+    @if ($errors->has('login') || $errors->has('login') || $errors->has('login')) 
         <div id="login-modal" class="uk-open" uk-modal style="display: block">
     @else
         <div id="login-modal" uk-modal>

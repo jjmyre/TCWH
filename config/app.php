@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Tri-Cities Wine Hub'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost:8888'),
 
     /*
     |--------------------------------------------------------------------------
@@ -150,7 +150,9 @@ return [
         /*
          * Package Service Providers...
          */
+        // Google API Mapper Package
         Cornford\Googlmapper\MapperServiceProvider::class,
+        // Google Geocode Package
         Spatie\Geocoder\GeocoderServiceProvider::class,
 
         /*

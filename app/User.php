@@ -47,4 +47,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Winery', 'visits')->withTimestamps();
     }
 
+    // access pivot column 'order'
+    public function plans() {   
+        return $this->belongsToMany('App\Winery', 'plans')->withTimestamps()->withPivot('id', 'order');
+    }
+
 }
