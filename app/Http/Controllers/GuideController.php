@@ -21,6 +21,7 @@ class GuideController extends Controller
     public function index() {
         
         $wineries = Winery::paginate(10);
+        $wineryOptions = Winery::all();
         $wineryMaps = Winery::all();
         $user = Auth::user();
         if($user) {
@@ -44,11 +45,11 @@ class GuideController extends Controller
         $cityOrRegion = 'city';
         $listOrMap = 'list';
         
-        foreach($wineries->unique('region')->sortBy('region') as $winery) {
+        foreach($wineryOptions->unique('region')->sortBy('region') as $winery) {
             $regionOptions[] = $winery->region;
         }
         
-        foreach($wineries->unique('city')->sortBy('city') as $winery) {
+        foreach($wineryOptions->unique('city')->sortBy('city') as $winery) {
             $cityOptions[] = $winery->city;
         }
 

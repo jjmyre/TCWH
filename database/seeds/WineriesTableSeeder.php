@@ -34,7 +34,6 @@ class WineriesTableSeeder extends Seeder
 		        'phone' => $winery->phone,
 		        'email' => $winery->email,
 		        'web_url' => $winery->web_url,
-		        'size' => $winery->size,
 		        'dining' => $winery->dining,
 		        'note' => $winery->note,
                 'logo' => $winery->logo,

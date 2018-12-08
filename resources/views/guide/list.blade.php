@@ -1,8 +1,8 @@
 {{ $wineries->appends(request()->except('page'))->links() }}
 
-<div class="uk-child-width-1-2@l uk-padding-small uk-margin-remove" uk-grid>
+<div class="uk-child-width-1-2@l" uk-grid>
     @foreach($wineries as $winery)
-        <div class="uk-card" id="div_{{$winery->id}}">
+        <div class="uk-card uk-padding" id="div_{{$winery->id}}">
             <div class="uk-card-header uk-padding-remove">                     
                 <div class="uk-flex-center" uk-grid>
                     <div>
@@ -17,7 +17,7 @@
                                 </h3>
                                 @auth
                                     @if($visits->contains('id', $winery->id))
-                                        <span class="uk-text-muted uk-padding-small uk-float-right" title="You have visited this winery." uk-icon="icon: check"></span>
+                                        <span class="uk-text-meta uk-card-badge visited" title="You have visited this winery." uk-icon="icon: check; ratio:2"></span>
                                     @endif
                                 @endauth
 

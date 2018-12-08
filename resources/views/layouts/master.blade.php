@@ -10,7 +10,7 @@
     <link href="{{ asset('css/styles.css') }}" type='text/css' rel='stylesheet' />
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Courgette|Nunito+Sans|Fahkwang" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Nunito+Sans|Fahkwang" rel="stylesheet">
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -53,13 +53,13 @@
                         <li class="uk-parent"><a href="#" class="uk-margin-right" uk-icon="icon: user; ratio: 2"><span>User</span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li><strong>{{$user->username}}</strong></li>
-                                    <li><a href="/dashboard/{{$user->id}}">My Dashboard</a></li>
-                                    <li><a href="/editinfo/{{$user->id}}">Edit Info</a></li>
+                                    <li><strong>{{Auth::user()->username}}</strong></li>
+                                    <li ><a href="/dashboard">My Dashboard</a></li>
+                                    <li><a href="/editinfo">Edit Info</a></li>
                                     <li>
-                                        <form method='POST' action='/logout' id='logout' class="uk-width-1-1" action='/logout'>
+                                        <form method='POST' action='/logout' id='logout-desk' class="uk-width-1-1">
                                             @csrf
-                                            <button type='submit' class='uk-button uk-button-primary' class="uk-margin-top">Logout</button>
+                                            <button type='submit' class="uk-margin-top uk-button uk-button-primary">Log Out</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -90,7 +90,7 @@
             </div>
         @endif
     </div>
-    <div class="uk-container wrapper">
+    <div class="wrapper">
         <header class="uk-padding"> 
             @yield('header')
         </header>
@@ -131,9 +131,9 @@
                         <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="{{ url('/dashboard') }}">My Dashboard</a></li>
                         <li class="{{ request()->is('profile*') ? 'uk-active' : '' }}"><a href="{{ url('/account') }}">Edit Info</a></li>
                         <li>
-                            <form method='POST' action='/logout' id='logout_mobile' class="uk-width-1-1" action='/logout'>
+                            <form method='POST' action='/logout' id="logout-mobile" class="uk-width-1-1">
                                 @csrf
-                                <button type='submit' class='uk-button uk-button-primary' class="uk-margin-top">Logout</button>
+                                <button type='submit' class="uk-button uk-button-primary">Log Out</button>
                             </form>
                         </li>
                     @endauth
@@ -142,7 +142,7 @@
         </div>
     </div>
     <!-- Login Form Modal -->
-    @if ($errors->has('login') || $errors->has('login') || $errors->has('login')) 
+    @if ($errors->has('username') || $errors->has('password') || $errors->has('email')) 
         <div id="login-modal" class="uk-open" uk-modal style="display: block">
     @else
         <div id="login-modal" uk-modal>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <div class="uk-margin-top">        
-                    <input class="uk-checkbox" name="remember" value="old('remember') ? 'checked' : '' }}" type="checkbox" >
+                    <input class="uk-checkbox" name="remember" value="old('remember') ? 'checked' : '' }}" id="remember" type="checkbox" >
                     <label for="remember">Remember Me </label>
                 </div>
                 <p class="uk-text-right">

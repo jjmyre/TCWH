@@ -31,7 +31,7 @@ class ContactController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         $subject = $request->input('subject');
-        $body = $request->input('body');
+        $body = $request->input('message');
 
         $data = array(
             'name' => $name,
@@ -40,6 +40,7 @@ class ContactController extends Controller
             'email' => $email
         );
 
+        // Mail out message with data array
         Mail::send('emails.contact', $data, function($message) use ($email, $name, $subject){
             $message->from($email, $name);
             $message->to('admin@tcwinehub.com', 'admin');

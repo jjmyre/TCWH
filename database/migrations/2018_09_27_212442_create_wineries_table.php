@@ -27,7 +27,6 @@ class CreateWineriesTable extends Migration
             $table->string('phone');
             $table->string('email')->nullable();
             $table->string('web_url')->nullable();
-            $table->string('size');
             $table->boolean('dining');
             $table->text('note')->nullable();
             $table->string('logo')->nullable();

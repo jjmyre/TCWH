@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="uk-card">
+<div class="uk-card uk-container">
     <div class="uk-card-body uk-padding">
         <form class="uk-form uk-form-stacked" action="/contact" method="POST" id="contact_form" uk-grid>
             @csrf

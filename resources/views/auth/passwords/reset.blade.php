@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div class="uk-card">
+    <div <div class="uk-card uk-container">
         <div class="uk-card-body uk-padding">
             <form class="uk-form uk-form-stacked" action="{{ route('password.request') }}" method="POST" uk-grid>
                 @csrf

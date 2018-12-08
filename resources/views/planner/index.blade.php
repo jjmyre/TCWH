@@ -5,124 +5,185 @@
 @endsection
 
 @section('header')
-        <h1 class="uk-heading-primary uk-text-center">My Tasting Planner</h1>
+        <h1 class="uk-heading-primary uk-text-center">Tasting Planner</h1>
 @endsection
 
 @section('content')
+<div class="uk-container">
+	<div class="uk-flex-center uk-margin-bottom uk-flex" uk-grid>
+		<div>
+			<div class="uk-display-inline">
+				<p class="uk-h4 uk-text-center">Add From:</p>
+				<ul class="uk-subnav uk-subnav-pill" uk-switcher="connect: .addMenu">
+		        	<li class="uk-padding-remove"><a href="#">Winery Guide</a></li>
+					@if($user->favorites()->exists())
+			    		<li class="uk-padding-remove"><a href="#">My Favorites</a></li>
+			    	@endif
+			    	@if($user->wishlists()->exists())
+			    		<li class="uk-padding-remove"><a href="#">My Wish List</a></li>
+			    	@endif
+			    	@if($user->visits()->exists())
+			    		<li class="uk-padding-remove"><a href="#">My Visited List</a></li>
+			    	@endif	
+		    	</ul>
+		    </div>
+			<div class="uk-switcher addMenu">
+				<div>
+					<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
+				        @csrf
+				        <select name="winery" class="uk-select" value='6'>
+				        	@foreach($wineries as $winery)
+				        		@if(!($plans->contains($winery->id)))
+				        			<option value="{{$winery->id}}">{{$winery->name}}</option>
+				        		@endif
+				        	@endforeach
+				        </select>
+						<div class="uk-text-right uk-margin-top">
+				        	<button type="submit" class="uk-button uk-button-secondary uk-border-rounded" title="Add">
+				        		<span uk-icon="icon: plus"></span>
+				        	</button>
+				    	</div>
+					</form>
+				</div>
+				@if($user->favorites()->exists())
+					<div>
+						<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
+					        @csrf
+					        <select name="winery" class="uk-select">
+					        	@foreach($favorites as $favorite)
+					        		@if(!($plans->contains($favorite->id)))
+					        			<option value="{{$favorite->id}}">{{$favorite->name}}</option>
+					        		@endif
+					        	@endforeach
+					        </select>
+					        <div class="uk-text-right uk-margin-top">
+						        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded" title="Add">
+						        	<span uk-icon="icon: plus"></span>
+						        </button>
+						    </div>
+						</form>
+					</div>
+				@endif
+				@if($user->wishlists()->exists())
+					<div>
+						<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
+					        @csrf
+					        <select name="winery" class="uk-select">
+					        	@foreach($wishlists as $wishlist)
+					        		@if(!($plans->contains($wishlist->id)))
+					        			<option value="{{$wishlist->id}}">{{$wishlist->name}}</option>
+					        		@endif
+					        	@endforeach
+					        </select>
+					        <div class="uk-text-right uk-margin-top">
+						        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded" title="Add">
+						        	<span uk-icon="icon: plus"></span>
+						        </button>
+						    </div>
+						</form>
+					</div>
+				@endif
+				@if($user->visits()->exists())
+					<div>
+						<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
+					        @csrf
+					        <select name="winery" class="uk-select">
+					        	@foreach($visits as $visit)
+					        		@if(!($plans->contains($visit->id)))
+					        			<option value="{{$visit->id}}">{{$visit->name}}</option>
+					        		@endif
+					        	@endforeach
+					        </select>
+					        <div class="uk-text-right uk-margin-top">
+						        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-display-inline" title="Add">
+						        	<span uk-icon="icon: plus"></span>
+						        </button>
+						    </div>
+						</form>
+					</div>
+				@endif
+			</div>
+		</div>
+	</div>
+	<div class="uk-padding-bottom">
+		@if(count($plans) >= 1)
+			<div class="uk-width-1-1 uk-text-center uk-margin-bottom">
+				<form class="uk-form uk-display-inline" action="/planner/clear" method="post">
+				    @csrf
+				    <input type="hidden" name="_method" value="delete" />
+				    <button type="submit" class="uk-link-muted uk-button uk-button-text uk-button-large">
+				    	<span uk-icon="icon: trash"></span>
+				    		Clear Planner
+					</button>
+				</form>
+			</div>
+		@else
+		<p class="uk-text-lead"> Your planner is empty.</p>
+		@endif
+	</div>
+	@foreach($plans as $plan)
+		<div class="uk-card div-border uk-margin-remove uk-padding-small uk-margin-bottom uk-flex uk-flex-middle" id="div_{{$plan->id}}" uk-grid>
+			<div>
+				@if($plan != $plans->first())
+					<form class="uk-form uk-display-block" action="/planner/moveup" method="post">
+				        @csrf
+				        <input type="hidden" name="order" value="{{$plan->pivot->order}}">
+				        <button type="submit" class="uk-button uk-button-default uk-display-block uk-padding-remove">
+				        	<span uk-icon="icon: triangle-up; ratio: 2"></span>
+				    	</button>
+					</form>
+				@endif
+				@if($plan != $plans->last())
+					<form class="uk-form uk-display-block" action="/planner/movedown" method="post">
+				        @csrf
+				        <input type="hidden" name="order" value="{{$plan->pivot->order}}">
+				        <button type="submit" class="uk-button uk-button-default uk-padding-remove">
+				        	<span uk-icon="icon: triangle-down; ratio:2"></span>
+				    	</button>
+					</form>
+				@endif
+			</div>
+			<div>
+				<span class="uk-text-lead uk-text-bold"><span uk-icon="icon:location; ratio:2"></span>{{$plan->pivot->order}}</span>
+			</div>
+			<div>
+				<h3 class="uk-h3 uk-margin-remove"><a class="uk-link uk-display-inline" href="/winery/{{$plan->id}}" target ="_blank">{{$plan->name}}</a></h3>
+				<address class="uk-margin-remove">{{$plan->street}}, <br>
+					{{$plan->city}}, {{$plan->state}}, {{$plan->zip}}
+				</address>
+			</div>
 
-<h2>Itinerary</h2>
-<form class="uk-form" action="/planner/clear" method="post">
-    @csrf
-    <input type="hidden" name="_method" value="delete" />
-    <button type="submit" class="not_favorited uk-button uk-button-default" title="Favorite">
-    	<span uk-icon="icon: trash; ratio:2">
-    		CLEAR
-    	</span>
-	</button>
-</form>
-    	
-@foreach($plans as $plan)
-	<h3 class="uk-h3"><strong>{{$plan->pivot->order}}</strong> {{$plan->name}}</h3>	
-	<a class="uk-label" href="/winery/{{$plan->id}}">More info</a>
-	<form class="uk-form uk-display-inline" action="/planner/remove/{{$plan->id}}" method="post">
-        @csrf
-        <input type="hidden" name="winery_id" value="{{$plan->id}}">
-        <input type="hidden" name="_method" value="delete" />
-        <button type="submit" class="not_favorited uk-button uk-button-default" title="Favorite">
-        	<span uk-icon="icon: minus; ratio:2"></span>
-    	</button>
-	</form>
-@endforeach
-
-<div class="uk-grid-match uk-flex-center uk-margin-bottom uk-flex" uk-grid>
-	<h4 class="uk-h4 uk-flex-middle uk-margin-right">ADD TO ITINERARY FROM:</h4>
-    <ul class="uk-subnav uk-text-left uk-subnav-pill uk-margin-left" uk-switcher="connect: .addMenu">
-		@if($user->favorites()->exists())
-    		<li class="uk-padding-remove"><a href="#">Favorites</a></li>
-    	@endif
-    	@if($user->wishlists()->exists())
-    		<li class="uk-padding-remove"><a href="#">Wish List</a></li>
-    	@endif
-    	@if($user->visits()->exists())
-    		<li class="uk-padding-remove"><a href="#">Visited List</a></li>
-    	@endif
-    	<li class="uk-padding-remove"><a href="#">Winery List</a></li>
-    </ul>
+		</div>
+		<div class="uk-text-right uk-display-block uk-margin-medium-bottom">			
+			<form class="uk-form uk-display-inline" action="/planner/remove/{{$plan->id}}" method="post">
+		        @csrf
+		        <input type="hidden" name="winery_id" value="{{$plan->id}}">
+		        <input type="hidden" name="_method" value="delete" />
+		        <button type="submit" class="uk-button uk-button-default">
+		        	<span uk-icon="icon: trash"></span>
+		        	Remove
+		    	</button>
+			</form>
+			<form class="uk-form uk-display-inline" action="/planner/visit" method="post">
+		        @csrf
+		        <input type="hidden" name="winery_id" value="{{$plan->id}}">
+		        <button type="submit" class="uk-button uk-button-default">
+		        	<span uk-icon="icon: check"></span>
+		        	Visited
+		    	</button>
+			</form>
+		</div>
+		{{--<div class="uk-text-left uk-display-inline">
+			<a class="">Directions from {{$plan->name}}</a> 
+		</div> --}}
+	@endforeach
+	@if($user->plans()->exists())
+         <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        	@include('guide.map')
+    	</div>
+	@endif
 </div>
 
-<div class="uk-switcher addMenu">
-@if($user->favorites()->exists())
-	<div>
-		<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
-	        @csrf
-	        <select name="winery" class="uk-select">
-	        	@foreach($favorites as $favorite)
-	        		<option value="{{$favorite->id}}">{{$favorite->name}}</option>
-	        	@endforeach
-	        </select>
-	        <div class="uk-text-right uk-margin-top">
-		        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded" title="Add">
-		        	<span uk-icon="icon: plus"></span>
-		        </button>
-		    </div>
-		</form>
-	</div>
-@endif
-@if($user->wishlists()->exists())
-	<div>
-		<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
-	        @csrf
-	        <select name="winery" class="uk-select">
-	        	@foreach($wishlists as $wishlist)
-	        		<option value="{{$wishlist->id}}">{{$wishlist->name}}</option>
-	        	@endforeach
-	        </select>
-	        <div class="uk-text-right uk-margin-top">
-		        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded" title="Add">
-		        	<span uk-icon="icon: plus"></span>
-		        </button>
-		    </div>
-		</form>
-	</div>
-@endif
-
-@if($user->visits()->exists())
-	<div>
-		<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
-	        @csrf
-	        <select name="winery" class="uk-select">
-	        	@foreach($visits as $visit)
-	        		<option value="{{$visit->id}}">{{$visit->name}}</option>
-	        	@endforeach
-	        </select>
-	        <div class="uk-text-right uk-margin-top">
-		        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded" title="Add">
-		        	<span uk-icon="icon: plus"></span>
-		        </button>
-		    </div>
-		</form>
-	</div>
-@endif
-	<div>
-		<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
-	        @csrf
-	        <select name="winery" class="uk-select" value='6'>
-	        	@foreach($wineries as $winery)
-	        		<option value="{{$winery->id}}">{{$winery->name}}</option>
-	        	@endforeach
-	        </select>
-			<div class="uk-text-right uk-margin-top">
-	        	<button type="submit" class="uk-button uk-button-secondary uk-border-rounded" title="Add">
-	        		<span uk-icon="icon: plus"></span>
-	        	</button>
-	    	</div>
-		</form>
-	</div>
-</div>
-
-@if($user->plans()->exists())
-	@include('guide.map')
-@endif
 
 
 @endsection

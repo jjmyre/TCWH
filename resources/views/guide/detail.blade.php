@@ -25,13 +25,13 @@
                         @csrf
                         <input type="hidden" name="_method" value="delete" />
                         <button type="submit" class="favorited uk-button uk-button-text" title="Favorite">
-                            <span uk-icon="icon: heart; ratio:2"></span>Remove from Favorites
+                            <span uk-icon="icon: heart; ratio:2"></span> Remove from Favorites
                 @else
                      <form class="uk-form uk-display-inline" action="/favorite" method="post">
                         @csrf
                         <input type="hidden" name="winery_id" value="{{$winery->id}}">
                         <button type="submit" class="not_favorited uk-button uk-button-text" title="Favorite">
-                            <span uk-icon="icon: heart; ratio:2"></span>Add to Favorites
+                            <span uk-icon="icon: heart; ratio:2"></span> Add to Favorites
                 @endif
                     </button>
                 </form>
@@ -40,14 +40,14 @@
                         @csrf
                         <input type="hidden" name="_method" value="delete" />
                         <button type="submit" class="wishlisted uk-button uk-button-text" title="Wishlist">
-                            <span uk-icon="icon: star; ratio:2"></span>Remove from Wishlist
+                            <span uk-icon="icon: star; ratio:2"></span> Remove from Wishlist
                           
                 @else
                      <form class="uk-form uk-display-inline" action="/wishlist" method="post">
                         @csrf
                         <input type="hidden" name="winery_id" value="{{$winery->id}}">
                         <button type="submit" class="not_wishlisted uk-button uk-button-text" title="Wishlist">
-                            <span uk-icon="icon: star; ratio:2"></span>Add to Wishlist
+                            <span uk-icon="icon: star; ratio:2"></span> Add to Wish List
                 @endif
                     </button>
                 </form>
@@ -63,9 +63,9 @@
             </form>--}}
         </div>
     </div>                     
-    <div class="uk-grid uk-container uk-child-width-1-3@m" uk-grid>
+    <div class="uk-grid uk-container uk-child-width-1-3@s" uk-grid>
         <div>
-            <h4 class="uk-margin-remove uk-text-center">Contact Info</h2>
+            <h4 class="uk-margin-remove">Contact Info</h2>
             <table class="uk-table uk-table-small uk-flex uk-flex-center">
                 <tbody>
                     <tr class="uk-flex uk-flex-middle">
@@ -95,9 +95,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="uk-text-center">
+        <div>
             <h4 class="uk-margin-remove">Tasting Room Hours</h4>
-            <table class="uk-table uk-table-small uk-flex uk-flex-center">
+            <table class="uk-table uk-table-small uk-flex uk-flex-left">
                 <tbody>
                     <tr>
                         <th>Monday</a></th>
@@ -130,11 +130,11 @@
                 </tbody>
             </table>
         </div>
-        <div class="uk-text-center">
+        <div>
             <h4 class="uk-margin-remove"> AVA Regions </h4>
             <ul class="uk-list uk-margin-remove">
                 @foreach($avas as $ava)
-                    <li class="uk-margin-remove"><a class="uk-link-reset" href="#">{{$ava}}</a></li>
+                    <li class="uk-margin-remove">{{$ava}}</li>
                 @endforeach
             </ul>
             <h4 class="uk-margin-remove-bottom"> Dining</h3>
@@ -147,7 +147,7 @@
             </p>
         </div>
     </div>
-    
-    @include('guide.map')
-    
+    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        @include('guide.map')
+    </div>
 @endsection

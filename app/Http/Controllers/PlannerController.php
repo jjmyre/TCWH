@@ -24,7 +24,9 @@ class PlannerController extends Controller
         $wineries = Winery::orderby('name')->get();
         $visits = $user->visits()->orderBy('name')->get();
         $plans = $user->plans()->orderby('order')->get();
-         
+        //$firstPlan = $plans->first();
+        //$lastPlan = $user->plans()->orderby('order')->first();
+
         if($user->plans()->exists()) {
             // create markers array with keys but empty values
             $markers = [];
@@ -51,7 +53,9 @@ class PlannerController extends Controller
             Mapper::map($markers['latitude'][0], $markers['longitude'][0], ['zoom' => 10, 'fullscreenControl' => true, 'center' => true, 'marker' => false, 'cluster' => false, 'clusters' => ['center' => false, 'zoom' => 10, 'size'=> 10], 'language' => 'en']);
 
             for($i = 0; $i <= (count($plans)-1); $i++) {
-                Mapper::informationWindow($markers['latitude'][$i], $markers['longitude'][$i], $markers['content'][$i], ['animation' => 'DROP']);
+                $labels = (string)($i + 1);
+
+                Mapper::informationWindow($markers['latitude'][$i], $markers['longitude'][$i], $markers['content'][$i], ['animation' => 'DROP', 'label' => $labels]);
             }
         }
         
@@ -68,34 +72,40 @@ class PlannerController extends Controller
     public function add(Request $request) {
 
         $winery_id = $request->input('winery');
-
+        $winery = Winery::find($winery_id);
         $user = Auth::user();
+        $plans = $user->plans()->get();
 
-        //get plan that is last in order
-        $plan = $user->plans()->orderby('order', 'desc')->first();
-
-        if(!empty($plan)){
-
-           // find the very last order number of planner list
-            $currentLastOrder = $plan->pivot->order;
-
-            //add 1 to the last order to make this winery last on list
-            $newLastOrder = $currentLastOrder + 1;
-
-            //attach new winery to planner with last order number
-            Auth::user()->plans()->attach($winery_id,  ['order' => $newLastOrder]);
+        if ($plans->contains('id', $winery_id)) {
+            return back()->with('status', $winery->name.' is already in your planner.');
+            
+        }
+        elseif(($plans->count() >= 9)){
+            return back()->with('status', 'Your planner can only have up to 9 wineries');
         }
         else {
-            //attach new winery to planner with order of 1
-            Auth::user()->plans()->attach($winery_id,  ['order' => 1]);
+            //get plan that is last in order
+            $currentPlan = $user->plans()->orderby('order', 'desc')->first();
+
+            if(!empty($currentPlan)){
+
+               // find the very last order number of planner list
+                $currentLastOrder = $currentPlan->pivot->order;
+
+                //add 1 to the last order to make this winery last on list
+                $newLastOrder = $currentLastOrder + 1;
+
+                //attach new winery to planner with last order number
+                $user->plans()->attach($winery_id,  ['order' => $newLastOrder]);
+            }
+            else {
+                //attach new winery to planner with order of 1
+                $user->plans()->attach($winery_id,  ['order' => 1]);
+            }
+                
+            // find winery with newly added winery_id
+            return back()->with('status', $winery->name.' was added to your planner!');
         }
-
-        // find winery with newly added winery_id
-        $winery = Winery::find($winery_id);
-
-        // redirect to last page with status message
-        return back()->with('status', $winery->name.' was added to your planner!');
-
     }
 
     public function remove($winery_id) {
@@ -128,12 +138,76 @@ class PlannerController extends Controller
 
     }
 
-    public function changeOrder() {
+    public function visit(Request $request) {
+        $user = Auth::user();
+        $wineryId = $request->input('winery_id');
+        $winery = Winery::find($wineryId);
+        $visits = $user->visits()->get();
+        
+        $selectedPlan = $user->plans()->where('winery_id', '=', $wineryId)->first();
 
+        $selectedPlanOrder = $selectedPlan->pivot->order;
+        $higherPlans = $user->plans()->where('order', '>', $selectedPlanOrder)->get();
+
+        if(!empty($selectedPlanOrder)) {
+            foreach($higherPlans as $higherPlan) {
+                $higherPlan->pivot->decrement('order');
+            }
+        }
+
+
+        $user->plans()->detach($wineryId);
+        
+        if ($visits->contains($wineryId)) {
+            return back()->with('status', $winery->name.' was visited again.');
+            
+        }
+        else {
+            $user->visits()->attach($wineryId);
+            return back()->with('status', $winery->name.' was added to your visited list!');
+        }
 
     }
 
-    public function move() {
+    public function moveup(Request $request) {
+        $user = Auth::user();
+        $plans = $user->plans()->get();
+        $currentOrder = $request->input('order');
+
+        //assign variable for winery by matching winery_id to pivot
+        $selectedPlan = $user->plans()->where('order', '=', $currentOrder)->get();      
+      
+        //get the plan item that is above the selected plan by order ranking
+        $abovePlan = $user->plans()->where('order', '=', $currentOrder-1)->get();
+
+        //decrement the above plan by index to find pivot
+        $abovePlan[0]->pivot->increment('order');
+
+        //increment the selected plan and return
+        $selectedPlan[0]->pivot->decrement('order');
+
+        return back();
+
+    }
+
+    public function movedown(Request $request) {
+        $user = Auth::user();
+        $plans = $user->plans()->get();
+        $currentOrder = $request->input('order');
+
+        //assign variable for winery by matching winery_id to pivot
+        $selectedPlan = $user->plans()->where('order', '=', $currentOrder)->get();      
+      
+        //get the plan item that is above the selected plan by order ranking
+        $belowPlan = $user->plans()->where('order', '=', $currentOrder+1)->get();
+
+        //decrement the above plan by index to find pivot
+        $belowPlan[0]->pivot->decrement('order');
+
+        //decrement the selected plan's order and return
+        $selectedPlan[0]->pivot->increment('order');
+
+        return back();
 
     }
 

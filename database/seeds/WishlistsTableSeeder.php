@@ -12,14 +12,21 @@ class WishlistsTableSeeder extends Seeder
      *
      * @return void
      */
+    // Adapted from Laracasts tutorial "Favorite This: Part 1"
     public function run()
     {
-        // Adapted from Laracasts tutorial "Favorite This: Part 1"
         foreach(range(1, 100) as $index) {
-        	// randomly get winery_ids
-        	$winery = Winery::inRandomOrder()->first();
-
-        	User::inRandomOrder()->first()->wishlists()->attach($winery->id);
+            // randomly get winery_ids
+            $winery = Winery::inRandomOrder()->first();
+            $user = User::inRandomOrder()->first();
+            $wishlists = $user->wishlists()->get();
+            if($wishlists->contains('id', $winery->id)) {
+                continue;
+            }
+            else {
+                $user->wishlists()->attach($winery->id);
+            }
+            
         }
     }
 }

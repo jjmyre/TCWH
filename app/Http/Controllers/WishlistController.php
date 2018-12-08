@@ -17,15 +17,19 @@ use Session;
 class WishlistController extends Controller
 {
     public function wishlist(Request $request) {
+        $user = Auth::user();
+        $wishlists = $user->wishlists()->get();
+        $winery_id = $request->input('winery_id');
+        $winery = Winery::find($winery_id);
 
-    	$winery_id = $request->input('winery_id');
-
-    	Auth::user()->wishlists()->attach($winery_id);
-
-    	$winery = Winery::find($winery_id);
-
-    	return back()->with('status', $winery->name.' was added to your wishlist!');
-
+        if ($wishlists->contains($winery_id)) {
+            return back()->with('status', $winery->name.' is already in your wish list.');
+            
+        }
+        else {
+            $user->wishlists()->attach($winery_id);
+            return back()->with('status', $winery->name.' was added to your wish list!');
+        }
     }
 
     public function unwishlist($winery_id) {

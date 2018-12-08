@@ -39,7 +39,9 @@ Route::group(['middleware' => 'auth'], function () {
 	// Planner
 	Route::get('/planner', 'PlannerController@index');
 	Route::post('/planner/add', 'PlannerController@add');
-	Route::post('/planner/move', 'PlannerController@move');
+	Route::post('/planner/moveup', 'PlannerController@moveup');
+	Route::post('/planner/movedown', 'PlannerController@movedown');
+	Route::post('/planner/visit', 'PlannerController@visit');
 	Route::delete('/planner/remove/{winery_id}', 'PlannerController@remove');
 	Route::delete('/planner/clear', 'PlannerController@clear');
 
@@ -63,8 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// User Logout
 	Route::post('/logout', 'UserController@logout');
-
 });
+
 
 // Contact Routes
 Route::get('/contact', 'ContactController@show');
@@ -81,6 +83,9 @@ Route::get('/signup', function () {
 Route::post('/signup', 'Auth\RegisterController@register')->name('register');
 
 // Login Routes
+Route::get('/login', function() {
+	return abort(404);
+});
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -90,7 +95,9 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-
+Route::fallback(function(){
+    return view('errors.404');
+});
 
 /*
 

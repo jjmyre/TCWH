@@ -13,14 +13,20 @@ use Illuminate\Http\Request;
 
 class VisitController extends Controller
 {
-    public function visit() {
-    	$winery_id = $request->input('winery_id');
+    public function visit(Request $request) {
+        $user = Auth::user();
+        $visits = $user->visits()->get();
+        $winery_id = $request->input('winery_id');
+        $winery = Winery::find($winery_id);
 
-    	Auth::user()->visits()->attach($winery_id);
-
-    	$winery = Winery::find($winery_id);
-
-    	return back()->with('status', $winery->name.' was added to your visited list!');
+        if ($visits->contains($winery_id)) {
+            return back()->with('status', $winery->name.' was visited again.');
+            
+        }
+        else {
+            $user->visits()->attach($winery_id);
+            return back()->with('status', $winery->name.' was added to your visited list!');
+        }
     }
 
     public function unvisit() {

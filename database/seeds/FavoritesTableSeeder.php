@@ -18,11 +18,17 @@ class FavoritesTableSeeder extends Seeder
     public function run()
     {
         foreach(range(1, 100) as $index) {
-        	// randomly get winery_ids
-        	$winery = Winery::inRandomOrder()->first();
-
-        	User::inRandomOrder()->first()->favorites()->attach($winery->id);
-
+            // randomly get winery_ids
+            $winery = Winery::inRandomOrder()->first();
+            $user = User::inRandomOrder()->first();
+            $favorites = $user->favorites()->get();
+            if($favorites->contains('id', $winery->id)) {
+                continue;
+            }
+            else {
+                $user->favorites()->attach($winery->id);
+            }
+            
         }
         
     }
