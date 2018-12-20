@@ -34,7 +34,7 @@ class FavoriteController extends Controller
     }
 
     public function unfavorite($winery_id) {
-
+        // remove favoriet via wineryid
     	Auth::user()->favorites()->detach($winery_id);
 
     	$winery = Winery::find($winery_id);
@@ -45,6 +45,7 @@ class FavoriteController extends Controller
 
     public function clear() {
 
+        // remove all favorites associated with user
     	Auth::user()->favorites()->detach();
     	
     	return back()->with('status', 'All of your favorites were cleared!');

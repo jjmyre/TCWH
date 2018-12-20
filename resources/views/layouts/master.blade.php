@@ -41,7 +41,9 @@
             @guest
                 <div class="uk-navbar-right uk-container">
                     <ul class="uk-navbar-nav">
-                        <li><a class="uk-text-uppercase uk-nav-item uk-margin-small-right" uk-toggle="target: #login-modal" href="">Login</a></li>
+                        @if (!(request()->is('signup')) && !(request()->is('password/*')))
+                            <li><a class="uk-text-uppercase uk-nav-item uk-margin-small-right" uk-toggle="target: #login-modal" href="">Login</a></li>
+                        @endif
                         <li class="{{ request()->is('signup') ? 'uk-active' : '' }}"><a class="uk-text-uppercase uk-nav-item uk-margin-small-right" href="{{ url('/signup') }}">Signup</a></li>
                     </ul>
                 </div>
@@ -52,9 +54,9 @@
                         <li class="uk-parent"><a href="#" class="uk-margin-right" uk-icon="icon: user; ratio: 2"><span>User</span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li class="uk-text-bold uk-padding-top uk-padding-bottom">{{Auth::user()->username}}</li>
-                                    <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="/dashboard">My Dashboard</a></li>
-                                    <li class="{{ request()->is('edit*') ? 'uk-active' : '' }}"><a href="/edit">Edit Info</a></li>
+                                    <li class="uk-text-bold uk-text-large uk-padding-top uk-padding-bottom">{{Auth::user()->username}}</li>
+                                    <li><a href="/dashboard">My Dashboard</a></li>
+                                    <li><a href="/edit">Edit Info</a></li>
                                     <li>
                                         <form method='POST' action='/logout' id='logout-desk' class="uk-width-1-1">
                                             @csrf
@@ -149,53 +151,55 @@
         </div>
     </div>
     <!-- Login Form Modal -->
-    @if ($errors->has('username') || $errors->has('password'))
-        <div id="login-modal" class="uk-open" uk-modal style="display: block">
-    @else
-        <div id="login-modal" uk-modal>
-    @endif 
-        <div class="uk-modal-dialog uk-modal-body">
-            <h2 class="uk-modal-title">Login</h2>
-            <form class="uk-form uk-form-stacked" action="{{ route('login') }}" method="POST" id="login-form">
-                @csrf
-                <div class="uk-form-row uk-margin-top">
-                    @if ($errors->has('username') || $errors->has('email'))               
-                        <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
-                            <a class="uk-alert-close" uk-close></a>
-                            <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+    @if (!(request()->is('signup')) && !(request()->is('password/*')))
+        @if ($errors->has('username') || $errors->has('password') || $errors->has('email'))
+            <div id="login-modal" class="uk-open" uk-modal style="display: block">
+        @else
+            <div id="login-modal" uk-modal>
+        @endif 
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">Login</h2>
+                <form class="uk-form uk-form-stacked" action="{{ route('login') }}" method="POST" id="login-form">
+                    @csrf
+                    <div class="uk-form-row uk-margin-top">
+                        @if ($errors->has('username') || $errors->has('email'))               
+                            <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                                <a class="uk-alert-close" uk-close></a>
+                                <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+                            </div>
+                        @endif 
+                        <label class="visuallyHidden" for="login">Username or Email</label>
+                        <div class="uk-inline uk-width-1-1">    
+                            <span class="uk-form-icon" uk-icon="icon:user"></span>
+                            <input class="uk-input" type="text" name="login" value="{{ old('username') ?: old('email_login') }}" id="login" placeholder="Username or Email" autofocus>
                         </div>
-                    @endif 
-                    <label class="visuallyHidden" for="login">Username or Email</label>
-                    <div class="uk-inline uk-width-1-1">    
-                        <span class="uk-form-icon" uk-icon="icon:user"></span>
-                        <input class="uk-input" type="text" name="login" value="{{ old('username') ?: old('email_login') }}" id="login" placeholder="Username or Email" autofocus>
                     </div>
-                </div>
-                <div class="uk-form-row uk-margin-top">
-                    @if ($errors->get('password'))              
-                        <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
-                            <a class="uk-alert-close" uk-close></a>
-                            <strong>{{ $errors->first('password') }}</strong>    
+                    <div class="uk-form-row uk-margin-top">
+                        @if ($errors->get('password'))              
+                            <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                                <a class="uk-alert-close" uk-close></a>
+                                <strong>{{ $errors->first('password') }}</strong>    
+                            </div>
+                        @endif    
+                        <label class="visuallyHidden" for="password">Password</label>
+                        <div class="uk-inline uk-width-1-1">    
+                            <span class="uk-form-icon" uk-icon="icon:lock"></span>
+                            <input class="uk-input" type="password" value="{{ old('password') }}" name="password" id="password" placeholder="Password" >
                         </div>
-                    @endif    
-                    <label class="visuallyHidden" for="password">Password</label>
-                    <div class="uk-inline uk-width-1-1">    
-                        <span class="uk-form-icon" uk-icon="icon:lock"></span>
-                        <input class="uk-input" type="password" value="{{ old('password') }}" name="password" id="password" placeholder="Password" >
                     </div>
-                </div>
-                <div class="uk-margin-top">        
-                    <input class="uk-checkbox" name="remember" value="old('remember') ? 'checked' : '' }}" id="remember" type="checkbox" >
-                    <label for="remember">Remember Me </label>
-                </div>
-                <div class="uk-text-right">
-                    <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                    <button class="uk-button uk-button-primary" type="submit">Log Me In</button>
-                </div>
+                    <div class="uk-margin-top">        
+                        <input class="uk-checkbox" name="remember" value="old('remember') ? 'checked' : '' }}" id="remember" type="checkbox" >
+                        <label for="remember">Remember Me </label>
+                    </div>
+                    <div class="uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                        <button class="uk-button uk-button-primary" type="submit">Log Me In</button>
+                    </div>
 
-                <a class='uk-button uk-button-small' href="/password/reset">Forgot Password?</a>
-            </form>
+                    <a class='uk-button uk-button-small' href="/password/reset">Forgot Password?</a>
+                </form>
+            </div>
         </div>
-    </div>
+    @endif
 </body>
 </html>

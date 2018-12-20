@@ -24,7 +24,6 @@ class WishlistController extends Controller
 
         if ($wishlists->contains($winery_id)) {
             return back()->with('status', $winery->name.' is already in your wish list.');
-            
         }
         else {
             $user->wishlists()->attach($winery_id);
@@ -33,19 +32,19 @@ class WishlistController extends Controller
     }
 
     public function unwishlist($winery_id) {
-
+        //remove selected winery
     	Auth::user()->wishlists()->detach($winery_id);
 
     	$winery = Winery::find($winery_id);
 
-    	return back()->with('status', $winery->name.' was removed from your wishlist!');
+    	return back()->with('status', $winery->name.' was removed from your wish list!');
     }
 
     public function clear() {
-
+        // remove all wish listed wineries
     	Auth::user()->wishlists()->detach();
     	
-    	return back()->with('status', 'Your wishlist was cleared!');
+    	return back()->with('status', 'Your wish list was cleared!');
 
     }
 }

@@ -21,11 +21,19 @@ use Geocoder;
 class GuideController extends Controller
 {
     public function index() {
-        
+        // get all wineries and paginate
         $wineries = Winery::paginate(10);
+
+        // get all wineries to be used for options
         $wineryOptions = Winery::all();
+
+        // get all wineries for maps
         $wineryMaps = Winery::all();
+
+        // get authorized user
         $user = Auth::user();
+
+        // wish lists, visits, favorites if user
         if($user) {
             $favorites = $user->favorites()->get();
             $wishlists = $user->wishlists()->get();
@@ -36,6 +44,7 @@ class GuideController extends Controller
             $wishlists = [];
             $visits = [];
         }
+
         $allFavorites = Favorite::all();
         $allWishlists = Wishlist::all(); 
         $citySelect = 'all';
@@ -47,10 +56,12 @@ class GuideController extends Controller
         $cityOrRegion = 'city';
         $listOrMap = 'list';
         
+        // dynamically generate region options for form
         foreach($wineryOptions->unique('region')->sortBy('region') as $winery) {
             $regionOptions[] = $winery->region;
         }
         
+        // dynamically generate city options for form
         foreach($wineryOptions->unique('city')->sortBy('city') as $winery) {
             $cityOptions[] = $winery->city;
         }
@@ -65,6 +76,7 @@ class GuideController extends Controller
            
             $markers['latitude'][] = $geo['lat'];
             $markers['longitude'][] = $geo['lng'];
+            // content for map info window
             $markers['content'][] = 
                 "<h4 class='uk-link-reset uk-margin-remove-bottom'>".$wineryMap->name."</h4>".
                 "<address class='uk-margin-remove-top'>".$geo['formatted_address']."</address>".
@@ -80,6 +92,7 @@ class GuideController extends Controller
         // Default map to first marker
         Mapper::map($markers['latitude'][0], $markers['longitude'][0], ['zoom' => 10, 'fullscreenControl' => true, 'center' => true, 'marker' => false, 'cluster' => false, 'clusters' => ['center' => false, 'zoom' => 10, 'size'=> 10], 'language' => 'en']);
 
+        // set information markers for map
         for($i = 0; $i <= (count($wineryMaps)-1); $i++) {
             Mapper::informationWindow($markers['latitude'][$i], $markers['longitude'][$i], $markers['content'][$i], ['animation' => 'DROP']);
         }
@@ -113,17 +126,20 @@ class GuideController extends Controller
             'sortSelect' => 'required',
         ]);
 
+        // retrieve values from form inputs
         $citySelect = $request->input('citySelect');
         $regionSelect = $request->input('regionSelect');
         $sortSelect = $request->input('sortSelect');
         $listOrMap = $request->input('listOrMap');
         $cityOrRegion = $request->input('cityOrRegion');
 
+        // get all wineries
         $wineries = Winery::all();
         $wineryMaps = Winery::get();
 
         $user = Auth::user();
 
+        // wish lists, visits, favorites if user
         if($user) {
             $favorites = Auth::user()->favorites()->get();
             $wishlists = Auth::user()->wishlists()->get();
@@ -214,6 +230,7 @@ class GuideController extends Controller
            
             $markers['latitude'][] = $geo['lat'];
             $markers['longitude'][] = $geo['lng'];
+            // content for information windows on map
             $markers['content'][] = 
                 "<h4 class='uk-link-reset uk-margin-remove-bottom'>".$wineryMap->name."</h4>".
                 "<address class='uk-margin-remove-top'>".$geo['formatted_address']."</address>".
@@ -229,6 +246,7 @@ class GuideController extends Controller
         // Default map to first marker
         Mapper::map($markers['latitude'][0], $markers['longitude'][0], ['zoom' => 10, 'fullscreenControl' => true, 'center' => true, 'marker' => false, 'cluster' => false, 'clusters' => ['center' => false, 'zoom' => 10, 'size'=> 10], 'language' => 'en']);
 
+        // set information markers dfor each winery on map
         for($i = 0; $i <= (count($wineryMaps)-1); $i++) {
             Mapper::informationWindow($markers['latitude'][$i], $markers['longitude'][$i], $markers['content'][$i], ['animation' => 'DROP']);
         }
@@ -256,6 +274,9 @@ class GuideController extends Controller
         $winery = Winery::with('avas')->find($id);
         $user = Auth::user();
 
+        // get nearby wineries by collecting wineries in the same city (with enough wineries, it would be sub_region)
+        $nearbyWineries = Winery::where('city', '=', $winery->city)->where('id', '!=', $winery->id)->orderBy('name')->get();
+
         if($user) {
             $favorites = $user->favorites()->get();
             $wishlists = $user->wishlists()->get();
@@ -268,20 +289,22 @@ class GuideController extends Controller
             $visits = [];
             $plans = [];
         }
-        
+        // empty array for avas
         $avas = [];
+        //set avas
         foreach($winery->avas as $ava){
             $avas[] = $ava->name;
         }
+        // alphabetize avas in list
         ksort($avas);
         
         // Business Hours
         $time = $winery->time;
 
-        // create markers array with keys but empty values
+        // create empty markers array
         $marker = [];
 
-
+        // use Geocoder package for coordinates
         $geo = Geocoder::getCoordinatesForAddress($winery->street, $winery->city, $winery->state, $winery->zip);
         $directionLink = 'https://www.google.com/maps/dir//'.$winery->name.', '.$winery->street.', '.$winery->state.', '.$winery->zip;
        
@@ -303,6 +326,7 @@ class GuideController extends Controller
             'winery' => $winery,
             'avas' => $avas,
             'time' => $time,
+            'nearbyWineries' => $nearbyWineries,
             'user' => $user,
             'favorites' => $favorites,
             'wishlists' => $wishlists,
@@ -331,7 +355,7 @@ class GuideController extends Controller
         $winery = Winery::find($wineryId);
 
         //create string for winery description
-        $problemWinery = $winery->name.' ( ID:'.$winery->id.' )';
+        $problemWinery = $winery->name.' [ ID:'.$winery->id.' ]';
 
         // create array from the data and auth user information
         $data = array(
@@ -346,7 +370,7 @@ class GuideController extends Controller
         Mail::send('emails.mistake', $data, function($message) use ($email, $name, $mistake, $problemWinery){
             $message->from($email, $name);
             $message->to('admin@tcwinehub.com', 'admin');
-            $message->subject('Mistake: '.$mistake.' ('.$problemWinery.')');
+            $message->subject('Mistake: '.$mistake.' - '.$problemWinery);
         });
 
         return back()->with('status', 'Message was sent. Thanks for helping us out!');

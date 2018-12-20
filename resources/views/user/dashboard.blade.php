@@ -24,8 +24,15 @@
                     @if($user->wishlists()->exists())
                         <ul class="uk-list">
                             @foreach($wishlists as $wishlist)
-                                <li>
-                                    <a class="uk-link" href="/winery/{{$wishlist->id}}">{{$wishlist->name}}</a>
+                                <li uk-grid>
+                                    <div>
+                                        <form class="uk-form uk-display-inline" action="/unwishlist/{{$wishlist->id}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <button class="uk-button uk-button-link uk-display-inline" type="submit"><span uk-icon="icon:trash"></span></button>
+                                        </form>
+                                    </div>
+                                    <a class="uk-link uk-text-large" href="/winery/{{$wishlist->id}}">{{$wishlist->name}}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -39,8 +46,15 @@
                     @if($user->favorites()->exists())
                         <ul class="uk-list">
                             @foreach($favorites as $favorite)
-                                <li>
+                                <li uk-grid>
                                     <a class="uk-link" href="/winery/{{$favorite->id}}">{{$favorite->name}}</a>
+                                    <div>
+                                        <form class="uk-form uk-display-inline" action="/unfavorite/{{$favorite->id}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <button class="uk-button uk-button-link uk-display-inline" type="submit"><span uk-icon="icon:trash"></span>DELETE</button>
+                                        </form>
+                                    </div>      
                                 </li>
                             @endforeach
                         </ul>

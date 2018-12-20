@@ -17,12 +17,12 @@
                                 </h3>
                                 @auth
                                     @if($visits->contains('id', $winery->id))
-                                        <span class="uk-card-badge visited" title="You have visited this winery." uk-icon="icon: check-square-o"></span>
+                                        <span class="uk-card-badge"><span class="visited" uk-icon="icon: check"></span><span class="uk-text-meta">VISITED</span></span>
                                     @endif
                                 @endauth
 
                                 @if($winery->sub_name)
-                                    <p class="uk-text-meta uk-margin-remove">{{ $winery->sub_name }}</p>
+                                    <p class="uk-text uk-margin-remove">{{ $winery->sub_name }}</p>
                                 @endif
                             </a>
                             <div class="uk-padding-top">

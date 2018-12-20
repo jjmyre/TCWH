@@ -18,6 +18,7 @@ use Session;
 class AvaMapController extends Controller
 {
     public function index() {
+        // get authorized user
     	$user = Auth::user();
 
     	// get complete list of avas
@@ -25,13 +26,15 @@ class AvaMapController extends Controller
 
         return view('ava.index')->with([
             'user' => $user,
-            'avaList' => $avaList
+            'avaList' => $avaList,
         ]); 
     }
 
     public function list($ava) {
+        // get authorized user
     	$user = Auth::user();
 
+        // get wishlists, favorites, visits if user exists
         if($user) {
             $favorites = $user->favorites()->get();
             $wishlists = $user->wishlists()->get();
@@ -43,12 +46,13 @@ class AvaMapController extends Controller
             $visits = [];
         }
 
+        // all wish lists and favoriets
         $allFavorites = Favorite::all();
         $allWishlists = Wishlist::all(); 
 
         // get complete list of avas
         $avaList = Ava::orderBy('name')->get();
-    	$avaActive = Ava::where('name', $ava)->first();
+    	$avaActive = Ava::where('name', 'LIKE', $ava)->first();
 
     	// query the ava pivot table and paginate wineries that are in the active Ava
     	$wineries = Winery::whereHas('avas', function ($query) use ($avaActive) {

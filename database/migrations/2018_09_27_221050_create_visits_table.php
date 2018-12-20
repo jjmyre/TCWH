@@ -16,6 +16,7 @@ class CreateVisitsTable extends Migration
         Schema::create('visits', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('tally')->default(1);
             $table->integer('user_id')->unsigned();
             $table->integer('winery_id')->unsigned();
         

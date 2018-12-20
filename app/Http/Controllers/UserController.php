@@ -4,15 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Winery;
-use App\Favorite;
-use App\Wishlist;
-use App\Visit;
-use App\Plan;
-use App\Ava;
-use App\Time;
 use App\User;
 use Session;
+use Hash;
 
 class UserController extends Controller
 {
@@ -40,21 +34,49 @@ class UserController extends Controller
         return view('user.edit')->with(['user' => $user]);
     }
 
-    public function update(Request $request)
+    public function editPassword(Request $request)
     { 
+        //validate input fields
         $this->validate(request(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed'
+            'current_password' => 'required|string|min:7',
+            'new_password' => 'required|string|min:7|confirmed',
         ]);
 
-        $user->name = request('name');
-        $user->email = request('email');
-        $user->password = bcrypt(request('password'));
+        // assign variables
+        $user = Auth::user();
+        $currentPassword =  $request->input('current_password');
+        $newPassword =  $request->input('new_password');
+
+        // check and see if the password matches, if not redirect back with message
+        if (!(Hash::check($currentPassword, $user->password))) {
+            return back()->with('status', 'Your password does not match our records.');
+        }
+        // crypt new password
+        $user->password = bcrypt($newPassword);
+
+        // save user
+        $user->save();
+
+        return back()->with('status', "Your password was successfully changed!");
+    }
+
+    public function editEmail(Request $request)
+    {
+        $user= Auth::user();
+        // validate input fields 
+        $this->validate(request(), [
+            'current_email' => 'required|email|max:255|exists:users,email',
+            'new_email' => 'required|email|max:255|unique:users,email|confirmed',
+        ]);
+
+        $currentEmail = $request->input('current_email');
+        $newEmail = $request->input('new_email');
+
+        $user->email = $newEmail;
 
         $user->save();
 
-        return back();
+        return back()->with('status', "Your email was successfully changed!");
     }
 
 

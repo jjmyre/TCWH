@@ -14,6 +14,12 @@
         <form class="uk-form uk-form-stacked" action="/contact" method="POST" id="contact_form" uk-grid>
             @csrf
             <div class="uk-width-1-1">
+                @auth
+                    <label class="uk-form-label" for="name">User Name</label>
+                @endauth
+                @guest 
+                    <label class="uk-form-label" for="name">Name</label>
+                @endguest
                 @if ($errors->has('name'))               
                     <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
                         <a class="uk-alert-close" uk-close></a>
@@ -21,27 +27,25 @@
                     </div>
                 @endif
                 @auth
-                    <label class="visuallyHidden" for="name">Username</label>
                     <div class="uk-inline uk-width-1-1">
                         <span class="uk-form-icon" uk-icon="icon:user"></span>
                         <input class="uk-input" id="name" name="name" value="{{$user->username}}" type="text" required readonly>                
                     </div>
                 @endauth
-                @guest 
-                    <label class="visuallyHidden" for="name">Name</label>
+                @guest
                     <div class="uk-width-1-1">
                         <input class="uk-input" id="name" name="name" placeholder="Name" value="{{ old('name') }}" type="text" autofocus>                
                     </div>
                 @endguest
             </div>
             <div class="uk-width-1-1 uk-margin-top">
+                <label class="uk-form-label" for="email">Email</label>
                 @if ($errors->has('email'))               
                     <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
                         <a class="uk-alert-close" uk-close></a>
                         <strong>{{ $errors->first('email') }}</strong>
                     </div>
                 @endif 
-                <label class="visuallyHidden" for="email">Email</label>
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon:mail"></span>
                     @auth
@@ -52,9 +56,8 @@
                     @endguest
                 </div>
             </div>
-            <fieldset class="uk-fieldset uk-width-1-1">
-                <legend class="uk-legend uk-margin-small-bottom">Message</legend>
-                <label class="visuallyHidden" for="subject">Subject of Message</label>
+            <fieldset class="uk-fieldset uk-padding-remove-top uk-width-1-1">
+                <label class="uk-form-label" for="subject">Subject of Message</label>
                  @if ($errors->has('subject'))               
                     <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
                         <a class="uk-alert-close" uk-close></a>
@@ -68,7 +71,7 @@
                     <option value="Question or Comment" {{ old('subject') == 'Question or Comment' ? 'SELECTED' : '' }}>Question or Comment</option>
                 </select>
                 <div class="uk-width-1-1 uk-margin-top">
-                    <label class="visuallyHidden" for="body">Message</label>
+                    <label class="uk-form-label" for="body">Message</label>
                      @if ($errors->has('message'))               
                         <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
                             <a class="uk-alert-close" uk-close></a>

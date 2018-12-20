@@ -28,13 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // Customize reset link email 
-  //  public function sendPasswordResetNotification($token)
-  //  {
-   //     $this->notify(new ResetPasswordNotification($token));
-   // }
-
-    #Define relationship of favorites, wishlists and visits
+    // Define relationship of favorites, wishlists and visits
     public function favorites() {   
         return $this->belongsToMany('App\Winery', 'favorites')->withTimestamps();
     }
@@ -44,12 +38,12 @@ class User extends Authenticatable
     }
 
     public function visits() {   
-        return $this->belongsToMany('App\Winery', 'visits')->withTimestamps();
+        return $this->belongsToMany('App\Winery', 'visits')->withTimestamps()->withPivot('id', 'tally');
     }
 
     // access pivot column 'order'
     public function plans() {   
-        return $this->belongsToMany('App\Winery', 'plans')->withTimestamps()->withPivot('id', 'order');
+        return $this->belongsToMany('App\Winery', 'plans')->withTimestamps()->withPivot('id', 'order', 'pending');
     }
 
 }

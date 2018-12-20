@@ -44,12 +44,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/planner/moveup', 'PlannerController@moveup');
 	Route::post('/planner/movedown', 'PlannerController@movedown');
 	Route::post('/planner/visit', 'PlannerController@visit');
+	Route::delete('/planner/unvisit/{wineryId}', 'PlannerController@unvisit');
 	Route::delete('/planner/remove/{wineryId}', 'PlannerController@remove');
 	Route::delete('/planner/clear', 'PlannerController@clear');
 
 	// User Edit Info & Dashboard
 	Route::get('/dashboard', 'UserController@dashboard');
 	Route::get('/edit', 'UserController@edit');
+	Route::post('/edit/password', 'UserController@editPassword');
+	Route::post('/edit/email', 'UserController@editEmail');
 
 	// Favorites
 	Route::post('/favorite', 'FavoriteController@favorite');
@@ -97,10 +100,4 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-
-/* Route::fallback(function(){
-    return view('errors.404');
-});
-
-*/
 

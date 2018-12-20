@@ -72,7 +72,7 @@ class LoginController extends Controller
         else{
             $this->validate($request, [
                 $this->username() => 'required|exists:users,email', 
-                'password' => 'required|min:7',
+                'password' => 'required|string|min:7',
             ]);
         }
     }

@@ -17,6 +17,7 @@ class CreatePlansTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('order');
+            $table->boolean('pending')->default(0);
             $table->integer('user_id')->unsigned();
             $table->integer('winery_id')->unsigned();
             

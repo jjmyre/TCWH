@@ -20,7 +20,6 @@
     "friday":"10:00am - 5:00pm",
     "saturday":"10:00am - 5:00pm",  
     "sunday":"10:00am - 5:00pm",
-    "note":"",
     "logo":"14hands_logo.png"
     },
     {
@@ -44,7 +43,6 @@
     "friday":"11:00am – 9:00pm",
     "saturday":"11:00am – 9:00pm",
     "sunday":"10:00am – 7:00pm",
-    "note":"",
     "logo":"2dor_logo.png"
     },
     {
@@ -68,7 +66,6 @@
     "friday":"10:00am – 6:00pm",
     "saturday":"10:00am – 6:00pm",
     "sunday":"10:00am – 6:00pm",
-    "note":"",
     "logo":"airfield_logo.png"
     },
     {
@@ -92,7 +89,6 @@
     "friday":"11:00am - 5:00pm",
     "saturday":"11:00am - 5:00pm",
     "sunday":"12:00pm - 5:00pm",
-    "note":"",
     "logo":"alexandria_logo.png"
     },
     {
@@ -116,7 +112,6 @@
     "friday":"12:00pm - 5:00pm",
     "saturday":"12:00pm - 5:00pm",
     "sunday":"12:00pm - 5:00pm",
-    "note":"",
     "logo":"alexandria_logo.png"
     },
     {
@@ -140,7 +135,6 @@
     "friday":"11:00am - 5:00pm",
     "saturday":"11:00am - 5:00pm",
     "sunday":"11:00am - 5:00pm",
-    "note":"",
     "logo":"anelare_logo.png"
     },
     {
@@ -164,7 +158,6 @@
     "friday":"10:00am - 5:00pm",
     "saturday":"10:00am - 5:00pm",
     "sunday":"10:00am - 5:00pm",
-    "note":"",
     "logo":"barnard_logo.png"
     },
     {
@@ -188,7 +181,6 @@
     "friday":"10:00am - 5:00pm",
     "saturday":"10:00am - 5:00pm",
     "sunday":"10:00am - 5:00pm",
-    "note":"",
     "logo":"barrelsprings_logo.png"
     },
     {
@@ -212,7 +204,6 @@
     "friday":"Closed",
     "saturday":"12:00pm - 5:00pm",
     "sunday":"12:00pm - 5:00pm",
-    "note":"",
     "logo":"bartholomew_logo.png"
     },
     {
@@ -236,7 +227,6 @@
     "friday": "2:00pm - 8:00pm",
     "saturday": "12:00pm - 8:00pm",  
     "sunday": "12:00am - 6:00pm",
-	"note":"Bill’s tasting room has a lounge atmosphere with patio seating. They not only offer wine tasting, but also serve microbrews, cheeses and cigars. Call for special events.",
     "logo":"bills_logo.png"
     },
     {
@@ -260,7 +250,6 @@
     "friday":"12:00pm - 6:00pm",
     "saturday":"12:00pm - 7:00pm",  
     "sunday":"12:00am - 6:00pm",
-    "note":"",
     "logo":"bookwalter_logo.png"
     }
 ]

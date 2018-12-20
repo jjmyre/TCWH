@@ -110,7 +110,7 @@
                 @endif
             </div>
 
-            <p class="uk-text-muted uk-margin-remove-top uk-text-center">
+            <p class="uk-text uk-margin-remove-top uk-text-center">
                 @if($wineries->total() == 1)
                     1 Winery
                 @elseif($wineries->total() > 1) 

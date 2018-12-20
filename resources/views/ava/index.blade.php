@@ -8,10 +8,10 @@
 	<h1 class="uk-heading-primary uk-text-center">
 		@if(isset($avaActive))
         	{{$avaActive->name}} AVA </h1>
-            <p class="uk-text-large uk-text-center">For more information on this AVA, visit the
+            <p class="uk-text-large uk-text-center">For facts and information about this AVA, visit the
                 <a class="uk-link" href="{{$avaActive->info_url}}" target="_blank">Washington State Wine Commission<span uk-icon="icon:link"></span>.</a></p>
         @else
-			AVA Map
+			AVA Map </h1>
         @endif
     
 @endsection
@@ -22,23 +22,22 @@
 
     		<ul class="uk-subnav-pill uk-list">
     			@foreach($avaList as $ava)
-    				<li class="uk-padding-small-top {{ request()->is('avamap/'.$ava->name) ? 'uk-active' : '' }}"><a class="uk-padding-small uk-text-lead" href="/avamap/{{$ava->name}}">{{$ava->name}}</a></li>
+    				<li class="uk-padding-small-top {{ isset($avaActive) && $avaActive == $ava ? 'uk-active' : '' }}"><a class="uk-padding-small uk-text-lead" href="/avamap/{!! str_replace(' ', '_', $ava->name) !!}">{{$ava->name}}</a></li>
     			@endforeach
     		</ul>
     	</div>
         <div class="ava-map uk-panel uk-width-2-3@m">
             <div>
                 @include('ava.svg')
-                <p class="uk-text-right">
-                    <span class="uk-display-block uk-margin-right" uk-icon="info"></span>
-
+                <p class="uk-text-left uk-margin-left">
+                    <span uk-icon="info"></span> This SVG map is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/deed.en" target="_blank">Creative Commons Attribution 3.0 Unported license<span uk-icon="icon:link"></span></a>. It has been adapted from it's original design found at <a href="https://en.wikipedia.org/wiki/File:USA_Washington_location_map.svg" target="_blank">Wikipedia<span uk-icon="icon:link"></span></a>.
                 </p>
             </div>
         </div>
     </div>
     <div class="uk-container uk-column-1-2@m uk-padding uk-margin-top">
         @if(request()->is('avamap'))
-            <p class="uk-text-large">AVA stands for American Viticultural Area and the boundaries of these wine-grape growing regions are determined by the Alcohol and Tobacco Tax and Trade Bureau. When an area is given an AVA classification, it is an official and legal designation. Currently, Washington state has 14 such AVAs, the vast majority of which are located east of the Cascade mountains in and around the Columbia Basin. There are many factors that go into designating a Viticultural Area, or what some refer to as an “Appellation”, but the primary reasons involve geographical, environmental and climate-based factors that make these areas ideal for growing grapes specifically for wine-making.</p> 
+            <p class="uk-text-large">AVA is an acronym that stands for "American Viticultural Area". The boundaries of these wine-grape growing regions are determined by the Alcohol and Tobacco Tax and Trade Bureau. When an area is given an AVA classification, it is an official and legal designation. Currently, Washington state has 14 such AVAs, the vast majority of which are located east of the Cascade mountains in and around the Columbia Basin. There are many factors that go into designating a Viticultural Area, or what some refer to as an “Appellation”, but the primary reasons involve geographical, environmental and climate-based factors that make these areas ideal for growing grapes specifically for wine-making.</p> 
 
             <p class="uk-text-large">Some wineries are known for producing wine by harvesting grapes in vineyards located in a specific AVA while other wineries actually purchase their grapes from various AVAs and carefully craft their wines according to the strengths that each AVA offers. For this reason, you will find that many wineries produce wines comprised of grapes from multiple AVAs and it all depends on the grape varietal and the wine-maker’s intended purpose. Furthermore, some wineries have their own vineyards in these AVAs while many others choose to outsource their grapes from independent vineyards.</p>
         @endif

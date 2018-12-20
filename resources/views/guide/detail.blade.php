@@ -59,10 +59,10 @@
                         <button type="submit" class="planned uk-button" title="Planner">
                             <span class="uk-display-block" uk-icon="icon: list; ratio:2"></span> Remove from Planner
                           
-                @else
+                @elseif($plans->count() < 9)
                      <form class="uk-form uk-display-inline" action="/planner/add" method="post">
                         @csrf
-                        <input type="hidden" name="winery_id" value="{{$winery->id}}">
+                        <input type="hidden" name="winery" value="{{$winery->id}}">
                         <button type="submit" class="not_wishlisted uk-button" title="Planner">
                             <span class="uk-display-block" uk-icon="icon: list; ratio:2"></span> Add to Planner
                 @endif
@@ -75,8 +75,8 @@
     </div>                     
     <div class="uk-grid uk-container uk-child-width-1-3@s" uk-grid>
         <div>
-            <h4 class="uk-margin-remove">Contact Info</h2>
-            <table class="uk-table uk-table-small uk-flex uk-flex-center">
+            <h4 class="uk-margin-remove">Contact Info</h4>
+            <table class="uk-table uk-table-small uk-flex uk-flex-left">
                 <tbody>
                     <tr class="uk-flex uk-flex-middle">
                         <th>Address</th>
@@ -93,7 +93,7 @@
                     @if(!empty($winery->email))
                         <tr>
                             <th>Email</th>
-                            <td><a href="mailto:{{$winery->email}}">{{$winery->email}}</td> 
+                            <td><a href="mailto:{{$winery->email}}">{{$winery->email}}</a></td> 
                         </tr>
                     @endif
                     @if(!empty($winery->web_url))
@@ -110,7 +110,7 @@
             <table class="uk-table uk-table-small uk-flex uk-flex-left">
                 <tbody>
                     <tr>
-                        <th>Monday</a></th>
+                        <th>Monday</th>
                         <td class="uk-text-left">{{$time->monday}}</td> 
                     </tr>
                     <tr>
@@ -141,13 +141,13 @@
             </table>
         </div>
         <div>
-            <h4 class="uk-margin-remove"> AVA Regions </h4>
+            <h4>AVA Regions </h4>
             <ul class="uk-list uk-margin-remove">
                 @foreach($avas as $ava)
-                    <li class="uk-margin-remove"><a class="uk-link" href="/avamap/{{$ava}}">{{$ava}}</a></li>
+                    <li class="uk-margin-remove"><a class="uk-link" href="/avamap/{!! str_replace(' ', '_', $ava) !!}">{{$ava}}</a></li>
                 @endforeach
             </ul>
-            <h4 class="uk-margin-remove-bottom"> Dining</h3>
+            <h4>Dining</h4>
             <p class="uk-margin-remove">
                 @if($winery->dining == 0)
                      {{"No"}}
@@ -155,6 +155,14 @@
                     {{"Yes"}}
                 @endif
             </p>
+            @if(count($nearbyWineries) > 0)
+                <h4>Nearby Wineries</h4>
+                <ul class="uk-list uk-margin-remove">
+                    @foreach($nearbyWineries as $nearbyWinery)
+                        <li class="uk-margin-remove"><a class="uk-link" href="/winery/{{$nearbyWinery->id}}">{{$nearbyWinery->name}}</a></li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
         @auth
             <div class="uk-container">
