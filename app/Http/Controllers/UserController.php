@@ -16,6 +16,11 @@ use Session;
 
 class UserController extends Controller
 {
+
+	public function __construct() {
+        $this->middleware('auth');
+    }
+
 	public function dashboard() {
 		$user = Auth::user();
 		$favorites = $user->favorites()->get();
@@ -31,8 +36,28 @@ class UserController extends Controller
 	}
 
 	public function edit() {
-		return view('user.edit');
-	}
+		$user = Auth::user();
+        return view('user.edit')->with(['user' => $user]);
+    }
+
+    public function update(Request $request)
+    { 
+        $this->validate(request(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed'
+        ]);
+
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = bcrypt(request('password'));
+
+        $user->save();
+
+        return back();
+    }
+
+
 
 	public function logout() {
 		Auth::logout();

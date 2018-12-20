@@ -71,12 +71,12 @@ class PlannerController extends Controller
 
     public function add(Request $request) {
 
-        $winery_id = $request->input('winery');
-        $winery = Winery::find($winery_id);
+        $wineryId = $request->input('winery');
+        $winery = Winery::find($wineryId);
         $user = Auth::user();
         $plans = $user->plans()->get();
 
-        if ($plans->contains('id', $winery_id)) {
+        if ($plans->contains('id', $wineryId)) {
             return back()->with('status', $winery->name.' is already in your planner.');
             
         }
@@ -96,11 +96,11 @@ class PlannerController extends Controller
                 $newLastOrder = $currentLastOrder + 1;
 
                 //attach new winery to planner with last order number
-                $user->plans()->attach($winery_id,  ['order' => $newLastOrder]);
+                $user->plans()->attach($wineryId,  ['order' => $newLastOrder]);
             }
             else {
                 //attach new winery to planner with order of 1
-                $user->plans()->attach($winery_id,  ['order' => 1]);
+                $user->plans()->attach($wineryId,  ['order' => 1]);
             }
                 
             // find winery with newly added winery_id
@@ -108,11 +108,11 @@ class PlannerController extends Controller
         }
     }
 
-    public function remove($winery_id) {
+    public function remove($wineryId) {
         // logged in, current user
         $user = Auth::user();
 
-        $selectedPlan = $user->plans()->where('winery_id', '=', $winery_id)->first();
+        $selectedPlan = $user->plans()->where('winery_id', '=', $wineryId)->first();
 
         $selectedPlanOrder = $selectedPlan->pivot->order;
         $higherPlans = $user->plans()->where('order', '>', $selectedPlanOrder)->get();
@@ -123,9 +123,9 @@ class PlannerController extends Controller
             }
         }
 
-        $user->plans()->detach($winery_id);
+        $user->plans()->detach($wineryId);
 
-        $deletedWinery = Winery::find($winery_id);
+        $deletedWinery = Winery::find($wineryId);
 
         return back()->with('status', $deletedWinery->name.' was removed from your planner!');
     }
@@ -169,6 +169,7 @@ class PlannerController extends Controller
 
     }
 
+    // Move the selected planned winery up in order
     public function moveup(Request $request) {
         $user = Auth::user();
         $plans = $user->plans()->get();
@@ -190,6 +191,7 @@ class PlannerController extends Controller
 
     }
 
+    // Move the selected planned winery down in order
     public function movedown(Request $request) {
         $user = Auth::user();
         $plans = $user->plans()->get();
@@ -208,7 +210,6 @@ class PlannerController extends Controller
         $selectedPlan[0]->pivot->increment('order');
 
         return back();
-
     }
 
 }

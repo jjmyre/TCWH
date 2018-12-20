@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Contact Us
+    Contact
 @endsection
 
 @section('header')
@@ -79,7 +79,7 @@
                 </div>
             </fieldset>
             <div class="uk-width-1-1 uk-margin-top-large uk-text-right">
-                <button type="submit" class="uk-button uk-button-primary">Send Message</button> 
+                <button type="submit" class="uk-button uk-button-primary">Send</button> 
             </div>
         </form>
     </div>

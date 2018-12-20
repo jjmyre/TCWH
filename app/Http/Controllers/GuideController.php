@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+// Dependencies
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Winery;
@@ -12,6 +13,7 @@ use App\Plan;
 use App\Ava;
 use App\Time;
 use App\User;
+use Mail;
 use Session;
 use Mapper;
 use Geocoder;
@@ -255,18 +257,18 @@ class GuideController extends Controller
         $user = Auth::user();
 
         if($user) {
-            $favorites = Auth::user()->favorites()->get();
-            $wishlists = Auth::user()->wishlists()->get();
-            $visits = Auth::user()->visits()->get(); 
+            $favorites = $user->favorites()->get();
+            $wishlists = $user->wishlists()->get();
+            $visits = $user->visits()->get();
+            $plans = $user->plans()->get(); 
         } 
         else {
             $favorites = [];
             $wishlists = [];
             $visits = [];
+            $plans = [];
         }
         
-        $allFavorites = Favorite::all();
-        $allWishlists = Wishlist::all(); 
         $avas = [];
         foreach($winery->avas as $ava){
             $avas[] = $ava->name;
@@ -295,8 +297,6 @@ class GuideController extends Controller
         // Default map to marker
         Mapper::map($marker['latitude'], $marker['longitude'], ['zoom' => 15, 'fullscreenControl' => true, 'center' => true, 'marker' => true, 'cluster' => false, 'language' => 'en']);
 
-    //    Mapper::marker($marker['latitude'], $marker['longitude'], ['animation' => 'DROP']);
-
         Mapper::informationWindow($marker['latitude'], $marker['longitude'], $marker['content'], ['open' => true]);
 
         return view('guide.detail')->with([
@@ -306,9 +306,50 @@ class GuideController extends Controller
             'user' => $user,
             'favorites' => $favorites,
             'wishlists' => $wishlists,
-            'allFavorites' => $allFavorites,
-            'allWishlists' => $allWishlists,
+            'plans' => $plans,
             'visits' => $visits,
         ]);
     }
+
+    public function mistake(Request $request) {
+        $user = Auth::user();
+        $name = $user->username;
+        $email = $user->email;
+
+        // validate contact form inputs
+        $this->validate($request, [
+            'mistake' => 'required',
+            'description' => 'required|string|min:10|max:500',
+        ]);
+
+        // retrieve data from inputs and assign to variables
+        $mistake = $request->input('mistake');
+        $description = $request->input('description');
+        $wineryId = $request->input('winery_id');
+
+        // get winery
+        $winery = Winery::find($wineryId);
+
+        //create string for winery description
+        $problemWinery = $winery->name.' ( ID:'.$winery->id.' )';
+
+        // create array from the data and auth user information
+        $data = array(
+            'description' => $description,
+            'mistake' => $mistake,
+            'name' => $name,
+            'email' => $email,
+            'problemWinery' => $problemWinery,
+        );
+
+        // Mail out message with data array
+        Mail::send('emails.mistake', $data, function($message) use ($email, $name, $mistake, $problemWinery){
+            $message->from($email, $name);
+            $message->to('admin@tcwinehub.com', 'admin');
+            $message->subject('Mistake: '.$mistake.' ('.$problemWinery.')');
+        });
+
+        return back()->with('status', 'Message was sent. Thanks for helping us out!');
+
+    }  
 }

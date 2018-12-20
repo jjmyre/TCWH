@@ -24,14 +24,14 @@
                     <form class="uk-form uk-display-inline" action="/unfavorite/{{$winery->id}}" method="post">
                         @csrf
                         <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" class="favorited uk-button uk-button-text" title="Favorite">
-                            <span uk-icon="icon: heart; ratio:2"></span> Remove from Favorites
+                        <button type="submit" class="favorited uk-button" title="Favorite">
+                            <span class="uk-display-block" uk-icon="icon: heart; ratio:2"></span> Remove from Favorites
                 @else
-                     <form class="uk-form uk-display-inline" action="/favorite" method="post">
+                    <form class="uk-form uk-display-inline" action="/favorite" method="post">
                         @csrf
                         <input type="hidden" name="winery_id" value="{{$winery->id}}">
-                        <button type="submit" class="not_favorited uk-button uk-button-text" title="Favorite">
-                            <span uk-icon="icon: heart; ratio:2"></span> Add to Favorites
+                        <button type="submit" class="not_favorited uk-button" title="Favorite">
+                            <span class="uk-display-block" uk-icon="icon: heart; ratio:2"></span> Add to Favorites
                 @endif
                     </button>
                 </form>
@@ -39,28 +39,38 @@
                     <form class="uk-form uk-display-inline" action="/unwishlist/{{$winery->id}}" method="post">
                         @csrf
                         <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" class="wishlisted uk-button uk-button-text" title="Wishlist">
-                            <span uk-icon="icon: star; ratio:2"></span> Remove from Wishlist
+                        <button type="submit" class="wishlisted uk-button" title="Wishlist">
+                            <span class="uk-display-block" uk-icon="icon: star; ratio:2"></span> Remove from Wishlist
                           
                 @else
                      <form class="uk-form uk-display-inline" action="/wishlist" method="post">
                         @csrf
                         <input type="hidden" name="winery_id" value="{{$winery->id}}">
-                        <button type="submit" class="not_wishlisted uk-button uk-button-text" title="Wishlist">
-                            <span uk-icon="icon: star; ratio:2"></span> Add to Wish List
+                        <button type="submit" class="not_wishlisted uk-button" title="Wishlist">
+                            <span class="uk-display-block" uk-icon="icon: star; ratio:2"></span> Add to Wish List
+                @endif
+                    </button>
+                </form>
+
+                @if($plans->contains('id', $winery->id))
+                    <form class="uk-form uk-display-inline" action="/planner/remove/{{$winery->id}}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="planned uk-button" title="Planner">
+                            <span class="uk-display-block" uk-icon="icon: list; ratio:2"></span> Remove from Planner
+                          
+                @else
+                     <form class="uk-form uk-display-inline" action="/planner/add" method="post">
+                        @csrf
+                        <input type="hidden" name="winery_id" value="{{$winery->id}}">
+                        <button type="submit" class="not_wishlisted uk-button" title="Planner">
+                            <span class="uk-display-block" uk-icon="icon: list; ratio:2"></span> Add to Planner
                 @endif
                     </button>
                 </form>
             @endauth
 
-           {{-- <form class="uk-form uk-form uk-display-inline" action="/planner/add/" method="post">
-                @csrf
-                <input type="hidden" value="{{$winery->id}}">
-                <button type="submit" class="uk-button uk-button-default uk-button-small" title="Planner">
-                    <span uk-icon="icon: plus-circle"></span>
-                    PLANNER        
-                </button>. 
-            </form>--}}
+           
         </div>
     </div>                     
     <div class="uk-grid uk-container uk-child-width-1-3@s" uk-grid>
@@ -134,7 +144,7 @@
             <h4 class="uk-margin-remove"> AVA Regions </h4>
             <ul class="uk-list uk-margin-remove">
                 @foreach($avas as $ava)
-                    <li class="uk-margin-remove">{{$ava}}</li>
+                    <li class="uk-margin-remove"><a class="uk-link" href="/avamap/{{$ava}}">{{$ava}}</a></li>
                 @endforeach
             </ul>
             <h4 class="uk-margin-remove-bottom"> Dining</h3>
@@ -146,8 +156,62 @@
                 @endif
             </p>
         </div>
+        @auth
+            <div class="uk-container">
+                <a class="uk-button uk-button-default uk-display-block uk-padding-remove uk-text-center" uk-toggle="target: #mistake-modal" href="">Something Wrong? Let us know.</a>
+            </div>
+        @endauth
     </div>
     <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
         @include('guide.map')
     </div>
+
+    <!-- Mistake Form Modal (only seen by users) -->
+    @auth
+        @if ($errors->has('mistake') || $errors->has('description'))
+            <div id="mistake-modal" class="uk-open" uk-modal style="display: block">
+        @else
+            <div id="mistake-modal" uk-modal>
+        @endif 
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">What's Wrong?</h2>
+                <form class="uk-form uk-form-stacked" action="/guide/mistake" method="POST" id="error_form">
+                    @csrf
+                    <fieldset class="uk-fieldset uk-width-1-1">
+                        <label class="uk-form-label" for="subject">Problem</label>
+                         @if ($errors->has('mistake'))               
+                            <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                                <a class="uk-alert-close" uk-close></a>
+                                <strong>{{ $errors->first('mistake') }}</strong>
+                            </div>
+                        @endif 
+                        <select class="uk-select" name="mistake" id="mistake" required>
+                            <option value='' {{ old('mistake') == '' ? 'SELECTED' : '' }} disabled>Select Problem</option>
+                            <option value="Incorrect Winery Address" {{ old('mistake') == 'Incorrect Winery Address' ? 'SELECTED' : '' }}>Incorrect Winery Address</option>
+                            <option value="Wrong Contact Information" {{ old('mistake') == 'Wrong Contact Information' ? 'SELECTED' : '' }}>Wrong Contact Info</option>
+                            <option value="Wrong Business Hours" {{ old('mistake') == 'Wrong Business Hours' ? 'SELECTED' : '' }}>Wrong Business Hours</option>
+                            <option value="Broken Link" {{ old('mistake') == 'Broken Link' ? 'SELECTED' : '' }}>Broken Link(s)</option>
+                            <option value="Winery Website" {{ old('mistake') == 'Winery Website' ? 'SELECTED' : '' }}>Missing Information</option>
+                            <option value="Other" {{ old('mistake') == 'Other' ? 'SELECTED' : '' }}>Other</option>
+                        </select>
+                        <div class="uk-width-1-1 uk-margin-top">
+                            <label class="uk-form-label" for="message">Description of Problem</label>
+                             @if ($errors->has('description'))               
+                                <div class="uk-alert-danger uk-margin-remove-bottom" uk-alert>
+                                    <a class="uk-alert-close" uk-close></a>
+                                    <strong>{{ $errors->first('description') }}</strong>
+                                </div>
+                            @endif 
+                            <textarea class="uk-textarea uk-width-1-1 uk-form-large" id="description" value="{{ old('description') }}" placeholder="Describe the problem (Limited to 500 characters)" name="description" required></textarea>
+                        </div>
+                    </fieldset>
+                    <input type="hidden" name="winery_id" value="{{$winery->id}}">
+                    <div class="uk-text-right uk-margin-top">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                        <button class="uk-button uk-button-primary" type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endauth
 @endsection

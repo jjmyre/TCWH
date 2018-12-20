@@ -60,7 +60,7 @@
                             @endforeach
                         </ul>
                     @else 
-                        <p>No wineries have been visited.</p>
+                        <p>Visited List is empty.</p>
                     @endif
                 </div>
             </div>

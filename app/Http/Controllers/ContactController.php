@@ -21,18 +21,22 @@ class ContactController extends Controller
 
     public function send(Request $request) {
 
+        // validate contact form inputs
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|string',
             'email' => 'required|email',
             'subject' => 'required',
             'message' => 'required|string|min:10|max:500',
         ]);
 
+
+        // retrieve data from inputs and assign to variables
         $name = $request->input('name');
         $email = $request->input('email');
         $subject = $request->input('subject');
         $body = $request->input('message');
 
+        // create array from the above given variable data
         $data = array(
             'name' => $name,
             'body' => $body,
@@ -48,7 +52,6 @@ class ContactController extends Controller
         });
 
         return back()->with('status', 'Your message was successfully sent!');
-
     }   
 
 }

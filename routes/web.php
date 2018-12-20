@@ -15,14 +15,15 @@ Route::get('/', function () {
     return redirect('/guide');
 });
 
-// Guide
+// Guide Routes
 Route::get('/guide', 'GuideController@index');
 Route::get('/guide/list', 'GuideController@list');
 Route::get('winery/{id}', 'GuideController@detail');
+Route::post('/guide/mistake', 'GuideController@mistake');
 
-// AVA Map
+// AVA Map Routes
 Route::get('/avamap', 'AvaMapController@index');
-Route::get('/avamap/{id}', 'AvaMapController@list');
+Route::get('/avamap/{ava}', 'AvaMapController@list');
 
 // About Page
 Route::get('/about', function () {
@@ -36,31 +37,32 @@ Route::get('/disclaimers', function () {
 
 // Authentication-Protected Routes
 Route::group(['middleware' => 'auth'], function () {
-	// Planner
+	
+	// Planner Routes
 	Route::get('/planner', 'PlannerController@index');
 	Route::post('/planner/add', 'PlannerController@add');
 	Route::post('/planner/moveup', 'PlannerController@moveup');
 	Route::post('/planner/movedown', 'PlannerController@movedown');
 	Route::post('/planner/visit', 'PlannerController@visit');
-	Route::delete('/planner/remove/{winery_id}', 'PlannerController@remove');
+	Route::delete('/planner/remove/{wineryId}', 'PlannerController@remove');
 	Route::delete('/planner/clear', 'PlannerController@clear');
 
 	// User Edit Info & Dashboard
-	Route::get('/dashboard/{id}', 'UserController@dashboard');
-	Route::get('/editinfo/{id}', 'UserController@edit');
+	Route::get('/dashboard', 'UserController@dashboard');
+	Route::get('/edit', 'UserController@edit');
 
 	// Favorites
 	Route::post('/favorite', 'FavoriteController@favorite');
-	Route::delete('/unfavorite/{winery_id}', 'FavoriteController@unfavorite');
+	Route::delete('/unfavorite/{wineryId}', 'FavoriteController@unfavorite');
 	Route::delete('/favorite/clear', 'FavoriteController@clear');
 
 	// Wishlists
 	Route::post('/wishlist', 'WishlistController@wishlist');
-	Route::delete('/unwishlist/{winery_id}', 'WishlistController@unwishlist');
+	Route::delete('/unwishlist/{wineryId}', 'WishlistController@unwishlist');
 
 	// Visited Wineries
 	Route::post('/visited', 'VisitController@visited');
-	Route::delete('/unvisited/{winery_id}', 'VisitController@unvisited');
+	Route::delete('/unvisited/{wineryId}', 'VisitController@unvisited');
 	Route::delete('/unvisited/clear', 'VisitController@clear');
 
 	// User Logout
@@ -87,7 +89,7 @@ Route::get('/login', function() {
 	return abort(404);
 });
 Route::post('/login', 'Auth\LoginController@login')->name('login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 // Password Reset Routes
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -95,44 +97,10 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::fallback(function(){
+
+/* Route::fallback(function(){
     return view('errors.404');
 });
 
-/*
-
-// Auth::routes();
-
-
-// Authentication Routes...
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// Registration Routes...
-Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup');
-Route::post('signup', 'Auth\RegisterController@register');
-
-// Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
-// Authentication Routes...
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// Registration Routes...
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
-
-Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
-
 */
+

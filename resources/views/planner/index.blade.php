@@ -31,18 +31,18 @@
 				<div>
 					<form class="uk-form uk-padding uk-margin-remove" action="/planner/add" method="post">
 				        @csrf
-				        <select name="winery" class="uk-select" value='6'>
+				 
+				        <select name="winery" class="uk-select uk-width-1-1">
 				        	@foreach($wineries as $winery)
 				        		@if(!($plans->contains($winery->id)))
 				        			<option value="{{$winery->id}}">{{$winery->name}}</option>
 				        		@endif
 				        	@endforeach
 				        </select>
-						<div class="uk-text-right uk-margin-top">
-				        	<button type="submit" class="uk-button uk-button-secondary uk-border-rounded" title="Add">
-				        		<span uk-icon="icon: plus"></span>
-				        	</button>
-				    	</div>
+			        	<button type="submit" class="uk-button uk-button-secondary uk-text-right" title="Add">
+			        		<span uk-icon="icon: plus"></span>
+			        	</button>
+			
 					</form>
 				</div>
 				@if($user->favorites()->exists())
@@ -118,34 +118,35 @@
 				</form>
 			</div>
 		@else
-		<p class="uk-text-lead"> Your planner is empty.</p>
+			<p class="uk-text-lead"> Planner is empty.</p>
 		@endif
 	</div>
 	@foreach($plans as $plan)
 		<div class="uk-card div-border uk-margin-remove uk-padding-small uk-margin-bottom uk-flex uk-flex-middle" id="div_{{$plan->id}}" uk-grid>
 			<div>
 				@if($plan != $plans->first())
-					<form class="uk-form uk-display-block" action="/planner/moveup" method="post">
+					<form class="uk-form uk-margin-right uk-padding-remove" action="/planner/moveup" method="post">
 				        @csrf
 				        <input type="hidden" name="order" value="{{$plan->pivot->order}}">
-				        <button type="submit" class="uk-button uk-button-default uk-display-block uk-padding-remove">
-				        	<span uk-icon="icon: triangle-up; ratio: 2"></span>
+				        <button type="submit" class="uk-button uk-button-default uk-padding-remove">
+				        	<span uk-icon="icon: triangle-up"></span>
 				    	</button>
 					</form>
 				@endif
 				@if($plan != $plans->last())
-					<form class="uk-form uk-display-block" action="/planner/movedown" method="post">
+					<form class="uk-form uk-margin-right uk-padding-remove" action="/planner/movedown" method="post">
 				        @csrf
 				        <input type="hidden" name="order" value="{{$plan->pivot->order}}">
 				        <button type="submit" class="uk-button uk-button-default uk-padding-remove">
-				        	<span uk-icon="icon: triangle-down; ratio:2"></span>
+				        	<span uk-icon="icon: triangle-down"></span>
 				    	</button>
 					</form>
 				@endif
 			</div>
-			<div>
-				<span class="uk-text-lead uk-text-bold"><span uk-icon="icon:location; ratio:2"></span>{{$plan->pivot->order}}</span>
+			<div class="uk-padding-remove uk-margin-remove">
+				<span class="uk-text-lead uk-text-bold"><span uk-icon="icon:location"></span>{{$plan->pivot->order}}</span>
 			</div>
+			
 			<div>
 				<h3 class="uk-h3 uk-margin-remove"><a class="uk-link uk-display-inline" href="/winery/{{$plan->id}}" target ="_blank">{{$plan->name}}</a></h3>
 				<address class="uk-margin-remove">{{$plan->street}}, <br>

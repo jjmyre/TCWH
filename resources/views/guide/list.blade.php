@@ -1,8 +1,8 @@
 {{ $wineries->appends(request()->except('page'))->links() }}
 
-<div class="uk-child-width-1-2@l" uk-grid>
+<div class="uk-child-width-1-2@l uk-grid-collapse" uk-grid>
     @foreach($wineries as $winery)
-        <div class="uk-card uk-padding" id="div_{{$winery->id}}">
+        <div class="uk-card div-border uk-padding" id="div_{{$winery->id}}">
             <div class="uk-card-header uk-padding-remove">                     
                 <div class="uk-flex-center" uk-grid>
                     <div>
@@ -17,12 +17,12 @@
                                 </h3>
                                 @auth
                                     @if($visits->contains('id', $winery->id))
-                                        <span class="uk-text-meta uk-card-badge visited" title="You have visited this winery." uk-icon="icon: check; ratio:2"></span>
+                                        <span class="uk-card-badge visited" title="You have visited this winery." uk-icon="icon: check-square-o"></span>
                                     @endif
                                 @endauth
 
                                 @if($winery->sub_name)
-                                    <p class="uk-text uk-margin-remove">{{ $winery->sub_name }}</p>
+                                    <p class="uk-text-meta uk-margin-remove">{{ $winery->sub_name }}</p>
                                 @endif
                             </a>
                             <div class="uk-padding-top">
@@ -31,13 +31,13 @@
                                         <form class="uk-form uk-display-inline" action="/unfavorite/{{$winery->id}}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
-                                            <button type="submit" class="favorited uk-button uk-button-default" title="Favorite">
+                                            <button type="submit" class="favorited uk-button" title="Favorite">
                                                 <span uk-icon="icon: heart"></span>
                                     @else
                                          <form class="uk-form uk-display-inline" action="/favorite" method="post">
                                             @csrf
                                             <input type="hidden" name="winery_id" value="{{$winery->id}}">
-                                            <button type="submit" class="not_favorited uk-button uk-button-default" title="Favorite">
+                                            <button type="submit" class="not_favorited uk-button" title="Favorite">
                                                 <span uk-icon="icon: heart"></span>
                                     @endif
                                             <span>({{ $allFavorites->where('winery_id', '==', $winery->id)->count() }})</span>
@@ -48,13 +48,13 @@
                                         <form class="uk-form uk-display-inline" action="/unwishlist/{{$winery->id}}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
-                                            <button type="submit" class="wishlisted uk-button uk-button-default" title="Wishlist">
+                                            <button type="submit" class="wishlisted uk-button uk-button" title="Wishlist">
                                                 <span class="wishlisted" uk-icon="icon: star"></span>
                                     @else    
                                         <form class="uk-form uk-display-inline" action="/wishlist" method="post">
                                             @csrf
                                             <input type="hidden" name="winery_id" value="{{$winery->id}}">
-                                            <button type="submit" class="not_wishlisted uk-button uk-button-default" title="Wishlist">
+                                            <button type="submit" class="not_wishlisted uk-button" title="Wishlist">
                                                 <span class="not_wishlisted" uk-icon="icon: star"></span>
                                     @endif
                                             <span>({{ $allWishlists->where('winery_id', '==', $winery->id)->count() }})</span>

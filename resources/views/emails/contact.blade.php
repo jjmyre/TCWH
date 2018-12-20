@@ -1,5 +1,4 @@
-
 <div>
-		<p>{{$name}}</p>
-		<p>{{$body}}</p>
+	<h1>{{$name}}</h1>
+	<p>{{$body}}</p>
 </div>

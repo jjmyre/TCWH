@@ -17,9 +17,7 @@ class CreateAvasTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('info_url')->nullable();
-            $table->string('css_class');            
+            $table->string('info_url')->nullable();           
         });
     }
 

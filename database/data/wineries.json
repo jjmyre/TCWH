@@ -2,7 +2,7 @@
     {
     "name":"14 Hands Winery",
     "sub_name":"",
-    "region":"Prosser",
+    "region":"Western Benton",
     "sub_region":"",
     "street":"660 Frontier Rd",
     "city":"Prosser",
@@ -26,7 +26,7 @@
     {
     "name":"2dor Wines",
     "sub_name":"County Line Tasting Room",
-    "region":"Prosser",
+    "region":"Western Benton",
     "sub_region":"Vintner's Village",
     "street":"500 Merlot Dr",
     "city":"Prosser",
@@ -50,7 +50,7 @@
     {
     "name":"Airfield Estates Winery",
     "sub_name":"",
-    "region":"Prosser",
+    "region":"Western Benton",
     "sub_region":"",
     "street":"560 Merlot Dr",
     "city":"Prosser",
@@ -74,7 +74,7 @@
     {
     "name":"Alexandria Nicole Cellars",
     "sub_name":"Prosser Tasting Room",
-    "region":"Prosser",
+    "region":"Western Benton",
     "sub_region":"",
     "street":"2880 Lee Rd, Suite D",
     "city":"Prosser",
@@ -122,7 +122,7 @@
     {
     "name":"Anelare Winery",
     "sub_name":"",
-    "region":"Benton City",
+    "region":"Central Benton",
     "sub_region":"",
     "street":"19205 N McBee Rd NW",
     "city":"Benton City",
@@ -170,7 +170,7 @@
     {
     "name": "Barrel Springs Winery",
     "sub_name": "",
-    "region":"Prosser",
+    "region":"Western Benton",
     "sub_region":"",
     "street": "46601 N Gap Rd",
     "city": "Prosser",
@@ -218,7 +218,7 @@
     {
     "name": "Bill’s Wines",
     "sub_name": "Bill’s Tasting Room",
-    "region":"Prosser",
+    "region":"Western Benton",
     "sub_region":"Downtown Prosser",
     "street": "1205 Meade Ave",
     "city": "Prosser",

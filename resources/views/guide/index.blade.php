@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-    <div class="uk-flex uk-flex-center uk-grid uk-margin-remove uk-padding-remove">
+    <div class="uk-flex uk-flex-center uk-margin-remove uk-padding-remove" uk-grid>
         <ul class="uk-subnav uk-subnav-pill uk-margin-right uk-margin-remove-left uk-padding-remove" uk-switcher="connect: .cityOrRegion">
             <li class="uk-padding-remove {{ $cityOrRegion == 'city' ? 'uk-active' : '' }}"><a href="#">City</a></li>
             <li class="uk-padding-remove {{ $cityOrRegion == 'region' ? 'uk-active' : '' }}"><a href="#">Region</a></li>
@@ -55,7 +55,9 @@
                     <input type="hidden" name="listOrMap" value="list">
                     <input type="hidden" name="regionSelect" value="default">
                     <div class="uk-text-right uk-margin-top">
-                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">GO</button>
+                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-padding-small uk-padding-remove-top uk-padding-remove-bottom">
+                            <span uk-icon="icon: search"></span>                     
+                        </button>
                     </div>
                 </form>
                 <form method='get' action='/guide/list/' name="listRegionForm" id="listRegionForm" class="uk-form uk-padding uk-margin-remove">
@@ -77,7 +79,9 @@
                                 <option value='z-a' {{ $sortSelect == "z-a" ? 'SELECTED' : '' }}>Z&#8594;A</option>         
                             </select>
                             <div class="uk-text-right uk-margin-top">
-                                <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">Go</button>
+                                <button type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-padding-small uk-padding-remove-top uk-padding-remove-bottom">
+                                    <span uk-icon="icon: search"></span>                     
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -139,7 +143,9 @@
                     <input name="sortSelect" type="hidden" value="a-z">
                     <input type="hidden" name="regionSelect" value="default">
                     <div class="uk-text-right uk-margin-top">
-                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">Go</button>
+                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-padding-small uk-padding-remove-top uk-padding-remove-bottom">
+                            <span uk-icon="icon: search"></span>                     
+                        </button>
                     </div>
                 </form>
                 <form method='get' action='/guide/list/' name="mapRegionForm" id="mapRegionForm" class="uk-form uk-padding uk-margin-remove">
@@ -160,7 +166,9 @@
                     <input name="sortSelect" type="hidden" value="a-z">
                     <input type="hidden" name="citySelect" value="default">
                     <div class="uk-text-right uk-margin-top">
-                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">Go</button>
+                        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-padding-small uk-padding-remove-top uk-padding-remove-bottom">
+                            <span uk-icon="icon: search"></span>                     
+                        </button>
                     </div>
                 </form>
             </div>

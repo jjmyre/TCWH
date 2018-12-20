@@ -28,9 +28,7 @@ class AvasTableSeeder extends Seeder
                 'created_at' => Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
                 'name' => $ava->name,
-                'description' => $ava->description,
                 'info_url' => $ava->info_url,
-                'css_class' => $ava->css_class,
             ]);
         }
     }
