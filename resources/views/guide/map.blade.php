@@ -2,7 +2,6 @@
     <div id="map">
     	{{-- Render map --}}
         {!! Mapper::render() !!}
-    	}
     </div>
 </div>
 

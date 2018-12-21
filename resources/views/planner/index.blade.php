@@ -163,9 +163,6 @@
 				</form>
 			@endif
 		</div>
-		{{--<div class="uk-text-left uk-display-inline">
-			<a class="">Directions from {{$plan->name}}</a> 
-		</div> --}}
 	@endforeach
 	@if($user->plans()->exists())
          <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
