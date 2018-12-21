@@ -51,7 +51,7 @@ class ContactController extends Controller
             $message->subject('Contact Form: '.$subject);
         });
 
-        return back()->with('status', 'Your message was successfully sent!');
+        return redirect()->back()->with('status', 'Your message was successfully sent!');
     }   
 
 }

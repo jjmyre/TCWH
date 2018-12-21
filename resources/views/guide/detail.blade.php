@@ -69,8 +69,6 @@
                     </button>
                 </form>
             @endauth
-
-           
         </div>
     </div>                     
     <div class="uk-grid uk-container uk-child-width-1-3@s" uk-grid>

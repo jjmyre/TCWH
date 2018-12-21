@@ -31,7 +31,7 @@
 	                    <label for="current_password" class="uk-form-label">Current Password</label>
 	                    <div class="uk-inline uk-width-1-1">
 	                    	<span class="uk-form-icon" uk-icon="icon:lock"></span>
-	                        <input id="current_password" type="password" class="uk-input" name="current_password" placeholder="Current Password">                
+	                        <input id="current_password" type="password" class="uk-input" value="{{ old('current_password') }}" name="current_password" placeholder="Current Password">                
 	                    </div>
 	                </div>
 	                <div class="uk-width-1-1">
@@ -76,7 +76,7 @@
 	                    <label for="current_password" class="uk-form-label">Current Email</label>
 	                    <div class="uk-inline uk-width-1-1">
 	                    	<span class="uk-form-icon" uk-icon="icon:mail"></span>
-	                        <input id="current_email" type="email" class="uk-input" name="current_email" placeholder="Current Email Address">                
+	                        <input id="current_email" type="email" class="uk-input" value="{{ old('current_email') }}" name="current_email" placeholder="Current Email Address">                
 	                    </div>
 	                </div>
 	                <div class="uk-width-1-1">
@@ -89,7 +89,7 @@
 	                    <label for="new_email" class="uk-form-label">New Email</label>
 	                    <div class="uk-inline uk-width-1-1">
 	                        <span class="uk-form-icon" uk-icon="icon:mail"></span>
-	                        <input id="new_email" type="email" class="uk-input" name="new_email" placeholder="New Email Address">                
+	                        <input id="new_email" type="email" class="uk-input" value="{{ old('new_email') }}" name="new_email" placeholder="New Email Address">                
 	                    </div>
 	                </div>
 	                <div class="uk-width-1-1">

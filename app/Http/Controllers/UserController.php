@@ -57,7 +57,7 @@ class UserController extends Controller
         // save user
         $user->save();
 
-        return back()->with('status', "Your password was successfully changed!");
+        return redirect()->back()->with('status', 'Your password was successfully changed!');
     }
 
     public function editEmail(Request $request)
@@ -76,7 +76,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back()->with('status', "Your email was successfully changed!");
+        return redirect()->back()->with('status', 'Your email was successfully changed!');
     }
 
 
