@@ -9,7 +9,6 @@
     </title>
     <link href="{{ asset('css/styles.css') }}" type='text/css' rel='stylesheet' />
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Acme|Nunito+Sans|Fahkwang" rel="stylesheet">
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -55,7 +54,7 @@
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     <li class="uk-text-bold uk-text-large uk-padding-top uk-padding-bottom">{{Auth::user()->username}}</li>
-                                    <li><a href="/dashboard">My Dashboard</a></li>
+                                    {{--<li><a href="/dashboard">My Dashboard</a></li>--}}
                                     <li><a href="/edit">Edit Info</a></li>
                                     <li>
                                         <form method='POST' action='/logout' id='logout-desk' class="uk-width-1-1">
@@ -137,7 +136,7 @@
                         <li class="{{ request()->is('signup*') ? 'uk-active' : '' }}"><a href="/signup">Signup</a></li>
                     @endguest
                     @auth
-                        <li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="/dashboard">My Dashboard</a></li>
+                        {{--<li class="{{ request()->is('dashboard*') ? 'uk-active' : '' }}"><a href="/dashboard">My Dashboard</a></li>--}}
                         <li class="{{ request()->is('edit*') ? 'uk-active' : '' }}"><a href="/edit">Edit Info</a></li>
                         <li>
                             <form method='POST' action='/logout' id="logout-mobile" class="uk-width-1-1">

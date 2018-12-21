@@ -41,17 +41,17 @@
 	                            <strong>{{ $errors->first('new_password') }}</strong>
 	                        </div>
 	                    @endif 
-	                    <label for="password" class="uk-form-label">New Password</label>
+	                    <label for="new_password" class="uk-form-label">New Password</label>
 	                    <div class="uk-inline uk-width-1-1">
 	                        <span class="uk-form-icon" uk-icon="icon:lock"></span>
-	                        <input id="password" type="password" class="uk-input" name="new_password" placeholder="New Password">                
+	                        <input id="new_password" type="password" class="uk-input" name="new_password" placeholder="New Password">                
 	                    </div>
 	                </div>
 	                <div class="uk-width-1-1">
-	                    <label for="email" class="uk-form-label">Confirm New Password</label>
+	                    <label for="new-password-confirm" class="uk-form-label">Confirm New Password</label>
 	                    <div class="uk-inline uk-width-1-1">
 	                        <span class="uk-form-icon" uk-icon="icon:lock"></span>
-	                        <input id="password-confirm" type="password" class="uk-input" name="new_password_confirmation" placeholder="Confirm Password" required>                
+	                        <input id="new-password-confirm" type="password" class="uk-input" name="new_password_confirmation" placeholder="Confirm Password" required>                
 	                    </div>
 	                </div>
 	                <div class="uk-width-1-1 uk-margin-top-large uk-text-right">
@@ -86,7 +86,7 @@
 	                            <strong>{{ $errors->first('new_email') }}</strong>
 	                        </div>
 	                    @endif 
-	                    <label for="password" class="uk-form-label">New Email</label>
+	                    <label for="new_email" class="uk-form-label">New Email</label>
 	                    <div class="uk-inline uk-width-1-1">
 	                        <span class="uk-form-icon" uk-icon="icon:mail"></span>
 	                        <input id="new_email" type="email" class="uk-input" name="new_email" placeholder="New Email Address">                
